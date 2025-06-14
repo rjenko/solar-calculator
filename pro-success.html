@@ -554,20 +554,20 @@
             const sunshineHours = getSunshineHours(postcode);
             const efficiency = sunshineHours / 950;
             
-            // Advanced calculations with degradation
+            // Advanced calculations with better UK assumptions
             const systemEfficiency = 0.95; // Inverter and system losses
             const annualDegradation = 0.005; // 0.5% per year
             const annualGeneration = systemSize * sunshineHours * systemEfficiency;
             
-            // Usage pattern affects self-consumption
-            const selfConsumption = usagePattern === 'day' ? 0.45 : 
-                                   usagePattern === 'evening' ? 0.25 : 0.35;
+            // Usage pattern affects self-consumption (more realistic ranges)
+            const selfConsumption = usagePattern === 'day' ? 0.50 : 
+                                   usagePattern === 'evening' ? 0.25 : 0.38;
             
             const selfUseAmount = annualGeneration * selfConsumption;
             const exportAmount = annualGeneration * (1 - selfConsumption);
             
-            // Financial calculations with inflation
-            const electricityInflation = 0.04; // 4% annual increase
+            // Financial calculations with realistic inflation
+            const electricityInflation = 0.045; // 4.5% annual increase (realistic)
             const currentRate = 0.34;
             const selfUseSavings = selfUseAmount * currentRate;
             const exportIncome = exportAmount * exportTariff;

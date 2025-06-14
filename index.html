@@ -708,9 +708,9 @@
             const monthlyBill = parseFloat(document.getElementById('monthlyBill').value);
             const orientation = parseFloat(document.getElementById('roofOrientation').value);
             
-            // UK-specific calculations with more accuracy and conservative approach
-            const annualGeneration = systemSize * 850 * orientation * 0.95; // 95% for system losses
-            const selfConsumption = 0.30; // UK average 30% self-consumption
+            // UK-specific calculations with more realistic approach
+            const annualGeneration = systemSize * 950 * orientation * 0.95; // Use 950 kWh/kW (more optimistic but realistic)
+            const selfConsumption = 0.35; // Increase to 35% self-consumption
             const annualSelfUse = annualGeneration * selfConsumption;
             const annualExport = annualGeneration * (1 - selfConsumption);
             
@@ -720,8 +720,8 @@
             const monthlySavings = totalAnnualSavings / 12;
             const paybackYears = systemCost / totalAnnualSavings;
             
-            // Account for electricity price inflation (3% annually) and degradation
-            const inflationMultiplier = 1.4; // 25 years at 3% inflation
+            // Account for electricity price inflation (4% annually) over 25 years
+            const inflationMultiplier = 2.6; // More realistic 25-year inflation factor
             const degradationFactor = 0.88; // 0.5% per year over 25 years
             const totalSavings25Years = (totalAnnualSavings * 25 * inflationMultiplier * degradationFactor) - systemCost;
             const roi = (totalSavings25Years / systemCost) * 100;
@@ -731,7 +731,7 @@
             document.getElementById('paybackPeriod').textContent = `${paybackYears.toFixed(1)} years`;
             document.getElementById('totalSavings').textContent = `£${totalSavings25Years.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
             document.getElementById('roi').textContent = `${roi.toFixed(0)}%`;
-            document.getElementById('monthlySavings').innerHTML = `£${monthlySavings.toFixed(0)}<br><small style="font-size: 0.6em; color: #666;">(£${(annualSelfUseSavings/12).toFixed(0)} self-use + £${(exportIncome/12).toFixed(0)} export)</small>`;
+            document.getElementById('monthlySavings').innerHTML = `£${monthlySavings.toFixed(0)}<br><small style="font-size: 0.6em; color: #666;">(£${(annualSelfUseSavings/12).toFixed(0)} home use + £${(exportIncome/12).toFixed(0)} grid sales)</small>`;
             document.getElementById('co2Saved').textContent = `${co2Saved.toFixed(1)} tonnes`;
             
             // Hide loading, show results
