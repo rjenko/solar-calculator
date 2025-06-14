@@ -720,7 +720,6 @@
 
     <script>
         let calculationCount = 0;
-        let stripePaymentLink = 'YOUR_STRIPE_PAYMENT_LINK_HERE'; // UPDATE THIS!
         
         function calculateROI() {
             // Show loading
@@ -851,9 +850,8 @@
         }
         
         function upgradeToPro() {
-            // UPDATE THIS WITH YOUR STRIPE LINK!
-            // window.location.href = stripePaymentLink;
-            alert('🚀 Add your Stripe payment link to the code! (Search for YOUR_STRIPE_PAYMENT_LINK_HERE)');
+            // Redirect to Stripe payment
+            window.location.href = 'https://buy.stripe.com/28o28r7U0eic7qk000';
         }
         
         function startCountdown() {
