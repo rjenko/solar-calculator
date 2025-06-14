@@ -4,6 +4,21 @@
       "source": "/pro-success",
       "destination": "/pro-success.html",
       "permanent": false
+    },
+    {
+      "source": "/legal",
+      "destination": "/legal.html",
+      "permanent": false
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html",
+      "permanent": false
+    },
+    {
+      "source": "/partners",
+      "destination": "/partners.html",
+      "permanent": false
     }
   ]
 }
