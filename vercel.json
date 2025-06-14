@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/pro-success",
+      "destination": "/pro-success.html",
+      "permanent": false
+    }
+  ]
+}
