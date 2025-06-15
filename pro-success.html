@@ -6,6 +6,31 @@
     <title>Solar Calculator Pro - Advanced UK Solar ROI Analysis</title>
     <meta name="description" content="Professional solar panel ROI calculator with postcode-specific data, battery analysis, and detailed reports.">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PWME39QWJD');
+      
+      // Track Pro purchases
+      function trackProUpgrade() {
+        gtag('event', 'purchase', {
+          'transaction_id': 'pro_' + Date.now(),
+          'value': 4.99,
+          'currency': 'GBP',
+          'items': [{
+            'item_id': 'solar_calc_pro',
+            'item_name': 'Solar Calculator Pro Access',
+            'price': 4.99,
+            'quantity': 1
+          }]
+        });
+      }
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -466,6 +491,12 @@
                 localStorage.setItem('solarProAccess', 'true');
                 localStorage.setItem('proSessionId', sessionId);
                 localStorage.setItem('proAccessDate', new Date().toISOString());
+                
+                // Track successful Pro purchase
+                if (typeof trackProUpgrade === 'function') {
+                    trackProUpgrade();
+                }
+                
                 return; // Allow access
             }
             
@@ -507,7 +538,7 @@
                         </ul>
                     </div>
                     
-                    <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
+                    <a href="https://buy.stripe.com/28o28r7U0eic7qk000" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
                         Get Pro Access - £4.99 →
                     </a>
                     
@@ -519,11 +550,6 @@
                             <input type="hidden" name="_subject" value="Pro Access Restoration Request">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
-                            
-                            <div style="margin-bottom: 12px;">
-                                <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Your Email*</label>
-                                <input type="email" name="email" required style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
-                            </div>
                             
                             <div style="margin-bottom: 12px;">
                                 <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Stripe Transaction ID (if available)</label>
@@ -547,184 +573,9 @@
                         <a href="/" style="color: #3498db;">← Back to Free Calculator</a>
                     </p>
                 </div>
-            `;
-        }
-        
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-        
-        function calculateProROI() {
-            const postcode = document.getElementById('postcode').value;
-            const systemSize = parseFloat(document.getElementById('systemSizePro').value);
-            const exportTariff = parseFloat(document.getElementById('exportTariff').value) / 100;
-            const usagePattern = document.getElementById('energyUsagePattern').value;
-            
-            // Get accurate postcode-specific data
-            const sunshineHours = getSunshineHours(postcode);
-            const efficiency = sunshineHours / 950;
-            
-            // Advanced calculations with better UK assumptions
-            const systemEfficiency = 0.95;
-            const annualGeneration = systemSize * sunshineHours * systemEfficiency;
-            
-            // Usage pattern affects self-consumption (more realistic ranges)
-            const selfConsumption = usagePattern === 'day' ? 0.50 : 
-                                   usagePattern === 'evening' ? 0.25 : 0.38;
-            
-            const selfUseAmount = annualGeneration * selfConsumption;
-            const exportAmount = annualGeneration * (1 - selfConsumption);
-            
-            // Financial calculations with realistic inflation
-            const electricityInflation = 0.045; // 4.5% annual increase (realistic)
-            const currentRate = 0.34;
-            const selfUseSavings = selfUseAmount * currentRate;
-            const exportIncome = exportAmount * exportTariff;
-            const firstYearSavings = selfUseSavings + exportIncome;
-            
-            // Calculate 25-year projections with degradation and inflation
-            let totalSavings = 0;
-            for (let year = 1; year <= 25; year++) {
-                const degradationFactor = Math.pow(0.995, year - 1); // 0.5% degradation per year
-                const inflationFactor = Math.pow(1 + electricityInflation, year - 1);
-                const yearSavings = firstYearSavings * degradationFactor * inflationFactor;
-                totalSavings += yearSavings;
-            }
-            
-            const systemCost = systemSize * 2000; // £2000 per kW estimate
-            const paybackYear = totalSavings > systemCost ? 
-                Math.ceil(systemCost / firstYearSavings) : 25;
-            
-            // Update results
-            document.getElementById('locationEfficiency').innerHTML = `${(efficiency * 100).toFixed(0)}%<br><small>${sunshineHours} hrs/year</small>`;
-            document.getElementById('annualGeneration').innerHTML = `${annualGeneration.toFixed(0)} kWh<br><small>Year 1</small>`;
-            document.getElementById('exportIncome').innerHTML = `£${exportIncome.toFixed(0)}<br><small>+ £${selfUseSavings.toFixed(0)} home use</small>`;
-            document.getElementById('truePayback').innerHTML = `${paybackYear} years<br><small>Inc. degradation</small>`;
-            
-            document.getElementById('proResults').style.display = 'block';
-            
-            generateSystemComparison();
-            generateMonthlyBreakdown(annualGeneration);
-        }
-        
-        function getSunshineHours(postcode) {
-            const regions = {
-                'SW': 1100, 'SE': 1050, 'E': 1000, 'W': 950,
-                'NW': 900, 'NE': 900, 'SC': 850, 'N': 850
-            };
-            const region = postcode.substring(0, 2).toUpperCase();
-            return regions[region] || 950;
-        }
-        
-        function calculateBatteryROI() {
-            const batterySize = parseFloat(document.getElementById('batterySize').value);
-            const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
-            
-            if (batterySize === 0) {
-                document.getElementById('batterySavings').textContent = '£0';
-                document.getElementById('batteryROI').textContent = '0%';
-                document.getElementById('batteryVerdict').textContent = 'N/A';
-            } else {
-                const dailySavings = batterySize * (0.34 - nightRate);
-                const annualSavings = dailySavings * 365;
-                const batteryCost = batterySize * 500;
-                const roi = (annualSavings / batteryCost) * 100;
-                
-                document.getElementById('batterySavings').textContent = `£${annualSavings.toFixed(0)}`;
-                document.getElementById('batteryROI').textContent = `${roi.toFixed(1)}%`;
-                document.getElementById('batteryVerdict').textContent = roi > 10 ? 'YES! ✓' : 'Maybe';
-            }
-            
-            document.getElementById('batteryResults').style.display = 'block';
-        }
-        
-        function generateSystemComparison() {
-            const sizes = [3, 4, 6, 8];
-            const container = document.getElementById('comparisonResults');
-            container.innerHTML = '';
-            
-            sizes.forEach(size => {
-                const div = document.createElement('div');
-                div.className = 'system-comparison';
-                if (size === 6) div.innerHTML = '<div class="best-choice">RECOMMENDED</div>';
-                
-                const annualSavings = size * 950 * 0.35 * 0.34 + size * 950 * 0.65 * 0.055;
-                const systemCost = size * 2000;
-                const payback = systemCost / annualSavings;
-                
-                div.innerHTML += `
-                    <h3>${size} kW System</h3>
-                    <p style="color: #666;">Cost: £${systemCost.toLocaleString()}</p>
-                    <div class="result-value">£${annualSavings.toFixed(0)}</div>
-                    <p>Annual Savings</p>
-                    <p style="margin-top: 10px;">Payback: ${payback.toFixed(1)} years</p>
-                `;
-                
-                container.appendChild(div);
-            });
-        }
-        
-        function generateMonthlyBreakdown(annualGeneration) {
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const distribution = [0.05, 0.06, 0.08, 0.10, 0.12, 0.13, 0.13, 0.11, 0.09, 0.07, 0.04, 0.02];
-            
-            const tbody = document.getElementById('monthlyData');
-            tbody.innerHTML = '';
-            
-            months.forEach((month, i) => {
-                const generation = annualGeneration * distribution[i];
-                const selfUse = generation * 0.35;
-                const exportGen = generation * 0.65;
-                const savings = (selfUse * 0.34) + (exportGen * 0.055);
-                
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${month}</td>
-                        <td>${generation.toFixed(0)}</td>
-                        <td>${selfUse.toFixed(0)}</td>
-                        <td>${exportGen.toFixed(0)}</td>
-                        <td>£${savings.toFixed(0)}</td>
-                    </tr>
-                `;
-            });
-        }
-        
-        function generateReport() {
-            const systemSize = document.getElementById('systemSizePro').value || '6';
-            const postcode = document.getElementById('postcode').value || 'Your Location';
-            const exportTariff = document.getElementById('exportTariff').value || '5.5';
-            
-            const results = `SOLAR INVESTMENT ANALYSIS REPORT
-Generated: ${new Date().toLocaleDateString('en-GB')}
-
-Your comprehensive solar panel investment analysis including 25-year projections, battery storage recommendations, and professional guidance.
-
-Location: ${postcode}
-System Size: ${systemSize} kW
-Export Rate: ${exportTariff}p/kWh
-
-This professional-grade analysis provides everything you need to make an informed solar investment decision.`;
-            
-            const blob = new Blob([results], { type: 'text/plain;charset=utf-8' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Solar_Investment_Analysis_${postcode.replace(/\s+/g, '_')}_${new Date().toLocaleDateString('en-GB').replace(/\//g, '-')}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-    </script>
-</body>
-</html>
+            `; 5px; font-weight: 600; font-size: 0.9em;">Your Email*</label>
+                                <input type="email" name="email" required style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom:

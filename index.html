@@ -6,6 +6,54 @@
     <title>Solar Panel ROI Calculator UK 2025 | Calculate Your Solar Savings</title>
     <meta name="description" content="Free solar panel ROI calculator for UK homeowners. Calculate payback period, 25-year savings, and return on investment. Updated for 2025 electricity rates.">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PWME39QWJD');
+      
+      // Track Pro purchases
+      function trackProUpgrade() {
+        gtag('event', 'purchase', {
+          'transaction_id': 'pro_' + Date.now(),
+          'value': 4.99,
+          'currency': 'GBP',
+          'items': [{
+            'item_id': 'solar_calc_pro',
+            'item_name': 'Solar Calculator Pro Access',
+            'price': 4.99,
+            'quantity': 1
+          }]
+        });
+      }
+      
+      // Track calculator usage
+      function trackCalculatorUse() {
+        gtag('event', 'calculate_roi', {
+          'event_category': 'engagement',
+          'event_label': 'solar_calculator_used'
+        });
+      }
+      
+      // Track upgrade button clicks
+      function trackUpgradeClick(location) {
+        gtag('event', 'begin_checkout', {
+          'currency': 'GBP',
+          'value': 4.99,
+          'items': [{
+            'item_id': 'solar_calc_pro',
+            'item_name': 'Solar Calculator Pro Access',
+            'price': 4.99,
+            'quantity': 1
+          }],
+          'event_label': location
+        });
+      }
+    </script>
+    
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="Solar Panel ROI Calculator UK - Calculate Your Savings">
     <meta property="og:description" content="Find out how much you can save with solar panels. Free UK calculator with 2025 electricity rates.">
@@ -395,6 +443,21 @@
                 width: 90%;
                 text-align: center;
             }
+            
+            /* Fix mobile chart overlap */
+            #savingsChart > div {
+                padding: 10px;
+            }
+            
+            #savingsChart > div > div:last-child {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            #savingsChart > div > div:last-child > div {
+                margin: 10px 0;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -447,7 +510,7 @@
                         <li>⭐ Compare 4 system sizes</li>
                         <li>⭐ Monthly cash flow table</li>
                     </ul>
-                    <button onclick="upgradeToPro()" style="background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%); color: white; padding: 12px 25px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; width: 100%; transform: scale(1.05);">
+                    <button onclick="trackUpgradeClick('hero'); window.location.href='https://buy.stripe.com/28o28r7U0eic7qk000'" style="background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%); color: white; padding: 12px 25px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; width: 100%; transform: scale(1.05);">
                         Get Pro Analysis →
                     </button>
                 </div>
@@ -503,7 +566,7 @@
                 </select>
             </div>
 
-            <button class="calculate-btn" onclick="calculateROI()">Calculate My Solar ROI →</button>
+            <button class="calculate-btn" onclick="calculateROI(); trackCalculatorUse();">Calculate My Solar ROI →</button>
 
             <div class="loading">
                 <div class="spinner"></div>
@@ -562,7 +625,7 @@
             <p style="margin: 20px 0; font-size: 0.9em;">
                 <strong>Example:</strong> London gets 15% more sun than Manchester. Pro shows YOUR actual savings.
             </p>
-            <button class="upgrade-btn" onclick="upgradeToPro()">Get My Accurate Analysis →</button>
+            <button class="upgrade-btn" onclick="trackUpgradeClick('after_calculation'); window.location.href='https://buy.stripe.com/28o28r7U0eic7qk000'">Get My Accurate Analysis →</button>
             <div class="countdown" id="countdown">Special launch price expires in: 23:47:32</div>
         </div>
 
@@ -685,7 +748,7 @@
         });
         
         let calculationCount = 0;
-        let stripePaymentLink = 'https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00';
+        let stripePaymentLink = 'https://buy.stripe.com/28o28r7U0eic7qk000';
         
         function calculateROI() {
             // Show loading
@@ -794,10 +857,6 @@
                     </div>
                 </div>
             `;
-        }
-        
-        function upgradeToPro() {
-            window.location.href = stripePaymentLink;
         }
         
         function scrollToCalculator() {

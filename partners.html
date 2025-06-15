@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner With Us - Solar ROI Calculator UK</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PWME39QWJD');
+      
+      // Track installer form submissions
+      function trackInstallerSubmit() {
+        gtag('event', 'generate_lead', {
+          'currency': 'GBP',
+          'value': 25.00  // Estimated lead value
+        });
+      }
+    </script>
+    
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -141,7 +159,7 @@
             ✅ Thank you! We'll be in touch within 24 hours to discuss partnership opportunities.
         </div>
         
-        <form id="partnerForm" action="https://formsubmit.co/r.jenkins0912@gmail.com" method="POST">
+        <form id="partnerForm" action="https://formsubmit.co/r.jenkins0912@gmail.com" method="POST" onsubmit="trackInstallerSubmit()">
             <!-- FormSubmit configuration -->
             <input type="hidden" name="_subject" value="New Solar Installer Partner Inquiry">
             <input type="hidden" name="_captcha" value="false">
