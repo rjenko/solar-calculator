@@ -937,8 +937,22 @@
             const totalAnnualSavings = annualSelfUseSavings + annualExportIncome;
             const paybackYears = systemCost / totalAnnualSavings;
             
+            // Calculate monthly breakdown
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthlyDist = [0.04, 0.05, 0.08, 0.10, 0.12, 0.13, 0.13, 0.12, 0.10, 0.07, 0.04, 0.02];
+            
+            let monthlyBreakdown = '';
+            months.forEach((month, i) => {
+                const monthGen = annualGeneration * monthlyDist[i];
+                const monthSelfUse = monthGen * selfConsumption;
+                const monthExport = monthGen * (1 - selfConsumption);
+                const monthSavings = (monthSelfUse * (parseFloat(currentTariff) / 100)) + (monthExport * (parseFloat(exportTariff) / 100));
+                
+                monthlyBreakdown += `${month.padEnd(12)} ${monthGen.toFixed(0).padEnd(10)} ${monthSelfUse.toFixed(0).padEnd(10)} ${monthExport.toFixed(0).padEnd(10)} £${monthSavings.toFixed(0)}\n`;
+            });
+            
             const reportContent = `================================================================================
-                      SOLAR INVESTMENT ANALYSIS
+                      SOLAR INVESTMENT ANALYSIS REPORT
 ================================================================================
 
 Generated: ${date}
@@ -976,7 +990,8 @@ Postcode:                   ${postcode}
 Sunshine Hours:             ${sunshineHours} hours/year
 Location Efficiency:        ${((sunshineHours / 850) * 100).toFixed(0)}% vs UK average
 Available Roof Area:        ${roofArea} m²
-Current Electricity Rate:   ${currentTariff}p/kWh (Ofgem cap - drops to 25.73p July 2025)
+Current Electricity Rate:   ${currentTariff}p/kWh
+Export Tariff:              ${exportTariff}p/kWh
 
 SYSTEM SPECIFICATIONS
 --------------------
@@ -986,15 +1001,76 @@ Roof Area Required:         ${Math.round(systemSize * 8)} m²
 Annual Generation:          ${annualGeneration.toFixed(0)} kWh
 System Efficiency:          ${(selfConsumption * 100).toFixed(0)}% self-consumption
 
-[Full report continues with monthly breakdown, financial projections, etc...]
+================================================================================
+                     MONTH-BY-MONTH GENERATION FORECAST
+================================================================================
+
+Month        Generation  Self-Use   Export     Savings
+------------------------------------------------------
+${monthlyBreakdown}------------------------------------------------------
+TOTAL        ${annualGeneration.toFixed(0).padEnd(10)} ${annualSelfUse.toFixed(0).padEnd(10)} ${annualExport.toFixed(0).padEnd(10)} £${totalAnnualSavings.toFixed(0)}
 
 ================================================================================
-                    END OF ANALYSIS
-                    
+                        5-YEAR FINANCIAL PROJECTION
+================================================================================
+
+Year    Savings     Cumulative    Notes
+--------------------------------------------
+0       £0          -£${systemCost}      Initial investment
+1       £${totalAnnualSavings.toFixed(0)}       -£${(systemCost - totalAnnualSavings).toFixed(0)}
+2       £${(totalAnnualSavings * 1.035 * 0.995).toFixed(0)}       -£${(systemCost - totalAnnualSavings - (totalAnnualSavings * 1.035 * 0.995)).toFixed(0)}
+3       £${(totalAnnualSavings * Math.pow(1.035, 2) * Math.pow(0.995, 2)).toFixed(0)}       -£${(systemCost - totalAnnualSavings * (1 + 1.035 * 0.995 + Math.pow(1.035, 2) * Math.pow(0.995, 2))).toFixed(0)}
+4       £${(totalAnnualSavings * Math.pow(1.035, 3) * Math.pow(0.995, 3)).toFixed(0)}       -£${(systemCost - totalAnnualSavings * (1 + 1.035 * 0.995 + Math.pow(1.035, 2) * Math.pow(0.995, 2) + Math.pow(1.035, 3) * Math.pow(0.995, 3))).toFixed(0)}
+5       £${(totalAnnualSavings * Math.pow(1.035, 4) * Math.pow(0.995, 4)).toFixed(0)}       ${totalAnnualSavings * (1 + 1.035 * 0.995 + Math.pow(1.035, 2) * Math.pow(0.995, 2) + Math.pow(1.035, 3) * Math.pow(0.995, 3) + Math.pow(1.035, 4) * Math.pow(0.995, 4)) > systemCost ? '+' : '-'}£${Math.abs(systemCost - totalAnnualSavings * (1 + 1.035 * 0.995 + Math.pow(1.035, 2) * Math.pow(0.995, 2) + Math.pow(1.035, 3) * Math.pow(0.995, 3) + Math.pow(1.035, 4) * Math.pow(0.995, 4))).toFixed(0)}
+
+Note: Includes 3.5% annual electricity price inflation and 0.5% panel degradation
+
+================================================================================
+                        BATTERY STORAGE ANALYSIS
+================================================================================
+
+Battery Size Selected:      ${batterySize} kWh
+${batterySize > 0 ? `Battery Cost:               £${batterySize * 500}
+Time-Shifting Potential:    £${(batterySize * 0.9 * (0.2703 - 0.07) * 365).toFixed(0)}/year
+Recommendation:             Worth considering for evening usage patterns` : 
+`No battery selected. Consider adding 10kWh battery for:
+- Time-shifting savings: £730/year (charge at 7p, use at 27p)
+- Backup power during outages
+- Increased self-consumption to 60-70%`}
+
+================================================================================
+                        KEY ASSUMPTIONS
+================================================================================
+
+• Self-consumption rate: 35% (conservative estimate)
+• Annual panel degradation: 0.5%
+• Electricity price inflation: 3.5% annually
+• Inverter replacement: Years 10 & 20 (£1,500 each)
+• System lifespan: 25 years minimum
+• Export rate: ${exportTariff}p/kWh (Smart Export Guarantee)
+
+================================================================================
+                        NEXT STEPS
+================================================================================
+
+1. Get 3 quotes from MCS certified installers
+2. Check your roof condition (should last 25+ years)
+3. Confirm no planning restrictions
+4. Compare inverter warranties (aim for 10+ years)
+5. Register for Smart Export Guarantee after installation
+
+================================================================================
+                        DISCLAIMER
+================================================================================
+
+This analysis provides estimates based on typical UK conditions and current 
+market rates. Actual results will vary based on weather, system performance, 
+and individual usage patterns. Always consult qualified professionals before 
+making investment decisions.
+
+================================================================================
 Report generated by: Solar ROI Calculator Pro
 Website: https://solarroicalculator.co.uk
-Report ID: ${reportId}
-Date: ${date}
 ================================================================================`;
             
             const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });

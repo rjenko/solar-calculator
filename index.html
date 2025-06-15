@@ -510,6 +510,7 @@
             <div class="nav-links">
                 <a href="#calculator">Calculator</a>
                 <a href="#faq">FAQ</a>
+                <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #ff8c00; color: white; padding: 5px 15px; border-radius: 20px;">Go Pro</a>
                 <a href="/partners">Partners</a>
                 <a href="/legal">Legal</a>
             </div>
@@ -729,7 +730,7 @@
         </table>
 
         <!-- FAQ Section with Icons -->
-        <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
             <h2>Frequently Asked Questions</h2>
             
             <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -848,7 +849,10 @@
             // UK-specific calculations with realistic assumptions
             const annualGeneration = systemSize * 850 * orientation; // 850 kWh/kW is UK average
             const selfConsumption = 0.30; // Conservative 30%
-            const annualSelfUse = Math.min(annualGeneration * selfConsumption, annualUsage);
+            
+            // CRITICAL: Self-use is limited by actual usage
+            const potentialSelfUse = annualGeneration * selfConsumption;
+            const annualSelfUse = Math.min(potentialSelfUse, annualUsage * 0.35); // Can't save more than you use!
             const annualExport = annualGeneration - annualSelfUse;
             
             const annualSelfUseSavings = annualSelfUse * electricityRate;
@@ -891,6 +895,19 @@
             document.getElementById('roi').textContent = `${roi.toFixed(0)}%`;
             document.getElementById('monthlySavings').innerHTML = `£${monthlySavings.toFixed(0)}<br><small style="font-size: 0.6em; color: #666;">(£${(annualSelfUseSavings/12).toFixed(0)} saved + £${(exportIncome/12).toFixed(0)} export)</small>`;
             document.getElementById('co2Saved').textContent = `${co2Saved.toFixed(1)} tonnes`;
+            
+            // Add usage coverage info
+            const usageCoverage = (annualSelfUse / annualUsage * 100).toFixed(0);
+            const resultsDiv = document.getElementById('results');
+            const coverageInfo = resultsDiv.querySelector('.usage-coverage') || document.createElement('div');
+            coverageInfo.className = 'usage-coverage';
+            coverageInfo.style.cssText = 'background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;';
+            coverageInfo.innerHTML = `<strong>Solar Coverage:</strong> This system will cover approximately ${usageCoverage}% of your electricity usage<br>
+                                     <small>Annual usage: ${annualUsage.toFixed(0)} kWh | Solar generation: ${annualGeneration.toFixed(0)} kWh</small>`;
+            
+            if (!resultsDiv.querySelector('.usage-coverage')) {
+                resultsDiv.insertBefore(coverageInfo, resultsDiv.querySelector('.result-card'));
+            }
             
             // Hide loading, show results
             document.querySelector('.loading').style.display = 'none';
