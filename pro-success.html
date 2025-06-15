@@ -38,24 +38,11 @@
             box-sizing: border-box;
         }
         
-        /* Security: Prevent text selection */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #2c3e50;
             background: #f8f9fa;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        
-        /* Allow selection only in input fields */
-        input, textarea {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
         }
         
         .pro-header {
@@ -286,7 +273,6 @@
             display: inline-block;
         }
         
-        /* Enhanced mobile optimizations */
         @media (max-width: 600px) {
             .tabs {
                 flex-wrap: wrap;
@@ -294,82 +280,11 @@
             
             .tab {
                 flex: 1 0 45%;
-                font-size: 0.9em;
-                padding: 8px 15px;
             }
             
             h1 {
                 font-size: 2em;
             }
-            
-            .container {
-                padding: 15px;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            .result-value {
-                font-size: 1.5em;
-            }
-            
-            .comparison-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .download-section {
-                padding: 20px;
-            }
-        }
-        
-        /* Accessibility improvements */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            .calculate-btn, .download-btn {
-                border: 2px solid currentColor;
-            }
-        }
-        
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-        
-        /* Smooth animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .tab-content.active {
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        /* Enhanced button states */
-        .calculate-btn:active, .download-btn:active {
-            transform: scale(0.98);
-        }
-        
-        .calculate-btn:disabled, .download-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
     </style>
 </head>
@@ -389,10 +304,10 @@
         
         <div id="mainContent">
             <div class="tabs">
-                <button class="tab active" data-tab="advanced">Advanced Calculator</button>
-                <button class="tab" data-tab="battery">Battery Analysis</button>
-                <button class="tab" data-tab="comparison">System Comparison</button>
-                <button class="tab" data-tab="monthly">Monthly Breakdown</button>
+                <button class="tab active" onclick="switchTab('advanced')">Advanced Calculator</button>
+                <button class="tab" onclick="switchTab('battery')">Battery Analysis</button>
+                <button class="tab" onclick="switchTab('comparison')">System Comparison</button>
+                <button class="tab" onclick="switchTab('monthly')">Monthly Breakdown</button>
             </div>
 
             <!-- Advanced Calculator Tab -->
@@ -569,65 +484,10 @@
     </div>
 
     <script>
-        // CRITICAL: Security measures FIRST
-        (function() {
-            // Disable right-click
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            
-            // Disable text selection except in inputs
-            document.addEventListener('selectstart', e => {
-                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                }
-            });
-            
-            // Disable developer tools shortcuts
-            document.addEventListener('keydown', e => {
-                if (e.keyCode === 123 || // F12
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-                    (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-            // Console warning for security
-            const styles = [
-                'color: red',
-                'font-size: 50px',
-                'font-weight: bold',
-                'text-shadow: 2px 2px 4px rgba(0,0,0,0.5)'
-            ].join(';');
-            
-            console.log('%cSTOP!', styles);
-            console.log('%cThis is a browser feature intended for developers. Do not enter or paste code here.', 'color: red; font-size: 16px;');
-            console.log('%cIf someone told you to copy/paste something here, it is a scam.', 'color: red; font-size: 16px;');
-            
-            // Detect dev tools (basic protection)
-            let devtools = {open: false, orientation: null};
-            const threshold = 160;
-            setInterval(() => {
-                if (window.outerHeight - window.innerHeight > threshold || 
-                    window.outerWidth - window.innerWidth > threshold) {
-                    if (!devtools.open) {
-                        devtools.open = true;
-                        console.clear();
-                        console.log('%cDeveloper tools detected', 'color: red; font-size: 20px;');
-                    }
-                }
-            }, 500);
-        })();
-        
-        // CRITICAL: Define all functions BEFORE they're used
-        
         // Basic protection
         document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('selectstart', e => {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
-        });
         
-        // Global variables for storing calculation data
+        // Global variables
         let globalPostcode = 'SW1A 1AA';
         let globalSystemSize = 6;
         let globalSelfConsumption = 0.35;
@@ -635,11 +495,40 @@
         let globalAnnualGeneration = 0;
         let globalSunshineHours = 950;
         
-        // SWITCH TAB FUNCTION
-        function switchTab(tabName) {
-            console.log('Switching to tab:', tabName);
+        // SECURITY CHECK FIRST
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
             
-            // Remove active from all tabs and contents
+            // Check for valid access
+            if (sessionId && sessionId.startsWith('cs_')) {
+                document.getElementById('successMessage').style.display = 'block';
+                localStorage.setItem('solarProAccess', 'true');
+                localStorage.setItem('proSessionId', sessionId);
+                localStorage.setItem('proAccessDate', new Date().toISOString());
+                
+                if (typeof trackProUpgrade === 'function') {
+                    trackProUpgrade();
+                }
+                return;
+            }
+            
+            const storedAccess = localStorage.getItem('solarProAccess');
+            const storedSession = localStorage.getItem('proSessionId');
+            
+            if (storedAccess === 'true' && storedSession) {
+                document.getElementById('successMessage').innerHTML = '✅ Welcome back to Solar Calculator Pro!';
+                document.getElementById('successMessage').style.display = 'block';
+                return;
+            }
+            
+            // No access - show denial
+            showAccessDenied();
+        });
+        
+        // TAB SWITCHING
+        function switchTab(tabName) {
+            // Remove active from all
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -647,115 +536,125 @@
                 content.classList.remove('active');
             });
             
-            // Add active to clicked tab
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            // Find and activate the right tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(tabName) || 
+                    (tabName === 'advanced' && tab.textContent.includes('Advanced')) ||
+                    (tabName === 'battery' && tab.textContent.includes('Battery')) ||
+                    (tabName === 'comparison' && tab.textContent.includes('System')) ||
+                    (tabName === 'monthly' && tab.textContent.includes('Monthly'))) {
+                    tab.classList.add('active');
+                }
+            });
             
-            // Show selected content
+            // Show content
             document.getElementById(tabName).classList.add('active');
         }
         
-        // GET SUNSHINE HOURS BY POSTCODE
+        // SUNSHINE HOURS DATA
         function getSunshineHours(postcode) {
             const postcodeData = {
-                // London & South East
                 'SW': 1050, 'SE': 1025, 'W': 1000, 'WC': 1000, 'EC': 1000, 'E': 975,
                 'N': 950, 'NW': 925, 'EN': 975, 'IG': 975, 'RM': 975, 'DA': 1000,
                 'BR': 1000, 'CR': 1000, 'SM': 1025, 'KT': 1025, 'TW': 1025,
-                'UB': 975, 'HA': 975, 'WD': 975, 'AL': 975, 'SG': 975, 'CM': 975,
-                'SS': 1000, 'CO': 975, 'ME': 1000, 'TN': 1000, 'CT': 1025,
-                
-                // South West
                 'BH': 1050, 'DT': 1050, 'SP': 1025, 'BA': 1025, 'TA': 1025,
                 'EX': 1050, 'TQ': 1075, 'PL': 1050, 'TR': 1100, 'BS': 1025,
-                'GL': 1000, 'SN': 1000, 'RG': 1000, 'OX': 975, 'HP': 975,
-                
-                // Midlands
                 'B': 925, 'CV': 925, 'DY': 925, 'WS': 925, 'WV': 925, 'ST': 900,
-                'TF': 900, 'SY': 925, 'WR': 950, 'HR': 950, 'LE': 925, 'NG': 925,
-                'DE': 900, 'SK': 900, 'S': 875, 'DN': 875,
-                
-                // North
-                'M': 875, 'WA': 875, 'WN': 875, 'BL': 875, 'OL': 875, 'L': 850,
-                'CH': 875, 'CW': 875, 'PR': 850, 'FY': 850, 'BB': 850, 'BD': 850,
-                'LS': 875, 'WF': 875, 'HD': 875, 'HX': 875, 'HG': 875, 'YO': 875,
-                'HU': 875, 'TS': 850, 'DL': 850, 'DH': 850, 'SR': 850, 'NE': 850,
-                'CA': 825, 'LA': 825,
-                
-                // Wales
-                'CF': 925, 'NP': 925, 'SA': 950, 'LD': 900, 'LL': 875,
-                
-                // Scotland
-                'EH': 825, 'G': 800, 'FK': 800, 'KY': 825, 'DD': 825, 'AB': 825,
-                'IV': 775, 'PH': 775, 'PA': 775, 'KA': 800, 'ML': 800, 'DG': 825,
-                'TD': 825, 'KW': 750, 'ZE': 700, 'HS': 700,
-                
-                // Northern Ireland
+                'M': 875, 'L': 850, 'LS': 875, 'BD': 850, 'HU': 875,
+                'CF': 925, 'NP': 925, 'SA': 950, 'LL': 875,
+                'EH': 825, 'G': 800, 'AB': 825, 'IV': 775,
                 'BT': 825
             };
             
             const prefix = postcode.substring(0, 2).toUpperCase();
-            return postcodeData[prefix] || 950; // Default to UK average
+            return postcodeData[prefix] || 950;
         }
         
         // CALCULATE PRO ROI
         function calculateProROI() {
-            try {
-                // Get inputs
-                const postcode = document.getElementById('postcode').value || 'SW1A 1AA';
-                const systemSize = parseFloat(document.getElementById('systemSizePro').value);
-                const exportRate = parseFloat(document.getElementById('exportTariff').value) / 100;
-                const usagePattern = document.getElementById('energyUsagePattern').value;
-                
-                // Store globally for other functions
-                globalPostcode = postcode;
-                globalSystemSize = systemSize;
-                globalExportRate = exportRate;
-                globalSunshineHours = getSunshineHours(postcode);
-                
-                // Calculate location efficiency
-                const locationFactor = globalSunshineHours / 950;
-                
-                // Calculate generation with realistic system efficiency
-                const systemEfficiency = 0.95;
-                globalAnnualGeneration = systemSize * globalSunshineHours * systemEfficiency;
-                
-                // Self-consumption based on usage pattern
-                globalSelfConsumption = usagePattern === 'day' ? 0.45 : 
-                                       usagePattern === 'evening' ? 0.25 : 0.35;
-                
-                const annualSelfUse = globalAnnualGeneration * globalSelfConsumption;
-                const annualExport = globalAnnualGeneration * (1 - globalSelfConsumption);
-                
-                const selfUseSavings = annualSelfUse * 0.34;
-                const exportIncome = annualExport * exportRate;
-                const totalAnnualSavings = selfUseSavings + exportIncome;
-                
-                // System cost
-                const systemCost = systemSize * 2000;
-                const paybackYears = systemCost / totalAnnualSavings;
-                
-                // Update display
-                document.getElementById('locationEfficiency').innerHTML = 
-                    `${(locationFactor * 100).toFixed(0)}%<br><small>${globalSunshineHours} hrs/year</small>`;
-                document.getElementById('annualGeneration').innerHTML = 
-                    `${globalAnnualGeneration.toFixed(0)} kWh`;
-                document.getElementById('exportIncome').innerHTML = 
-                    `£${exportIncome.toFixed(0)}<br><small>+ £${selfUseSavings.toFixed(0)} home use</small>`;
-                document.getElementById('truePayback').innerHTML = 
-                    `${paybackYears.toFixed(1)} years`;
-                
-                document.getElementById('proResults').style.display = 'block';
-                
-                // Update other tabs
-                generateSystemComparison();
-                generateMonthlyBreakdown();
-            } catch (error) {
-                console.error('Calculation error:', error);
-                alert('An error occurred during calculation. Please check your inputs and try again.');
-            }
+            const postcode = document.getElementById('postcode').value || 'SW1A 1AA';
+            const systemSize = parseFloat(document.getElementById('systemSizePro').value);
+            const exportRate = parseFloat(document.getElementById('exportTariff').value) / 100;
+            const usagePattern = document.getElementById('energyUsagePattern').value;
+            
+            globalPostcode = postcode;
+            globalSystemSize = systemSize;
+            globalExportRate = exportRate;
+            globalSunshineHours = getSunshineHours(postcode);
+            
+            const locationFactor = globalSunshineHours / 950;
+            const systemEfficiency = 0.95;
+            globalAnnualGeneration = systemSize * globalSunshineHours * systemEfficiency;
+            
+            globalSelfConsumption = usagePattern === 'day' ? 0.45 : 
+                                   usagePattern === 'evening' ? 0.25 : 0.35;
+            
+            const annualSelfUse = globalAnnualGeneration * globalSelfConsumption;
+            const annualExport = globalAnnualGeneration * (1 - globalSelfConsumption);
+            
+            const selfUseSavings = annualSelfUse * 0.34;
+            const exportIncome = annualExport * exportRate;
+            const totalAnnualSavings = selfUseSavings + exportIncome;
+            
+            const systemCost = systemSize * 2000;
+            const paybackYears = systemCost / totalAnnualSavings;
+            
+            // Update display
+            document.getElementById('locationEfficiency').innerHTML = 
+                `${(locationFactor * 100).toFixed(0)}%<br><small>${globalSunshineHours} hrs/year</small>`;
+            document.getElementById('annualGeneration').innerHTML = 
+                `${globalAnnualGeneration.toFixed(0)} kWh`;
+            document.getElementById('exportIncome').innerHTML = 
+                `£${exportIncome.toFixed(0)}<br><small>+ £${selfUseSavings.toFixed(0)} home use</small>`;
+            document.getElementById('truePayback').innerHTML = 
+                `${paybackYears.toFixed(1)} years`;
+            
+            document.getElementById('proResults').style.display = 'block';
+            
+            // Update other tabs
+            generateSystemComparison();
+            generateMonthlyBreakdown();
         }
         
-        // GENERATE SYSTEM COMPARISON
+        // BATTERY CALCULATION
+        function calculateBatteryROI() {
+            const batterySize = parseFloat(document.getElementById('batterySize').value);
+            const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
+            
+            if (batterySize === 0) {
+                document.getElementById('batterySavings').textContent = '£0';
+                document.getElementById('batteryROI').textContent = '0%';
+                document.getElementById('batteryVerdict').textContent = 'N/A';
+                document.getElementById('batteryResults').style.display = 'block';
+                return;
+            }
+            
+            const batteryCosts = {5: 2500, 10: 5000, 13.5: 8000, 15: 7500};
+            const batteryCost = batteryCosts[batterySize];
+            
+            const dailyCycles = 0.85;
+            const efficiency = 0.90;
+            const dailySavings = batterySize * dailyCycles * (0.34 - nightRate) * efficiency;
+            const annualSavings = dailySavings * 365;
+            
+            let totalSavings = 0;
+            for (let year = 1; year <= 10; year++) {
+                totalSavings += annualSavings * Math.pow(0.98, year - 1);
+            }
+            
+            const roi = ((totalSavings - batteryCost) / batteryCost * 100);
+            const payback = batteryCost / annualSavings;
+            
+            document.getElementById('batterySavings').textContent = `£${annualSavings.toFixed(0)}`;
+            document.getElementById('batteryROI').textContent = `${roi.toFixed(0)}%`;
+            document.getElementById('batteryVerdict').textContent = 
+                payback < 10 ? 'YES! ✓' : payback < 15 ? 'Maybe' : 'No ✗';
+            
+            document.getElementById('batteryResults').style.display = 'block';
+        }
+        
+        // SYSTEM COMPARISON
         function generateSystemComparison() {
             const container = document.getElementById('comparisonResults');
             container.innerHTML = '';
@@ -766,7 +665,6 @@
                 const div = document.createElement('div');
                 div.className = 'system-comparison';
                 
-                // Calculate for this size
                 const generation = size * globalSunshineHours * 0.95;
                 const selfUse = generation * globalSelfConsumption;
                 const export = generation * (1 - globalSelfConsumption);
@@ -797,12 +695,10 @@
             });
         }
         
-        // GENERATE MONTHLY BREAKDOWN
+        // MONTHLY BREAKDOWN
         function generateMonthlyBreakdown() {
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 
                           'July', 'August', 'September', 'October', 'November', 'December'];
-            
-            // UK-specific monthly distribution
             const monthlyFactors = [0.04, 0.05, 0.08, 0.10, 0.12, 0.13, 
                                   0.13, 0.12, 0.10, 0.07, 0.05, 0.04];
             
@@ -832,7 +728,6 @@
                 `;
             });
             
-            // Add totals row
             const totalRow = tbody.insertRow();
             totalRow.style.fontWeight = 'bold';
             totalRow.style.background = '#f8f9fa';
@@ -845,62 +740,8 @@
             `;
         }
         
-        // CALCULATE BATTERY ROI
-        function calculateBatteryROI() {
-            try {
-                const batterySize = parseFloat(document.getElementById('batterySize').value);
-                const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
-                
-                if (batterySize === 0) {
-                    document.getElementById('batterySavings').textContent = '£0';
-                    document.getElementById('batteryROI').textContent = '0%';
-                    document.getElementById('batteryVerdict').textContent = 'N/A';
-                    document.getElementById('batteryResults').style.display = 'block';
-                    return;
-                }
-                
-                // Battery costs
-                const batteryCosts = {
-                    5: 2500,
-                    10: 5000,
-                    13.5: 8000,
-                    15: 7500
-                };
-                
-                const batteryCost = batteryCosts[batterySize];
-                
-                // Realistic battery calculations
-                const dailyCycles = 0.85;
-                const efficiency = 0.90;
-                const degradation = 0.02;
-                
-                const dailySavings = batterySize * dailyCycles * (0.34 - nightRate) * efficiency;
-                const annualSavings = dailySavings * 365;
-                
-                // 10-year analysis
-                let totalSavings = 0;
-                for (let year = 1; year <= 10; year++) {
-                    totalSavings += annualSavings * Math.pow(1 - degradation, year - 1);
-                }
-                
-                const roi = ((totalSavings - batteryCost) / batteryCost * 100);
-                const payback = batteryCost / annualSavings;
-                
-                document.getElementById('batterySavings').textContent = `£${annualSavings.toFixed(0)}`;
-                document.getElementById('batteryROI').textContent = `${roi.toFixed(0)}%`;
-                document.getElementById('batteryVerdict').textContent = 
-                    payback < 10 ? 'YES! ✓' : payback < 15 ? 'Maybe' : 'No ✗';
-                
-                document.getElementById('batteryResults').style.display = 'block';
-            } catch (error) {
-                console.error('Battery calculation error:', error);
-                alert('An error occurred during battery calculation. Please check your inputs and try again.');
-            }
-        }
-        
-        // GENERATE COMPREHENSIVE REPORT
+        // GENERATE REPORT
         function generateReport() {
-            // Ensure we have data by running calculation if needed
             if (globalAnnualGeneration === 0) {
                 alert('Please complete the Advanced Calculator first to generate a report.');
                 switchTab('advanced');
@@ -931,135 +772,38 @@ Payback Period: ${paybackYears.toFixed(1)} years
 25-Year ROI: ${(((annualSavings * 25) - systemCost) / systemCost * 100).toFixed(0)}%
 Annual Savings: £${annualSavings.toFixed(0)}
 
-SYSTEM SPECIFICATION
-================================================================================
-System Size: ${systemSize} kW
-Expected Annual Generation: ${globalAnnualGeneration.toFixed(0)} kWh
-Location Sunshine Hours: ${globalSunshineHours} hours/year
-Self-Consumption Rate: ${(globalSelfConsumption * 100).toFixed(0)}%
-Export Rate: ${(globalExportRate * 100).toFixed(1)}p/kWh
-
-FINANCIAL BREAKDOWN
-================================================================================
-Installation Cost: £${systemCost.toLocaleString()}
-Annual Self-Use Savings: £${(annualSelfUse * 0.34).toFixed(0)}
-Annual Export Income: £${(annualExport * globalExportRate).toFixed(0)}
-Total Annual Savings: £${annualSavings.toFixed(0)}
-25-Year Total Profit: £${((annualSavings * 25) - systemCost).toLocaleString()}
+Your solar investment will pay for itself in ${Math.ceil(paybackYears)} years.
+After that, you'll enjoy free electricity and export income for decades.
 
 ================================================================================
-                        END OF REPORT
-================================================================================
-            `;
+                    END OF REPORT - SOLAR ROI CALCULATOR PRO
+================================================================================`;
             
-            // Create download
             const blob = new Blob([reportContent], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `Solar_Investment_Analysis_${postcode.replace(/\s+/g, '_')}_${date.replace(/\//g, '-')}.txt`;
+            a.download = `Solar_Analysis_${postcode.replace(/\s+/g, '_')}_${date.replace(/\//g, '-')}.txt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }
         
-        // ACCESS DENIED FUNCTION
+        // ACCESS DENIED
         function showAccessDenied() {
             document.body.innerHTML = `
                 <div style="max-width: 600px; margin: 100px auto; padding: 40px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
                     <h1 style="color: #e74c3c;">🔒 Pro Access Required</h1>
                     <p style="font-size: 1.2em; margin: 20px 0;">This is the Pro version of our solar calculator.</p>
-                    <p>To access advanced features like postcode-specific data, battery analysis, and detailed reports, you need Pro access.</p>
-                    
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                        <h3>Pro Calculator Includes:</h3>
-                        <ul style="text-align: left; display: inline-block; list-style-type: none; padding: 0;">
-                            <li>📍 Your exact postcode sunshine hours</li>
-                            <li>🔋 Battery storage ROI analysis</li>
-                            <li>💰 Export tariff comparison</li>
-                            <li>📊 Month-by-month breakdown</li>
-                            <li>🏠 System size comparison</li>
-                            <li>📈 25-year financial projections</li>
-                        </ul>
-                    </div>
-                    
                     <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
                         Get Pro Access - £4.99 →
                     </a>
-                    
-                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h4 style="color: #1976d2; margin-bottom: 15px;">💡 Already purchased Pro access?</h4>
-                        <p style="margin: 0 0 15px 0; font-size: 0.9em;">If you've cleared your browser data or are using a different device, please email us for access restoration.</p>
-                        
-                        <p style="margin: 15px 0; font-size: 0.9em;">
-                            <strong>Email:</strong> support@solarroicalculator.co.uk<br>
-                            <strong>Include:</strong> Your purchase email and transaction ID
-                        </p>
-                        
-                        <p style="margin: 15px 0 0 0; font-size: 0.8em; color: #666;">We typically respond within 24 hours</p>
-                    </div>
-                    
                     <p style="margin-top: 20px;">
                         <a href="/" style="color: #3498db;">← Back to Free Calculator</a>
                     </p>
                 </div>
             `;
-        }
-        
-        // SECURITY CHECK AND INITIALIZATION
-        window.onload = function() {
-            console.log('Pro Calculator loading...');
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const sessionId = urlParams.get('session_id');
-            
-            // Check for valid Stripe session
-            if (sessionId && sessionId.startsWith('cs_')) {
-                console.log('Valid new purchase session');
-                document.getElementById('successMessage').style.display = 'block';
-                localStorage.setItem('solarProAccess', 'true');
-                localStorage.setItem('proSessionId', sessionId);
-                localStorage.setItem('proAccessDate', new Date().toISOString());
-                
-                // Track successful Pro purchase
-                if (typeof trackProUpgrade === 'function') {
-                    trackProUpgrade();
-                }
-                
-                // Setup tab listeners
-                setupTabListeners();
-                return; // Allow access
-            }
-            
-            // Check localStorage for previous access
-            const storedAccess = localStorage.getItem('solarProAccess');
-            const storedSession = localStorage.getItem('proSessionId');
-            
-            if (storedAccess === 'true' && storedSession && 
-                (storedSession.startsWith('cs_') || storedSession.startsWith('manual_restore_'))) {
-                console.log('Valid stored session found');
-                document.getElementById('successMessage').innerHTML = '✅ Welcome back to Solar Calculator Pro!';
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Setup tab listeners
-                setupTabListeners();
-                return; // Allow access
-            }
-            
-            // No valid access - show denied page
-            console.log('No valid access - redirecting to purchase');
-            showAccessDenied();
-        };
-        
-        // SETUP TAB LISTENERS
-        function setupTabListeners() {
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabName = this.getAttribute('data-tab');
-                    switchTab(tabName);
-                });
-            });
         }
     </script>
 </body>
