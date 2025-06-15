@@ -299,10 +299,10 @@
         
         <div id="mainContent">
             <div class="tabs">
-                <button class="tab active" onclick="switchTab('advanced')">Advanced Calculator</button>
-                <button class="tab" onclick="switchTab('battery')">Battery Analysis</button>
-                <button class="tab" onclick="switchTab('comparison')">System Comparison</button>
-                <button class="tab" onclick="switchTab('monthly')">Monthly Breakdown</button>
+                <button class="tab active" id="tab-advanced">Advanced Calculator</button>
+                <button class="tab" id="tab-battery">Battery Analysis</button>
+                <button class="tab" id="tab-comparison">System Comparison</button>
+                <button class="tab" id="tab-monthly">Monthly Breakdown</button>
             </div>
 
             <!-- Advanced Calculator Tab -->
@@ -515,6 +515,7 @@
                     trackProUpgrade();
                 }
                 
+                setupTabListeners();
                 return; // Allow access
             }
             
@@ -529,6 +530,7 @@
                 console.log('Valid stored session found');
                 document.getElementById('successMessage').innerHTML = '✅ Welcome back to Solar Calculator Pro!';
                 document.getElementById('successMessage').style.display = 'block';
+                setupTabListeners();
                 return; // Allow access
             }
             
@@ -536,6 +538,22 @@
             console.log('No valid access - showing denied page');
             showAccessDenied();
         };
+        
+        // SET UP TAB LISTENERS - THIS IS THE FIX
+        function setupTabListeners() {
+            document.getElementById('tab-advanced').addEventListener('click', function() {
+                switchTab('advanced');
+            });
+            document.getElementById('tab-battery').addEventListener('click', function() {
+                switchTab('battery');
+            });
+            document.getElementById('tab-comparison').addEventListener('click', function() {
+                switchTab('comparison');
+            });
+            document.getElementById('tab-monthly').addEventListener('click', function() {
+                switchTab('monthly');
+            });
+        }
         
         function showAccessDenied() {
             document.body.innerHTML = `
@@ -599,7 +617,7 @@
             `;
         }
         
-        // TAB SWITCHING - FIXED
+        // TAB SWITCHING - FIXED VERSION
         function switchTab(tabName) {
             // Remove active from all tabs and contents
             document.querySelectorAll('.tab').forEach(tab => {
@@ -610,17 +628,10 @@
             });
             
             // Add active to clicked tab
-            const allTabs = document.querySelectorAll('.tab');
-            const tabIndex = ['advanced', 'battery', 'comparison', 'monthly'].indexOf(tabName);
-            if (tabIndex !== -1 && allTabs[tabIndex]) {
-                allTabs[tabIndex].classList.add('active');
-            }
+            document.getElementById('tab-' + tabName).classList.add('active');
             
             // Show selected content
-            const selectedContent = document.getElementById(tabName);
-            if (selectedContent) {
-                selectedContent.classList.add('active');
-            }
+            document.getElementById(tabName).classList.add('active');
         }
         
         // GET SUNSHINE HOURS BY POSTCODE
