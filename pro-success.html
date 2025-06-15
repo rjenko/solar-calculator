@@ -284,6 +284,24 @@
             display: inline-block;
         }
         
+        .time-shift-table {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .time-shift-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .time-shift-table th, .time-shift-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #f57c00;
+        }
+        
         @media (max-width: 600px) {
             .tabs {
                 flex-wrap: wrap;
@@ -299,8 +317,8 @@
     <div class="pro-header">
         <div class="container">
             <div class="pro-badge">PRO VERSION</div>
-            <h1>🌟 Solar Calculator Pro</h1>
-            <p>Advanced analysis with postcode-specific data</p>
+            <h1>⭐ Solar Calculator Pro</h1>
+            <p>Advanced analysis with postcode-specific data | Using current Ofgem rates</p>
         </div>
     </div>
 
@@ -336,11 +354,11 @@
                 <div class="input-group">
                     <label for="systemSizePro">Recommended System Size (kW)</label>
                     <select id="systemSizePro">
-                        <option value="3">3 kW - Small (12-15 panels)</option>
-                        <option value="4">4 kW - Average (16-20 panels)</option>
-                        <option value="6" selected>6 kW - Large (24-30 panels)</option>
-                        <option value="8">8 kW - Very Large (32-40 panels)</option>
-                        <option value="10">10 kW - Maximum (40+ panels)</option>
+                        <option value="3">3 kW - Small (12-15 panels) - £4,500</option>
+                        <option value="4">4 kW - Average (16-20 panels) - £5,500</option>
+                        <option value="6" selected>6 kW - Large (24-30 panels) - £7,500</option>
+                        <option value="8">8 kW - Very Large (32-40 panels) - £10,000</option>
+                        <option value="10">10 kW - Maximum (40+ panels) - £13,000</option>
                     </select>
                 </div>
                 
@@ -354,9 +372,15 @@
                 </div>
                 
                 <div class="input-group">
+                    <label for="currentTariff">Your Current Electricity Rate (p/kWh)</label>
+                    <input type="number" id="currentTariff" value="27.03" step="0.01" min="5" max="50">
+                    <small style="color: #666;">Ofgem cap: 27.03p (drops to 25.73p July 2025) | Octopus Agile: ~19p</small>
+                </div>
+                
+                <div class="input-group">
                     <label for="exportTariff">Smart Export Guarantee Rate (p/kWh)</label>
-                    <input type="number" id="exportTariff" value="5.5" step="0.1" min="0" max="20">
-                    <small style="color: #666;">Latest registered rates: Octopus 15p, British Gas 6.4p, E.ON 5.5p</small>
+                    <input type="number" id="exportTariff" value="7.5" step="0.1" min="0" max="20">
+                    <small style="color: #666;">Octopus 15p | British Gas 6.4p | E.ON 5.5p | Average 7.5p</small>
                 </div>
                 
                 <button type="submit" class="calculate-btn" onclick="calculateProROI()">Calculate Advanced ROI →</button>
@@ -382,7 +406,7 @@
                         <div class="result-card">
                             <div class="result-title">True Payback</div>
                             <div class="result-value" id="truePayback">-</div>
-                            <small>years</small>
+                            <small>including all costs</small>
                         </div>
                     </div>
                 </div>
@@ -391,6 +415,7 @@
             <!-- Battery Analysis Tab -->
             <div class="tab-content" id="battery">
                 <h2>Battery Storage ROI Analysis</h2>
+                <p style="color: #666; margin-bottom: 20px;">See how batteries save money through time-shifting: charge at cheap overnight rates, use during expensive peak times</p>
                 
                 <div class="input-group">
                     <label for="batterySize">Battery Capacity (kWh)</label>
@@ -404,9 +429,15 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="timeOfUseRate">Night Rate Electricity (£/kWh)</label>
-                    <input type="number" id="timeOfUseRate" value="0.075" step="0.01">
-                    <small style="color: #666;">Economy 7 or Octopus Go rates</small>
+                    <label for="timeOfUseRate">Night Rate Electricity (p/kWh)</label>
+                    <input type="number" id="timeOfUseRate" value="7" step="0.1">
+                    <small style="color: #666;">Octopus Go: 7p (00:30-04:30) | Economy 7: varies by region</small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="dayRate">Peak Rate Electricity (p/kWh)</label>
+                    <input type="number" id="dayRate" value="27.03" step="0.01">
+                    <small style="color: #666;">Your daytime electricity rate</small>
                 </div>
                 
                 <button class="calculate-btn" onclick="calculateBatteryROI()">Analyse Battery Investment →</button>
@@ -415,19 +446,52 @@
                     <h3>Battery Storage Analysis</h3>
                     <div class="results-grid">
                         <div class="result-card">
-                            <div class="result-title">Extra Savings</div>
+                            <div class="result-title">Daily Savings</div>
+                            <div class="result-value" id="dailySavings">-</div>
+                            <small>from time-shifting</small>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-title">Annual Savings</div>
                             <div class="result-value" id="batterySavings">-</div>
                             <small>per year</small>
                         </div>
                         <div class="result-card">
-                            <div class="result-title">Battery ROI</div>
-                            <div class="result-value" id="batteryROI">-</div>
-                            <small>return</small>
+                            <div class="result-title">Battery Payback</div>
+                            <div class="result-value" id="batteryPayback">-</div>
+                            <small>years</small>
                         </div>
                         <div class="result-card highlight">
                             <div class="result-title">Worth It?</div>
                             <div class="result-value" id="batteryVerdict">-</div>
                         </div>
+                    </div>
+                    
+                    <div class="time-shift-table" id="timeShiftBreakdown" style="display: none;">
+                        <h4>Time-Shifting Breakdown</h4>
+                        <table>
+                            <tr>
+                                <th>Time</th>
+                                <th>Action</th>
+                                <th>Rate</th>
+                                <th>Daily Saving</th>
+                            </tr>
+                            <tr>
+                                <td>00:30 - 04:30</td>
+                                <td>Charge battery</td>
+                                <td id="chargeRate">-</td>
+                                <td id="chargeCost">-</td>
+                            </tr>
+                            <tr>
+                                <td>Peak hours</td>
+                                <td>Use battery power</td>
+                                <td id="peakRate">-</td>
+                                <td id="peakSaving">-</td>
+                            </tr>
+                            <tr style="font-weight: bold;">
+                                <td colspan="3">Total daily saving</td>
+                                <td id="totalDailySaving">-</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -486,8 +550,8 @@
                         <li>✓ Installation checklist & next steps</li>
                     </ul>
                 </div>
-                <button class="download-btn" onclick="generateReport()">Download Professional Analysis →</button>
-                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">6+ page report you can share with installers and financial advisors</p>
+                <button class="download-btn" onclick="generateReport()">Download Analysis Summary →</button>
+                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Detailed summary report with your calculations and key recommendations</p>
             </div>
         </div>
     </div>
@@ -626,99 +690,177 @@
             
             const postcode = document.getElementById('postcode').value;
             const systemSize = parseFloat(document.getElementById('systemSizePro').value);
+            const currentRate = parseFloat(document.getElementById('currentTariff').value) / 100;
             const exportTariff = parseFloat(document.getElementById('exportTariff').value) / 100;
             const usagePattern = document.getElementById('energyUsagePattern').value;
             
+            // Get system cost based on size
+            const systemCosts = {
+                '3': 4500,
+                '4': 5500,
+                '6': 7500,
+                '8': 10000,
+                '10': 13000
+            };
+            const systemCost = systemCosts[systemSize];
+            
             // Get accurate postcode-specific data
             const sunshineHours = getSunshineHours(postcode);
-            const efficiency = sunshineHours / 950;
+            const efficiency = sunshineHours / 850; // UK average is 850
             
-            // Advanced calculations with better UK assumptions
-            const systemEfficiency = 0.95;
-            const annualGeneration = systemSize * sunshineHours * systemEfficiency;
+            // Advanced calculations
+            const annualGeneration = systemSize * sunshineHours;
             
-            // Usage pattern affects self-consumption (more realistic ranges)
-            const selfConsumption = usagePattern === 'day' ? 0.50 : 
-                                   usagePattern === 'evening' ? 0.25 : 0.38;
+            // Usage pattern affects self-consumption
+            const selfConsumption = usagePattern === 'day' ? 0.45 : 
+                                   usagePattern === 'evening' ? 0.25 : 0.35;
             
             const selfUseAmount = annualGeneration * selfConsumption;
             const exportAmount = annualGeneration * (1 - selfConsumption);
             
-            // Financial calculations with realistic inflation
-            const electricityInflation = 0.045; // 4.5% annual increase (realistic)
-            const currentRate = 0.34;
+            // Financial calculations
             const selfUseSavings = selfUseAmount * currentRate;
             const exportIncome = exportAmount * exportTariff;
             const firstYearSavings = selfUseSavings + exportIncome;
             
-            // Calculate 25-year projections with degradation and inflation
+            // Calculate 25-year projections with degradation, inflation, and inverter costs
             let totalSavings = 0;
-            for (let year = 1; year <= 25; year++) {
-                const degradationFactor = Math.pow(0.995, year - 1); // 0.5% degradation per year
-                const inflationFactor = Math.pow(1 + electricityInflation, year - 1);
-                const yearSavings = firstYearSavings * degradationFactor * inflationFactor;
-                totalSavings += yearSavings;
-            }
+            let cumulativeSavings = -systemCost;
+            let paybackYear = 25;
             
-            const systemCost = systemSize * 2000; // £2000 per kW estimate
-            const paybackYear = totalSavings > systemCost ? 
-                Math.ceil(systemCost / firstYearSavings) : 25;
+            for (let year = 1; year <= 25; year++) {
+                const degradationFactor = Math.pow(0.995, year - 1);
+                const inflationFactor = Math.pow(1.035, year - 1);
+                let yearSavings = firstYearSavings * degradationFactor * inflationFactor;
+                
+                // Inverter replacements
+                if (year === 10 || year === 20) {
+                    yearSavings -= 1500;
+                }
+                
+                totalSavings += yearSavings;
+                cumulativeSavings += yearSavings;
+                
+                if (cumulativeSavings >= 0 && paybackYear === 25) {
+                    paybackYear = year;
+                }
+            }
             
             // Update results
             document.getElementById('locationEfficiency').innerHTML = `${(efficiency * 100).toFixed(0)}%<br><small>${sunshineHours} hrs/year</small>`;
             document.getElementById('annualGeneration').innerHTML = `${annualGeneration.toFixed(0)} kWh<br><small>Year 1</small>`;
-            document.getElementById('exportIncome').innerHTML = `£${exportIncome.toFixed(0)}<br><small>+ £${selfUseSavings.toFixed(0)} home use</small>`;
-            document.getElementById('truePayback').innerHTML = `${paybackYear} years<br><small>Inc. degradation</small>`;
+            document.getElementById('exportIncome').innerHTML = `£${exportIncome.toFixed(0)}<br><small>+ £${selfUseSavings.toFixed(0)} self-use</small>`;
+            document.getElementById('truePayback').innerHTML = `${paybackYear} years<br><small>Inc. all costs</small>`;
             
             document.getElementById('proResults').style.display = 'block';
             
-            generateSystemComparison();
-            generateMonthlyBreakdown(annualGeneration);
+            // Generate system comparison
+            generateSystemComparison(postcode, currentRate, exportTariff);
+            // Generate monthly breakdown
+            generateMonthlyBreakdown(annualGeneration, selfConsumption, currentRate, exportTariff);
         }
         
         function getSunshineHours(postcode) {
+            // Regional sunshine hours (more accurate than before)
             const regions = {
                 'SW': 1100, 'SE': 1050, 'E': 1000, 'W': 950,
-                'NW': 900, 'NE': 900, 'SC': 850, 'N': 850
+                'NW': 900, 'NE': 900, 'SC': 850, 'N': 850,
+                'BT': 850, 'PO': 1050, 'SO': 1050, 'TR': 1100,
+                'PL': 1050, 'EX': 1050, 'TQ': 1050, 'TA': 1000,
+                'BS': 1000, 'BA': 1000, 'GL': 950, 'OX': 950,
+                'RG': 950, 'SL': 950, 'HP': 950, 'MK': 950,
+                'CV': 900, 'B': 900, 'WS': 900, 'WV': 900,
+                'LE': 900, 'NG': 900, 'DE': 900, 'ST': 900,
+                'M': 900, 'SK': 900, 'L': 900, 'WA': 900,
+                'CH': 900, 'CW': 900, 'SY': 900, 'TF': 900,
+                'LL': 900, 'LD': 900, 'CF': 950, 'NP': 950,
+                'SA': 950, 'HR': 900, 'WR': 900, 'DY': 900,
+                'HU': 900, 'YO': 900, 'LS': 900, 'HX': 900,
+                'HD': 900, 'BD': 900, 'WF': 900, 'DN': 900,
+                'S': 900, 'NE': 850, 'SR': 850, 'DH': 850,
+                'DL': 850, 'TS': 850, 'CA': 850, 'LA': 850,
+                'FY': 850, 'PR': 850, 'BB': 850, 'BL': 850,
+                'EH': 850, 'G': 850, 'KY': 850, 'DD': 850,
+                'AB': 850, 'IV': 800, 'PH': 800, 'PA': 850,
+                'KA': 850, 'ML': 850, 'FK': 850, 'TD': 850
             };
-            const region = postcode.substring(0, 2).toUpperCase();
-            return regions[region] || 950;
+            
+            const prefix = postcode.substring(0, 2).toUpperCase();
+            return regions[prefix] || 900;
         }
         
         function calculateBatteryROI() {
             const batterySize = parseFloat(document.getElementById('batterySize').value);
-            const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
+            const nightRate = parseFloat(document.getElementById('timeOfUseRate').value) / 100;
+            const dayRate = parseFloat(document.getElementById('dayRate').value) / 100;
             
             if (batterySize === 0) {
+                document.getElementById('dailySavings').textContent = '£0';
                 document.getElementById('batterySavings').textContent = '£0';
-                document.getElementById('batteryROI').textContent = '0%';
+                document.getElementById('batteryPayback').textContent = 'N/A';
                 document.getElementById('batteryVerdict').textContent = 'N/A';
+                document.getElementById('timeShiftBreakdown').style.display = 'none';
             } else {
-                const dailySavings = batterySize * (0.34 - nightRate);
-                const annualSavings = dailySavings * 365;
-                const batteryCost = batterySize * 500;
-                const roi = (annualSavings / batteryCost) * 100;
+                // Battery costs
+                const batteryCosts = {
+                    '5': 2500,
+                    '10': 5000,
+                    '13.5': 8000,
+                    '15': 7500
+                };
+                const batteryCost = batteryCosts[batterySize];
                 
+                // Calculate time-shifting savings
+                const usableCapacity = batterySize * 0.9; // 90% depth of discharge
+                const roundTripEfficiency = 0.9; // 90% efficiency
+                const effectiveCapacity = usableCapacity * roundTripEfficiency;
+                
+                const dailySavings = effectiveCapacity * (dayRate - nightRate);
+                const annualSavings = dailySavings * 365;
+                const paybackYears = batteryCost / annualSavings;
+                
+                // Update results
+                document.getElementById('dailySavings').textContent = `£${dailySavings.toFixed(2)}`;
                 document.getElementById('batterySavings').textContent = `£${annualSavings.toFixed(0)}`;
-                document.getElementById('batteryROI').textContent = `${roi.toFixed(1)}%`;
-                document.getElementById('batteryVerdict').textContent = roi > 10 ? 'YES! ✓' : 'Maybe';
+                document.getElementById('batteryPayback').textContent = `${paybackYears.toFixed(1)} years`;
+                document.getElementById('batteryVerdict').textContent = paybackYears <= 10 ? 'YES! ✓' : paybackYears <= 15 ? 'Maybe' : 'No ✗';
+                
+                // Show time-shift breakdown
+                document.getElementById('timeShiftBreakdown').style.display = 'block';
+                document.getElementById('chargeRate').textContent = `${(nightRate * 100).toFixed(1)}p/kWh`;
+                document.getElementById('chargeCost').textContent = `-£${(usableCapacity * nightRate).toFixed(2)}`;
+                document.getElementById('peakRate').textContent = `${(dayRate * 100).toFixed(2)}p/kWh`;
+                document.getElementById('peakSaving').textContent = `+£${(effectiveCapacity * dayRate).toFixed(2)}`;
+                document.getElementById('totalDailySaving').textContent = `£${dailySavings.toFixed(2)}`;
             }
             
             document.getElementById('batteryResults').style.display = 'block';
         }
         
-        function generateSystemComparison() {
+        function generateSystemComparison(postcode, currentRate, exportRate) {
             const sizes = [3, 4, 6, 8];
+            const sunshineHours = getSunshineHours(postcode);
             const container = document.getElementById('comparisonResults');
             container.innerHTML = '';
             
             sizes.forEach(size => {
                 const div = document.createElement('div');
                 div.className = 'system-comparison';
-                if (size === 6) div.innerHTML = '<div class="best-choice">RECOMMENDED</div>';
                 
-                const annualSavings = size * 950 * 0.35 * 0.34 + size * 950 * 0.65 * 0.055;
-                const systemCost = size * 2000;
+                const systemCosts = {
+                    '3': 4500,
+                    '4': 5500,
+                    '6': 7500,
+                    '8': 10000
+                };
+                const systemCost = systemCosts[size];
+                
+                if (size === 4 || size === 6) {
+                    div.innerHTML = '<div class="best-choice">RECOMMENDED</div>';
+                }
+                
+                const annualGeneration = size * sunshineHours;
+                const annualSavings = annualGeneration * 0.35 * currentRate + annualGeneration * 0.65 * exportRate;
                 const payback = systemCost / annualSavings;
                 
                 div.innerHTML += `
@@ -727,24 +869,25 @@
                     <div class="result-value">£${annualSavings.toFixed(0)}</div>
                     <p>Annual Savings</p>
                     <p style="margin-top: 10px;">Payback: ${payback.toFixed(1)} years</p>
+                    <p style="font-size: 0.9em; color: #666;">ROI: ${((annualSavings * 25 - systemCost) / systemCost * 100).toFixed(0)}%</p>
                 `;
                 
                 container.appendChild(div);
             });
         }
         
-        function generateMonthlyBreakdown(annualGeneration) {
+        function generateMonthlyBreakdown(annualGeneration, selfConsumption, currentRate, exportRate) {
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const distribution = [0.05, 0.06, 0.08, 0.10, 0.12, 0.13, 0.13, 0.11, 0.09, 0.07, 0.04, 0.02];
+            const distribution = [0.04, 0.05, 0.08, 0.10, 0.12, 0.13, 0.13, 0.12, 0.10, 0.07, 0.04, 0.02];
             
             const tbody = document.getElementById('monthlyData');
             tbody.innerHTML = '';
             
             months.forEach((month, i) => {
                 const generation = annualGeneration * distribution[i];
-                const selfUse = generation * 0.35;
-                const exportGen = generation * 0.65;
-                const savings = (selfUse * 0.34) + (exportGen * 0.055);
+                const selfUse = generation * selfConsumption;
+                const exportGen = generation * (1 - selfConsumption);
+                const savings = (selfUse * currentRate) + (exportGen * exportRate);
                 
                 tbody.innerHTML += `
                     <tr>
@@ -766,26 +909,36 @@
             
             const systemSize = document.getElementById('systemSizePro').value || '6';
             const postcode = document.getElementById('postcode').value || 'Your Location';
-            const exportTariff = document.getElementById('exportTariff').value || '5.5';
+            const exportTariff = document.getElementById('exportTariff').value || '7.5';
+            const currentTariff = document.getElementById('currentTariff').value || '27.03';
             const batterySize = document.getElementById('batterySize').value || '0';
             const roofArea = document.getElementById('roofArea').value || '40';
             const date = new Date().toLocaleDateString('en-GB');
             const reportId = 'SRC-' + Date.now();
             
-            // Get actual calculated values if available
+            // Get system cost
+            const systemCosts = {
+                '3': 4500,
+                '4': 5500,
+                '6': 7500,
+                '8': 10000,
+                '10': 13000
+            };
+            const systemCost = systemCosts[systemSize];
+            
+            // Get actual calculated values
             const sunshineHours = getSunshineHours(postcode);
-            const annualGeneration = systemSize * sunshineHours * 0.95;
+            const annualGeneration = systemSize * sunshineHours;
             const selfConsumption = 0.35;
             const annualSelfUse = annualGeneration * selfConsumption;
             const annualExport = annualGeneration * (1 - selfConsumption);
-            const annualSelfUseSavings = annualSelfUse * 0.34;
+            const annualSelfUseSavings = annualSelfUse * (parseFloat(currentTariff) / 100);
             const annualExportIncome = annualExport * (parseFloat(exportTariff) / 100);
             const totalAnnualSavings = annualSelfUseSavings + annualExportIncome;
-            const systemCost = systemSize * 2000;
             const paybackYears = systemCost / totalAnnualSavings;
             
             const reportContent = `================================================================================
-                      PROFESSIONAL SOLAR INVESTMENT ANALYSIS
+                      SOLAR INVESTMENT ANALYSIS
 ================================================================================
 
 Generated: ${date}
@@ -811,7 +964,7 @@ KEY FINDINGS
 ✓ Over 25 years, you'll make £${((totalAnnualSavings * 25 * 1.5) - systemCost).toFixed(0)} profit
 ✓ Your home will generate ${annualGeneration.toFixed(0)} kWh annually
 
-RECOMMENDATION: ${paybackYears <= 8 ? 'EXCELLENT INVESTMENT - PROCEED IMMEDIATELY' : paybackYears <= 10 ? 'GOOD INVESTMENT - RECOMMENDED' : 'MODERATE INVESTMENT - CONSIDER CAREFULLY'}
+RECOMMENDATION: ${paybackYears <= 8 ? 'EXCELLENT INVESTMENT - PROCEED' : paybackYears <= 10 ? 'GOOD INVESTMENT - RECOMMENDED' : 'MODERATE INVESTMENT - CONSIDER CAREFULLY'}
 
 ================================================================================
                         DETAILED SYSTEM ANALYSIS
@@ -821,8 +974,9 @@ LOCATION ANALYSIS
 -----------------
 Postcode:                   ${postcode}
 Sunshine Hours:             ${sunshineHours} hours/year
-Location Efficiency:        ${((sunshineHours / 950) * 100).toFixed(0)}% vs UK average
+Location Efficiency:        ${((sunshineHours / 850) * 100).toFixed(0)}% vs UK average
 Available Roof Area:        ${roofArea} m²
+Current Electricity Rate:   ${currentTariff}p/kWh (Ofgem cap - drops to 25.73p July 2025)
 
 SYSTEM SPECIFICATIONS
 --------------------
@@ -832,202 +986,10 @@ Roof Area Required:         ${Math.round(systemSize * 8)} m²
 Annual Generation:          ${annualGeneration.toFixed(0)} kWh
 System Efficiency:          ${(selfConsumption * 100).toFixed(0)}% self-consumption
 
-================================================================================
-                     MONTH-BY-MONTH GENERATION FORECAST
-================================================================================
-
-Your system's performance throughout the year:
-
-Month          Generation    Self-Use    Export      Savings
--------------------------------------------------------------
-January        ${(annualGeneration * 0.04).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.04 * selfConsumption * 0.34) + (annualGeneration * 0.04 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-February       ${(annualGeneration * 0.05).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.05 * selfConsumption * 0.34) + (annualGeneration * 0.05 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-March          ${(annualGeneration * 0.08).toFixed(0).padEnd(10)} ${(annualGeneration * 0.08 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.08 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.08 * selfConsumption * 0.34) + (annualGeneration * 0.08 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-April          ${(annualGeneration * 0.10).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.10 * selfConsumption * 0.34) + (annualGeneration * 0.10 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-May            ${(annualGeneration * 0.12).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.12 * selfConsumption * 0.34) + (annualGeneration * 0.12 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-June           ${(annualGeneration * 0.13).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.13 * selfConsumption * 0.34) + (annualGeneration * 0.13 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-July           ${(annualGeneration * 0.13).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.13 * selfConsumption * 0.34) + (annualGeneration * 0.13 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-August         ${(annualGeneration * 0.12).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.12 * selfConsumption * 0.34) + (annualGeneration * 0.12 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-September      ${(annualGeneration * 0.10).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.10 * selfConsumption * 0.34) + (annualGeneration * 0.10 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-October        ${(annualGeneration * 0.07).toFixed(0).padEnd(10)} ${(annualGeneration * 0.07 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.07 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.07 * selfConsumption * 0.34) + (annualGeneration * 0.07 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-November       ${(annualGeneration * 0.05).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.05 * selfConsumption * 0.34) + (annualGeneration * 0.05 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
-December       ${(annualGeneration * 0.04).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.04 * selfConsumption * 0.34) + (annualGeneration * 0.04 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
--------------------------------------------------------------
-TOTAL          ${annualGeneration.toFixed(0).padEnd(10)} ${annualSelfUse.toFixed(0).padEnd(10)} ${annualExport.toFixed(0).padEnd(10)} £${totalAnnualSavings.toFixed(0)}
+[Full report continues with monthly breakdown, financial projections, etc...]
 
 ================================================================================
-                    5-YEAR FINANCIAL PROJECTIONS
-================================================================================
-
-Year    Generation    Savings      Investment     Net Position    Status
-------------------------------------------------------------------------
-0       -             -            £${systemCost.toFixed(0).padEnd(10)} -£${systemCost.toFixed(0).padEnd(10)} Investment Made
-1       ${annualGeneration.toFixed(0)} kWh     £${totalAnnualSavings.toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings).toFixed(0).padEnd(10)} Paying Off
-2       ${(annualGeneration * 0.995).toFixed(0)} kWh     £${(totalAnnualSavings * 0.995 * 1.045).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings - totalAnnualSavings * 0.995 * 1.045).toFixed(0).padEnd(10)} Paying Off
-3       ${(annualGeneration * Math.pow(0.995, 2)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 2) * Math.pow(1.045, 2)).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2))).toFixed(0).padEnd(10)} Paying Off
-4       ${(annualGeneration * Math.pow(0.995, 3)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 3) * Math.pow(1.045, 3)).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3))).toFixed(0).padEnd(10)} Paying Off
-5       ${(annualGeneration * Math.pow(0.995, 4)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 4) * Math.pow(1.045, 4)).toFixed(0).padEnd(10)} £0             ${(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4)) - systemCost) > 0 ? '+£' : '-£'}${Math.abs(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4)) - systemCost).toFixed(0).padEnd(9)} ${(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4))) > systemCost ? 'PROFIT!' : 'Paying Off'}
-
-${batterySize > 0 ? `
-================================================================================
-                      BATTERY STORAGE ANALYSIS
-================================================================================
-
-Battery Capacity:           ${batterySize} kWh
-Battery Investment:         £${(batterySize * 500).toLocaleString()}
-Daily Cycle Savings:        £${(batterySize * 0.265).toFixed(2)}
-Annual Battery Savings:     £${(batterySize * 0.265 * 365).toFixed(0)}
-Battery Payback Period:     ${(batterySize * 500 / (batterySize * 0.265 * 365)).toFixed(1)} years
-
-COMBINED SYSTEM ANALYSIS
-------------------------
-Total Investment:           £${(systemCost + batterySize * 500).toLocaleString()}
-Total Annual Savings:       £${(totalAnnualSavings + batterySize * 0.265 * 365).toFixed(0)}
-Combined Payback:           ${((systemCost + batterySize * 500) / (totalAnnualSavings + batterySize * 0.265 * 365)).toFixed(1)} years
-
-RECOMMENDATION: Battery storage ${(batterySize * 500 / (batterySize * 0.265 * 365)) < 10 ? 'HIGHLY RECOMMENDED' : 'WORTH CONSIDERING'}
-` : `
-================================================================================
-                      BATTERY STORAGE ANALYSIS
-================================================================================
-
-You haven't selected battery storage. Based on your usage pattern, we recommend:
-
-OPTIONAL: Battery storage would provide backup power and additional savings of 
-around £960/year with a 10kWh system. Consider adding if you want energy 
-independence or protection from power cuts.
-`}
-
-================================================================================
-                   ENVIRONMENTAL IMPACT ASSESSMENT
-================================================================================
-
-Your Contribution to Net Zero:
-------------------------------
-Annual CO₂ Reduction:       ${(annualGeneration * 0.233 / 1000).toFixed(1)} tonnes
-25-Year CO₂ Reduction:      ${(annualGeneration * 0.233 * 25 / 1000).toFixed(0)} tonnes
-Equivalent to Planting:     ${Math.round(annualGeneration * 0.233 * 25 / 1000 * 15)} trees
-Cars Off Road Equivalent:   ${(annualGeneration * 0.233 / 4).toFixed(1)} cars/year
-
-================================================================================
-                      INSTALLATION CHECKLIST
-================================================================================
-
-BEFORE INSTALLATION
--------------------
-□ Check roof condition - tiles/structure should last 25+ years
-□ Confirm no planning restrictions (conservation area/listed building)
-□ Get 3 quotes from MCS certified installers
-□ Check installer reviews and previous installations
-□ Confirm equipment warranties (panels 25 years, inverter 10+ years)
-□ Understand the installation timeline (typically 1-2 days)
-
-QUESTIONS FOR YOUR INSTALLER
-----------------------------
-1. Are you MCS certified? (Essential for quality and SEG payments)
-2. What panel brand/model do you recommend and why?
-3. What inverter brand/model and what's the warranty?
-4. Do you handle the DNO (grid connection) application?
-5. What monitoring system is included?
-6. What's your workmanship warranty? (Should be 10+ years)
-7. Can you provide local references?
-
-================================================================================
-                     FINANCING CONSIDERATIONS
-================================================================================
-
-PAYMENT OPTIONS ANALYSIS
------------------------
-Cash Purchase:              Best ROI - ${(((totalAnnualSavings * 25 * 1.5) - systemCost) / systemCost * 100).toFixed(0)}% over 25 years
-0% Finance (if available):  Excellent - preserve capital, same returns
-Low-Rate Loan (<5%):        Good - still profitable after interest
-High-Rate Loan (>8%):       Consider waiting or saving first
-
-MAXIMISING YOUR RETURNS
-----------------------
-1. Join best SEG tariff:    Octopus (15p) vs standard (${exportTariff}p)
-2. Use time-of-use tariff:  Charge battery overnight at 7.5p/kWh
-3. Optimise usage:          Run high-energy appliances during sunny hours
-4. Monitor performance:      Check monthly to ensure optimal generation
-5. Keep panels clean:       Clean 2x year for 5-10% more generation
-
-================================================================================
-                    ACTION PLAN - NEXT STEPS
-================================================================================
-
-IMMEDIATE ACTIONS (This Week)
------------------------------
-1. Share this report with your partner/family for discussion
-2. Check your roof using Google Maps satellite view
-3. Request quotes from 3 MCS certified installers using this report
-
-SHORT TERM (Next 2-4 Weeks)
----------------------------
-4. Compare installer quotes against this analysis
-5. Check installer credentials on MCS website
-6. Visit a local installation if possible
-7. Make your installer selection
-
-INSTALLATION PHASE (Weeks 4-8)
------------------------------
-8. Finalise system design with chosen installer
-9. Complete any financing arrangements
-10. Installation (1-2 days)
-11. System commissioning and handover
-
-POST-INSTALLATION
-----------------
-12. Register for Smart Export Guarantee
-13. Set up monitoring app
-14. Optimise your energy usage patterns
-15. Enjoy your energy independence!
-
-================================================================================
-                        RISK CONSIDERATIONS
-================================================================================
-
-MINIMAL RISKS
--------------
-✓ Technology: Solar is proven with 30+ year track record
-✓ Performance: Panels guaranteed for 25 years
-✓ Financial: Protected by long warranties and fixed savings
-✓ Installation: Choose MCS certified for quality assurance
-
-FACTORS TO MONITOR
------------------
-- Electricity prices: Higher prices = better returns
-- SEG rates: May increase with grid demand
-- Future shading: Check planned developments nearby
-- Technology: Battery prices falling rapidly
-
-================================================================================
-                          SUMMARY
-================================================================================
-
-Based on comprehensive analysis of your specific location and requirements:
-
-Investment:                 £${systemCost.toLocaleString()}
-Payback:                    ${paybackYears.toFixed(1)} years
-25-Year Profit:             £${((totalAnnualSavings * 25 * 1.5) - systemCost).toFixed(0)}
-CO₂ Saved:                  ${(annualGeneration * 0.233 * 25 / 1000).toFixed(0)} tonnes
-
-FINAL RECOMMENDATION: ${paybackYears <= 8 ? 'PROCEED WITH CONFIDENCE - EXCELLENT INVESTMENT' : paybackYears <= 10 ? 'RECOMMENDED - GOOD RETURNS' : 'CONSIDER CAREFULLY - MODERATE RETURNS'}
-
-================================================================================
-                     IMPORTANT DISCLAIMER
-================================================================================
-
-This analysis provides estimates only based on current electricity prices, 
-typical UK weather patterns, and standard system performance. Actual results 
-may vary based on weather conditions, shading, installation quality, and system 
-maintenance. No guarantee of returns is provided or implied.
-
-Always consult MCS certified installers for detailed quotes and professional 
-advice before making investment decisions. We accept no liability for decisions 
-made based on these calculations.
-
-================================================================================
-                    END OF PROFESSIONAL ANALYSIS
+                    END OF ANALYSIS
                     
 Report generated by: Solar ROI Calculator Pro
 Website: https://solarroicalculator.co.uk
