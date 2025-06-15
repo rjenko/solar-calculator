@@ -438,13 +438,16 @@
                 <p>Based on your roof and usage, here's how different systems compare:</p>
                 
                 <div class="comparison-container" id="comparisonResults">
-                    <!-- Populated by JavaScript -->
+                    <p style="text-align: center; color: #666; padding: 40px;">
+                        Please complete the Advanced Calculator first to see system comparisons based on your specific location and usage patterns.
+                    </p>
                 </div>
             </div>
 
             <!-- Monthly Breakdown Tab -->
             <div class="tab-content" id="monthly">
                 <h2>Month-by-Month Analysis</h2>
+                <p style="color: #666; margin-bottom: 10px;">Year 1 generation and savings by month</p>
                 
                 <div class="monthly-breakdown">
                     <table class="breakdown-table">
@@ -458,7 +461,11 @@
                             </tr>
                         </thead>
                         <tbody id="monthlyData">
-                            <!-- Populated by JavaScript -->
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+                                    Please complete the Advanced Calculator first to see your monthly breakdown.
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -469,17 +476,18 @@
                 <h3>📄 Download Your Investment Analysis</h3>
                 <p>Get a detailed breakdown of your solar investment with all calculations and recommendations</p>
                 <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left;">
-                    <p style="margin: 0; font-size: 0.9em;"><strong>Your report includes:</strong></p>
+                    <p style="margin: 0; font-size: 0.9em;"><strong>Your comprehensive report includes:</strong></p>
                     <ul style="margin: 10px 0 0 20px; font-size: 0.9em;">
-                        <li>Complete financial breakdown with 25-year projections</li>
-                        <li>Monthly cash flow analysis</li>
-                        <li>System sizing recommendations</li>
-                        <li>Battery storage investment analysis</li>
-                        <li>Professional installer consultation guide</li>
+                        <li>✓ Executive summary with key ROI metrics</li>
+                        <li>✓ Month-by-month generation & savings breakdown</li>
+                        <li>✓ Year-by-year financial projections (5 years detailed)</li>
+                        <li>✓ System sizing recommendations for your roof</li>
+                        <li>✓ Battery storage ROI analysis (if applicable)</li>
+                        <li>✓ Installation checklist & next steps</li>
                     </ul>
                 </div>
-                <button class="download-btn" onclick="generateReport()">Download Investment Analysis →</button>
-                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Professional-grade analysis you can share with installers and financial advisors</p>
+                <button class="download-btn" onclick="generateReport()">Download Professional Analysis →</button>
+                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">6+ page report you can share with installers and financial advisors</p>
             </div>
         </div>
     </div>
@@ -760,88 +768,271 @@
             const postcode = document.getElementById('postcode').value || 'Your Location';
             const exportTariff = document.getElementById('exportTariff').value || '5.5';
             const batterySize = document.getElementById('batterySize').value || '0';
+            const roofArea = document.getElementById('roofArea').value || '40';
             const date = new Date().toLocaleDateString('en-GB');
+            const reportId = 'SRC-' + Date.now();
             
-            const reportContent = `SOLAR INVESTMENT ANALYSIS REPORT
+            // Get actual calculated values if available
+            const sunshineHours = getSunshineHours(postcode);
+            const annualGeneration = systemSize * sunshineHours * 0.95;
+            const selfConsumption = 0.35;
+            const annualSelfUse = annualGeneration * selfConsumption;
+            const annualExport = annualGeneration * (1 - selfConsumption);
+            const annualSelfUseSavings = annualSelfUse * 0.34;
+            const annualExportIncome = annualExport * (parseFloat(exportTariff) / 100);
+            const totalAnnualSavings = annualSelfUseSavings + annualExportIncome;
+            const systemCost = systemSize * 2000;
+            const paybackYears = systemCost / totalAnnualSavings;
+            
+            const reportContent = `================================================================================
+                      PROFESSIONAL SOLAR INVESTMENT ANALYSIS
 ================================================================================
+
 Generated: ${date}
-Report Reference: SRC-${Date.now()}
+Report Reference: ${reportId}
+Prepared for: ${postcode}
 
-EXECUTIVE SUMMARY
 ================================================================================
-This comprehensive analysis has been prepared using Solar ROI Calculator Pro
-with location-specific data for maximum accuracy.
+                            EXECUTIVE SUMMARY
+================================================================================
 
-Location: ${postcode}
-System Size: ${systemSize} kW
-Export Rate: ${exportTariff}p/kWh
-Battery Storage: ${batterySize} kWh
+INVESTMENT OVERVIEW
+-------------------
+System Size:                ${systemSize} kW
+Total Investment:           £${systemCost.toLocaleString()}
+Payback Period:             ${paybackYears.toFixed(1)} years
+25-Year Net Profit:         £${((totalAnnualSavings * 25 * 1.5) - systemCost).toFixed(0)}
+Return on Investment:       ${(((totalAnnualSavings * 25 * 1.5) - systemCost) / systemCost * 100).toFixed(0)}%
 
 KEY FINDINGS
+------------
+✓ Your solar investment will pay for itself in ${Math.ceil(paybackYears)} years
+✓ You'll save £${totalAnnualSavings.toFixed(0)} in the first year alone
+✓ Over 25 years, you'll make £${((totalAnnualSavings * 25 * 1.5) - systemCost).toFixed(0)} profit
+✓ Your home will generate ${annualGeneration.toFixed(0)} kWh annually
+
+RECOMMENDATION: ${paybackYears <= 8 ? 'EXCELLENT INVESTMENT - PROCEED IMMEDIATELY' : paybackYears <= 10 ? 'GOOD INVESTMENT - RECOMMENDED' : 'MODERATE INVESTMENT - CONSIDER CAREFULLY'}
+
 ================================================================================
-Based on your specific location and usage patterns, our analysis shows:
+                        DETAILED SYSTEM ANALYSIS
+================================================================================
 
-1. PAYBACK PERIOD
-   Your solar investment will pay for itself in approximately ${Math.ceil(systemSize * 2000 / (systemSize * 950 * 0.35 * 0.34 + systemSize * 950 * 0.65 * 0.055))} years.
-   After this point, all savings are pure profit.
-
-2. 25-YEAR PROJECTION
-   Total Investment: £${(systemSize * 2000).toLocaleString()}
-   Total Returns: £${(systemSize * 950 * 0.35 * 0.34 * 25 * 1.5).toFixed(0)}
-   Net Profit: £${((systemSize * 950 * 0.35 * 0.34 * 25 * 1.5) - (systemSize * 2000)).toFixed(0)}
-
-3. ANNUAL SAVINGS
-   Self-consumption savings: £${(systemSize * 950 * 0.35 * 0.34).toFixed(0)}
-   Export income: £${(systemSize * 950 * 0.65 * parseFloat(exportTariff)/100).toFixed(0)}
-   Total annual savings: £${(systemSize * 950 * 0.35 * 0.34 + systemSize * 950 * 0.65 * parseFloat(exportTariff)/100).toFixed(0)}
+LOCATION ANALYSIS
+-----------------
+Postcode:                   ${postcode}
+Sunshine Hours:             ${sunshineHours} hours/year
+Location Efficiency:        ${((sunshineHours / 950) * 100).toFixed(0)}% vs UK average
+Available Roof Area:        ${roofArea} m²
 
 SYSTEM SPECIFICATIONS
-================================================================================
-Recommended System Size: ${systemSize} kW
-Number of Panels: ${systemSize * 4} (assuming 250W panels)
-Roof Area Required: ${systemSize * 8} m²
-Annual Generation: ${(systemSize * 950).toFixed(0)} kWh
-
-FINANCIAL BREAKDOWN
-================================================================================
-Installation Cost: £${(systemSize * 2000).toLocaleString()}
-Annual Electricity Savings: £${(systemSize * 950 * 0.35 * 0.34).toFixed(0)}
-Annual Export Income: £${(systemSize * 950 * 0.65 * parseFloat(exportTariff)/100).toFixed(0)}
-Payback Period: ${Math.ceil(systemSize * 2000 / (systemSize * 950 * 0.35 * 0.34 + systemSize * 950 * 0.65 * 0.055))} years
-25-Year ROI: ${(((systemSize * 950 * 0.35 * 0.34 * 25 * 1.5) - (systemSize * 2000)) / (systemSize * 2000) * 100).toFixed(0)}%
-
-${batterySize > 0 ? `BATTERY STORAGE ANALYSIS
-================================================================================
-Battery Capacity: ${batterySize} kWh
-Additional Investment: £${batterySize * 500}
-Extra Annual Savings: £${(batterySize * 0.265 * 365).toFixed(0)}
-Battery Payback: ${(batterySize * 500 / (batterySize * 0.265 * 365)).toFixed(1)} years
-` : ''}
-
-ENVIRONMENTAL IMPACT
-================================================================================
-Annual CO₂ Savings: ${(systemSize * 950 * 0.233 / 1000).toFixed(1)} tonnes
-25-Year CO₂ Savings: ${(systemSize * 950 * 0.233 * 25 / 1000).toFixed(0)} tonnes
-Equivalent to planting ${Math.round(systemSize * 950 * 0.233 * 25 / 1000 * 15)} trees
-
-NEXT STEPS
-================================================================================
-1. Contact MCS certified installers for detailed quotes
-2. Check your roof condition and any planning requirements
-3. Compare financing options (cash vs. loan)
-4. Apply for Smart Export Guarantee with your energy supplier
-5. Consider battery storage if you use most electricity in evenings
-
-IMPORTANT NOTES
-================================================================================
-- This analysis is based on current electricity prices and regulations
-- Actual results may vary based on weather, shading, and system performance
-- Ensure your installer is MCS certified for quality assurance
-- Most systems come with 25-year performance warranties
+--------------------
+Recommended Size:           ${systemSize} kW
+Number of Panels:           ${Math.round(systemSize * 4)} × 250W panels
+Roof Area Required:         ${Math.round(systemSize * 8)} m²
+Annual Generation:          ${annualGeneration.toFixed(0)} kWh
+System Efficiency:          ${(selfConsumption * 100).toFixed(0)}% self-consumption
 
 ================================================================================
-Report generated by Solar ROI Calculator Pro
-https://solarroicalculator.co.uk
+                     MONTH-BY-MONTH GENERATION FORECAST
+================================================================================
+
+Your system's performance throughout the year:
+
+Month          Generation    Self-Use    Export      Savings
+-------------------------------------------------------------
+January        ${(annualGeneration * 0.04).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.04 * selfConsumption * 0.34) + (annualGeneration * 0.04 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+February       ${(annualGeneration * 0.05).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.05 * selfConsumption * 0.34) + (annualGeneration * 0.05 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+March          ${(annualGeneration * 0.08).toFixed(0).padEnd(10)} ${(annualGeneration * 0.08 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.08 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.08 * selfConsumption * 0.34) + (annualGeneration * 0.08 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+April          ${(annualGeneration * 0.10).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.10 * selfConsumption * 0.34) + (annualGeneration * 0.10 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+May            ${(annualGeneration * 0.12).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.12 * selfConsumption * 0.34) + (annualGeneration * 0.12 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+June           ${(annualGeneration * 0.13).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.13 * selfConsumption * 0.34) + (annualGeneration * 0.13 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+July           ${(annualGeneration * 0.13).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.13 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.13 * selfConsumption * 0.34) + (annualGeneration * 0.13 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+August         ${(annualGeneration * 0.12).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.12 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.12 * selfConsumption * 0.34) + (annualGeneration * 0.12 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+September      ${(annualGeneration * 0.10).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.10 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.10 * selfConsumption * 0.34) + (annualGeneration * 0.10 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+October        ${(annualGeneration * 0.07).toFixed(0).padEnd(10)} ${(annualGeneration * 0.07 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.07 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.07 * selfConsumption * 0.34) + (annualGeneration * 0.07 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+November       ${(annualGeneration * 0.05).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.05 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.05 * selfConsumption * 0.34) + (annualGeneration * 0.05 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+December       ${(annualGeneration * 0.04).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * selfConsumption).toFixed(0).padEnd(10)} ${(annualGeneration * 0.04 * (1-selfConsumption)).toFixed(0).padEnd(10)} £${((annualGeneration * 0.04 * selfConsumption * 0.34) + (annualGeneration * 0.04 * (1-selfConsumption) * parseFloat(exportTariff) / 100)).toFixed(0)}
+-------------------------------------------------------------
+TOTAL          ${annualGeneration.toFixed(0).padEnd(10)} ${annualSelfUse.toFixed(0).padEnd(10)} ${annualExport.toFixed(0).padEnd(10)} £${totalAnnualSavings.toFixed(0)}
+
+================================================================================
+                    5-YEAR FINANCIAL PROJECTIONS
+================================================================================
+
+Year    Generation    Savings      Investment     Net Position    Status
+------------------------------------------------------------------------
+0       -             -            £${systemCost.toFixed(0).padEnd(10)} -£${systemCost.toFixed(0).padEnd(10)} Investment Made
+1       ${annualGeneration.toFixed(0)} kWh     £${totalAnnualSavings.toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings).toFixed(0).padEnd(10)} Paying Off
+2       ${(annualGeneration * 0.995).toFixed(0)} kWh     £${(totalAnnualSavings * 0.995 * 1.045).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings - totalAnnualSavings * 0.995 * 1.045).toFixed(0).padEnd(10)} Paying Off
+3       ${(annualGeneration * Math.pow(0.995, 2)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 2) * Math.pow(1.045, 2)).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2))).toFixed(0).padEnd(10)} Paying Off
+4       ${(annualGeneration * Math.pow(0.995, 3)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 3) * Math.pow(1.045, 3)).toFixed(0).padEnd(10)} £0             -£${(systemCost - totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3))).toFixed(0).padEnd(10)} Paying Off
+5       ${(annualGeneration * Math.pow(0.995, 4)).toFixed(0)} kWh     £${(totalAnnualSavings * Math.pow(0.995, 4) * Math.pow(1.045, 4)).toFixed(0).padEnd(10)} £0             ${(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4)) - systemCost) > 0 ? '+£' : '-£'}${Math.abs(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4)) - systemCost).toFixed(0).padEnd(9)} ${(totalAnnualSavings * (1 + 0.995 * 1.045 + Math.pow(0.995, 2) * Math.pow(1.045, 2) + Math.pow(0.995, 3) * Math.pow(1.045, 3) + Math.pow(0.995, 4) * Math.pow(1.045, 4))) > systemCost ? 'PROFIT!' : 'Paying Off'}
+
+${batterySize > 0 ? `
+================================================================================
+                      BATTERY STORAGE ANALYSIS
+================================================================================
+
+Battery Capacity:           ${batterySize} kWh
+Battery Investment:         £${(batterySize * 500).toLocaleString()}
+Daily Cycle Savings:        £${(batterySize * 0.265).toFixed(2)}
+Annual Battery Savings:     £${(batterySize * 0.265 * 365).toFixed(0)}
+Battery Payback Period:     ${(batterySize * 500 / (batterySize * 0.265 * 365)).toFixed(1)} years
+
+COMBINED SYSTEM ANALYSIS
+------------------------
+Total Investment:           £${(systemCost + batterySize * 500).toLocaleString()}
+Total Annual Savings:       £${(totalAnnualSavings + batterySize * 0.265 * 365).toFixed(0)}
+Combined Payback:           ${((systemCost + batterySize * 500) / (totalAnnualSavings + batterySize * 0.265 * 365)).toFixed(1)} years
+
+RECOMMENDATION: Battery storage ${(batterySize * 500 / (batterySize * 0.265 * 365)) < 10 ? 'HIGHLY RECOMMENDED' : 'WORTH CONSIDERING'}
+` : `
+================================================================================
+                      BATTERY STORAGE ANALYSIS
+================================================================================
+
+You haven't selected battery storage. Based on your usage pattern, we recommend:
+
+OPTIONAL: Battery storage would provide backup power and additional savings of 
+around £960/year with a 10kWh system. Consider adding if you want energy 
+independence or protection from power cuts.
+`}
+
+================================================================================
+                   ENVIRONMENTAL IMPACT ASSESSMENT
+================================================================================
+
+Your Contribution to Net Zero:
+------------------------------
+Annual CO₂ Reduction:       ${(annualGeneration * 0.233 / 1000).toFixed(1)} tonnes
+25-Year CO₂ Reduction:      ${(annualGeneration * 0.233 * 25 / 1000).toFixed(0)} tonnes
+Equivalent to Planting:     ${Math.round(annualGeneration * 0.233 * 25 / 1000 * 15)} trees
+Cars Off Road Equivalent:   ${(annualGeneration * 0.233 / 4).toFixed(1)} cars/year
+
+================================================================================
+                      INSTALLATION CHECKLIST
+================================================================================
+
+BEFORE INSTALLATION
+-------------------
+□ Check roof condition - tiles/structure should last 25+ years
+□ Confirm no planning restrictions (conservation area/listed building)
+□ Get 3 quotes from MCS certified installers
+□ Check installer reviews and previous installations
+□ Confirm equipment warranties (panels 25 years, inverter 10+ years)
+□ Understand the installation timeline (typically 1-2 days)
+
+QUESTIONS FOR YOUR INSTALLER
+----------------------------
+1. Are you MCS certified? (Essential for quality and SEG payments)
+2. What panel brand/model do you recommend and why?
+3. What inverter brand/model and what's the warranty?
+4. Do you handle the DNO (grid connection) application?
+5. What monitoring system is included?
+6. What's your workmanship warranty? (Should be 10+ years)
+7. Can you provide local references?
+
+================================================================================
+                     FINANCING CONSIDERATIONS
+================================================================================
+
+PAYMENT OPTIONS ANALYSIS
+-----------------------
+Cash Purchase:              Best ROI - ${(((totalAnnualSavings * 25 * 1.5) - systemCost) / systemCost * 100).toFixed(0)}% over 25 years
+0% Finance (if available):  Excellent - preserve capital, same returns
+Low-Rate Loan (<5%):        Good - still profitable after interest
+High-Rate Loan (>8%):       Consider waiting or saving first
+
+MAXIMIZING YOUR RETURNS
+----------------------
+1. Join best SEG tariff:    Octopus (15p) vs standard (${exportTariff}p)
+2. Use time-of-use tariff:  Charge battery overnight at 7.5p/kWh
+3. Optimize usage:          Run high-energy appliances during sunny hours
+4. Monitor performance:      Check monthly to ensure optimal generation
+5. Keep panels clean:       Clean 2x year for 5-10% more generation
+
+================================================================================
+                    ACTION PLAN - NEXT STEPS
+================================================================================
+
+IMMEDIATE ACTIONS (This Week)
+-----------------------------
+1. Share this report with your partner/family for discussion
+2. Check your roof using Google Maps satellite view
+3. Request quotes from 3 MCS certified installers using this report
+
+SHORT TERM (Next 2-4 Weeks)
+---------------------------
+4. Compare installer quotes against this analysis
+5. Check installer credentials on MCS website
+6. Visit a local installation if possible
+7. Make your installer selection
+
+INSTALLATION PHASE (Weeks 4-8)
+-----------------------------
+8. Finalize system design with chosen installer
+9. Complete any financing arrangements
+10. Installation (1-2 days)
+11. System commissioning and handover
+
+POST-INSTALLATION
+----------------
+12. Register for Smart Export Guarantee
+13. Set up monitoring app
+14. Optimize your energy usage patterns
+15. Enjoy your energy independence!
+
+================================================================================
+                        RISK CONSIDERATIONS
+================================================================================
+
+MINIMAL RISKS
+-------------
+✓ Technology: Solar is proven with 30+ year track record
+✓ Performance: Panels guaranteed for 25 years
+✓ Financial: Protected by long warranties and fixed savings
+✓ Installation: Choose MCS certified for quality assurance
+
+FACTORS TO MONITOR
+-----------------
+- Electricity prices: Higher prices = better returns
+- SEG rates: May increase with grid demand
+- Future shading: Check planned developments nearby
+- Technology: Battery prices falling rapidly
+
+================================================================================
+                          SUMMARY
+================================================================================
+
+Based on comprehensive analysis of your specific location and requirements:
+
+Investment:                 £${systemCost.toLocaleString()}
+Payback:                    ${paybackYears.toFixed(1)} years
+25-Year Profit:             £${((totalAnnualSavings * 25 * 1.5) - systemCost).toFixed(0)}
+CO₂ Saved:                  ${(annualGeneration * 0.233 * 25 / 1000).toFixed(0)} tonnes
+
+FINAL RECOMMENDATION: ${paybackYears <= 8 ? 'PROCEED WITH CONFIDENCE - EXCELLENT INVESTMENT' : paybackYears <= 10 ? 'RECOMMENDED - GOOD RETURNS' : 'CONSIDER CAREFULLY - MODERATE RETURNS'}
+
+================================================================================
+                     IMPORTANT DISCLAIMER
+================================================================================
+
+This analysis provides estimates only based on current electricity prices, 
+typical UK weather patterns, and standard system performance. Actual results 
+may vary based on weather conditions, shading, installation quality, and system 
+maintenance. No guarantee of returns is provided or implied.
+
+Always consult MCS certified installers for detailed quotes and professional 
+advice before making investment decisions. We accept no liability for decisions 
+made based on these calculations.
+
+================================================================================
+                    END OF PROFESSIONAL ANALYSIS
+                    
+Report generated by: Solar ROI Calculator Pro
+Website: https://solarroicalculator.co.uk
+Report ID: ${reportId}
+Date: ${date}
 ================================================================================`;
             
             const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
