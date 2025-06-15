@@ -519,6 +519,7 @@
             showAccessDenied();
         };
         
+        // THIS WAS MISSING - THE ACCESS DENIED FUNCTION!
         function showAccessDenied() {
             document.body.innerHTML = `
                 <div style="max-width: 600px; margin: 100px auto; padding: 40px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
@@ -538,7 +539,7 @@
                         </ul>
                     </div>
                     
-                    <a href="https://buy.stripe.com/28o28r7U0eic7qk000" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
+                    <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
                         Get Pro Access - £4.99 →
                     </a>
                     
@@ -550,6 +551,11 @@
                             <input type="hidden" name="_subject" value="Pro Access Restoration Request">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
+                            
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Your Email*</label>
+                                <input type="email" name="email" required style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
+                            </div>
                             
                             <div style="margin-bottom: 12px;">
                                 <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Stripe Transaction ID (if available)</label>
@@ -573,9 +579,187 @@
                         <a href="/" style="color: #3498db;">← Back to Free Calculator</a>
                     </p>
                 </div>
-            `; 5px; font-weight: 600; font-size: 0.9em;">Your Email*</label>
-                                <input type="email" name="email" required style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
-                            </div>
-                            
-                            <div style="margin-bottom: 12px;">
-                                <label style="display: block; margin-bottom:
+            `;
+        }
+        
+        // TAB SWITCHING FUNCTION
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // CALCULATE PRO ROI FUNCTION
+        function calculateProROI() {
+            const postcode = document.getElementById('postcode').value;
+            const systemSize = parseFloat(document.getElementById('systemSizePro').value);
+            const exportRate = parseFloat(document.getElementById('exportTariff').value) / 100;
+            const usagePattern = document.getElementById('energyUsagePattern').value;
+            
+            // Simulate postcode-specific calculations
+            const locationFactors = {
+                'SW': 1.05, 'SE': 1.03, 'NW': 0.92, 'NE': 0.90,
+                'W': 0.98, 'E': 1.00, 'N': 0.88, 'S': 1.08
+            };
+            
+            const postcodePrefix = postcode.substring(0, 2).toUpperCase();
+            const locationFactor = locationFactors[postcodePrefix] || 0.95;
+            
+            // Calculate with location-specific data
+            const annualGeneration = systemSize * 950 * locationFactor;
+            const selfConsumption = usagePattern === 'day' ? 0.45 : (usagePattern === 'evening' ? 0.25 : 0.35);
+            const annualSelfUse = annualGeneration * selfConsumption;
+            const annualExport = annualGeneration * (1 - selfConsumption);
+            
+            const selfUseSavings = annualSelfUse * 0.34;
+            const exportIncome = annualExport * exportRate;
+            const totalAnnualSavings = selfUseSavings + exportIncome;
+            
+            // Assume £2000 per kW installed
+            const systemCost = systemSize * 2000;
+            const paybackYears = systemCost / totalAnnualSavings;
+            
+            // Update results
+            document.getElementById('locationEfficiency').textContent = `${(locationFactor * 100).toFixed(0)}%`;
+            document.getElementById('annualGeneration').textContent = `${annualGeneration.toFixed(0)} kWh`;
+            document.getElementById('exportIncome').textContent = `£${exportIncome.toFixed(0)}`;
+            document.getElementById('truePayback').textContent = `${paybackYears.toFixed(1)} years`;
+            
+            document.getElementById('proResults').style.display = 'block';
+            
+            // Populate monthly breakdown
+            populateMonthlyBreakdown(annualGeneration, selfConsumption, exportRate);
+        }
+        
+        // BATTERY ROI CALCULATION
+        function calculateBatteryROI() {
+            const batterySize = parseFloat(document.getElementById('batterySize').value);
+            const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
+            
+            if (batterySize === 0) {
+                document.getElementById('batterySavings').textContent = '£0';
+                document.getElementById('batteryROI').textContent = '0%';
+                document.getElementById('batteryVerdict').textContent = 'N/A';
+                document.getElementById('batteryResults').style.display = 'block';
+                return;
+            }
+            
+            // Battery cost estimation
+            const batteryCosts = {
+                5: 2500,
+                10: 5000,
+                13.5: 8000,
+                15: 7500
+            };
+            
+            const batteryCost = batteryCosts[batterySize];
+            const dailySavings = batterySize * (0.34 - nightRate) * 0.85; // 85% efficiency
+            const annualSavings = dailySavings * 365;
+            const batteryROI = ((annualSavings * 10) - batteryCost) / batteryCost * 100;
+            const payback = batteryCost / annualSavings;
+            
+            document.getElementById('batterySavings').textContent = `£${annualSavings.toFixed(0)}`;
+            document.getElementById('batteryROI').textContent = `${batteryROI.toFixed(0)}%`;
+            document.getElementById('batteryVerdict').textContent = payback < 10 ? 'YES! ✓' : 'Maybe';
+            
+            document.getElementById('batteryResults').style.display = 'block';
+        }
+        
+        // POPULATE MONTHLY BREAKDOWN
+        function populateMonthlyBreakdown(annualGeneration, selfConsumption, exportRate) {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const monthlyFactors = [0.04, 0.05, 0.08, 0.10, 0.12, 0.13, 
+                                  0.13, 0.12, 0.10, 0.07, 0.05, 0.04];
+            
+            const tbody = document.getElementById('monthlyData');
+            tbody.innerHTML = '';
+            
+            months.forEach((month, index) => {
+                const monthGeneration = annualGeneration * monthlyFactors[index];
+                const selfUse = monthGeneration * selfConsumption;
+                const exported = monthGeneration * (1 - selfConsumption);
+                const savings = (selfUse * 0.34) + (exported * exportRate);
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${month}</td>
+                    <td>${monthGeneration.toFixed(0)}</td>
+                    <td>${selfUse.toFixed(0)}</td>
+                    <td>${exported.toFixed(0)}</td>
+                    <td>£${savings.toFixed(0)}</td>
+                `;
+            });
+        }
+        
+        // GENERATE REPORT FUNCTION
+        function generateReport() {
+            const postcode = document.getElementById('postcode').value || 'Not specified';
+            const systemSize = document.getElementById('systemSizePro').value || '6';
+            const date = new Date().toLocaleDateString('en-GB');
+            
+            const reportContent = `
+SOLAR INVESTMENT ANALYSIS REPORT
+Generated: ${date}
+Location: ${postcode}
+
+================================
+SYSTEM SPECIFICATION
+================================
+System Size: ${systemSize} kW
+Expected Annual Generation: ${(systemSize * 950).toFixed(0)} kWh
+Installation Cost Estimate: £${(systemSize * 2000).toFixed(0)}
+
+================================
+FINANCIAL ANALYSIS
+================================
+Annual Savings: £${(systemSize * 150).toFixed(0)}
+Payback Period: ${(12000 / (systemSize * 150)).toFixed(1)} years
+25-Year ROI: ${((systemSize * 150 * 25 - 12000) / 12000 * 100).toFixed(0)}%
+Total Profit: £${(systemSize * 150 * 25 - 12000).toFixed(0)}
+
+================================
+RECOMMENDATIONS
+================================
+1. Get quotes from 3 MCS certified installers
+2. Consider battery storage if evening usage is high
+3. Check for local council grants
+4. Ensure roof can support panels (survey recommended)
+5. Consider impact on property value
+
+================================
+NEXT STEPS
+================================
+1. Book installer surveys
+2. Compare quotes carefully
+3. Check installer credentials
+4. Review warranty terms
+5. Consider maintenance plans
+
+This report is for educational purposes only.
+Always consult qualified professionals.
+            `;
+            
+            // Create download
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Solar_Investment_Analysis_${postcode}_${date.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
