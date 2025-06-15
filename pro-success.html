@@ -997,7 +997,7 @@ SYSTEM SPECIFICATIONS
 --------------------
 Recommended Size:           ${systemSize} kW
 Number of Panels:           ${Math.round(systemSize * 4)} × 250W panels
-Roof Area Required:         ${Math.round(systemSize * 8)} m²
+Roof Area Required:         ${Math.round(systemSize * 8)} m²${Math.round(systemSize * 8) > parseFloat(roofArea) ? '\n⚠️ WARNING: Roof space may be insufficient!' : ''}
 Annual Generation:          ${annualGeneration.toFixed(0)} kWh
 System Efficiency:          ${(selfConsumption * 100).toFixed(0)}% self-consumption
 
