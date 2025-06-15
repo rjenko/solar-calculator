@@ -20,6 +20,11 @@
             background: #f8f9fa;
         }
         
+        /* Hide everything by default until access is verified */
+        #mainApp {
+            display: none;
+        }
+        
         .pro-header {
             background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
             color: white;
@@ -264,205 +269,248 @@
     </style>
 </head>
 <body>
-    <div class="pro-header">
-        <div class="container">
-            <div class="pro-badge">PRO VERSION</div>
-            <h1>🌟 Solar Calculator Pro</h1>
-            <p>Advanced analysis with postcode-specific data</p>
-        </div>
+    <!-- Access Denied Screen (shown by default) -->
+    <div id="accessDenied" style="max-width: 600px; margin: 100px auto; padding: 40px; text-align: center;">
+        <h1 style="color: #e74c3c;">🔒 Pro Access Required</h1>
+        <p style="font-size: 1.2em; margin: 20px 0;">This is the Pro version of our solar calculator.</p>
+        <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
+            Get Pro Access - £4.99 →
+        </a>
+        <p style="margin-top: 20px;">
+            <a href="/" style="color: #3498db;">← Back to Free Calculator</a>
+        </p>
     </div>
 
-    <div class="container">
-        <div class="success-message" id="successMessage">
-            ✅ Payment successful! Welcome to Solar Calculator Pro.
+    <!-- Main App (hidden until access verified) -->
+    <div id="mainApp">
+        <div class="pro-header">
+            <div class="container">
+                <div class="pro-badge">PRO VERSION</div>
+                <h1>🌟 Solar Calculator Pro</h1>
+                <p>Advanced analysis with postcode-specific data</p>
+            </div>
         </div>
-        
-        <div id="mainContent">
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('advanced')">Advanced Calculator</button>
-                <button class="tab" onclick="switchTab('battery')">Battery Analysis</button>
-                <button class="tab" onclick="switchTab('comparison')">System Comparison</button>
-                <button class="tab" onclick="switchTab('monthly')">Monthly Breakdown</button>
-            </div>
 
-            <!-- Advanced Calculator Tab -->
-            <div class="tab-content active" id="advanced">
-                <h2>Postcode-Specific Solar Analysis</h2>
-                
-                <div class="input-group">
-                    <label for="postcode">Your Postcode</label>
-                    <input type="text" id="postcode" placeholder="e.g., SW1A 1AA" value="SW1A 1AA">
-                    <small style="color: #666;">Precise sunshine hours from UK historical weather data (30-year average)</small>
+        <div class="container">
+            <div class="success-message" id="successMessage">
+                ✅ Payment successful! Welcome to Solar Calculator Pro.
+            </div>
+            
+            <div id="mainContent">
+                <div class="tabs">
+                    <button class="tab active" id="tabAdvanced">Advanced Calculator</button>
+                    <button class="tab" id="tabBattery">Battery Analysis</button>
+                    <button class="tab" id="tabComparison">System Comparison</button>
+                    <button class="tab" id="tabMonthly">Monthly Breakdown</button>
                 </div>
-                
-                <div class="input-group">
-                    <label for="roofArea">Available Roof Area (m²)</label>
-                    <input type="number" id="roofArea" value="40" min="10" max="200">
-                    <small style="color: #666;">Typical UK roof: 40-60m²</small>
-                </div>
-                
-                <div class="input-group">
-                    <label for="systemSizePro">Recommended System Size (kW)</label>
-                    <select id="systemSizePro">
-                        <option value="3">3 kW - Small (12-15 panels)</option>
-                        <option value="4">4 kW - Average (16-20 panels)</option>
-                        <option value="6" selected>6 kW - Large (24-30 panels)</option>
-                        <option value="8">8 kW - Very Large (32-40 panels)</option>
-                        <option value="10">10 kW - Maximum (40+ panels)</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-                    <label for="energyUsagePattern">When do you use most electricity?</label>
-                    <select id="energyUsagePattern">
-                        <option value="day">Mostly daytime (work from home)</option>
-                        <option value="evening">Mostly evenings (out during day)</option>
-                        <option value="mixed" selected>Mixed usage</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-                    <label for="exportTariff">Smart Export Guarantee Rate (p/kWh)</label>
-                    <input type="number" id="exportTariff" value="5.5" step="0.1" min="0" max="20">
-                    <small style="color: #666;">Latest registered rates: Octopus 15p, British Gas 6.4p, E.ON 5.5p</small>
-                </div>
-                
-                <button type="submit" class="calculate-btn" onclick="calculateProROI()">Calculate Advanced ROI →</button>
-                
-                <div id="proResults" style="display: none;">
-                    <h3>Your Personalised Results</h3>
-                    <div class="results-grid">
-                        <div class="result-card highlight">
-                            <div class="result-title">Location Efficiency</div>
-                            <div class="result-value" id="locationEfficiency">-</div>
-                            <small>vs UK average</small>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-title">Annual Generation</div>
-                            <div class="result-value" id="annualGeneration">-</div>
-                            <small>kWh per year</small>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-title">Export Income</div>
-                            <div class="result-value" id="exportIncome">-</div>
-                            <small>per year</small>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-title">True Payback</div>
-                            <div class="result-value" id="truePayback">-</div>
-                            <small>years</small>
+
+                <!-- Advanced Calculator Tab -->
+                <div class="tab-content active" id="advanced">
+                    <h2>Postcode-Specific Solar Analysis</h2>
+                    
+                    <div class="input-group">
+                        <label for="postcode">Your Postcode</label>
+                        <input type="text" id="postcode" placeholder="e.g., SW1A 1AA" value="SW1A 1AA">
+                        <small style="color: #666;">Precise sunshine hours from UK historical weather data (30-year average)</small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="roofArea">Available Roof Area (m²)</label>
+                        <input type="number" id="roofArea" value="40" min="10" max="200">
+                        <small style="color: #666;">Typical UK roof: 40-60m²</small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="systemSizePro">Recommended System Size (kW)</label>
+                        <select id="systemSizePro">
+                            <option value="3">3 kW - Small (12-15 panels)</option>
+                            <option value="4">4 kW - Average (16-20 panels)</option>
+                            <option value="6" selected>6 kW - Large (24-30 panels)</option>
+                            <option value="8">8 kW - Very Large (32-40 panels)</option>
+                            <option value="10">10 kW - Maximum (40+ panels)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="energyUsagePattern">When do you use most electricity?</label>
+                        <select id="energyUsagePattern">
+                            <option value="day">Mostly daytime (work from home)</option>
+                            <option value="evening">Mostly evenings (out during day)</option>
+                            <option value="mixed" selected>Mixed usage</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="exportTariff">Smart Export Guarantee Rate (p/kWh)</label>
+                        <input type="number" id="exportTariff" value="5.5" step="0.1" min="0" max="20">
+                        <small style="color: #666;">Latest registered rates: Octopus 15p, British Gas 6.4p, E.ON 5.5p</small>
+                    </div>
+                    
+                    <button type="submit" class="calculate-btn" id="calculateProBtn">Calculate Advanced ROI →</button>
+                    
+                    <div id="proResults" style="display: none;">
+                        <h3>Your Personalised Results</h3>
+                        <div class="results-grid">
+                            <div class="result-card highlight">
+                                <div class="result-title">Location Efficiency</div>
+                                <div class="result-value" id="locationEfficiency">-</div>
+                                <small>vs UK average</small>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-title">Annual Generation</div>
+                                <div class="result-value" id="annualGeneration">-</div>
+                                <small>kWh per year</small>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-title">Export Income</div>
+                                <div class="result-value" id="exportIncome">-</div>
+                                <small>per year</small>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-title">True Payback</div>
+                                <div class="result-value" id="truePayback">-</div>
+                                <small>years</small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Battery Analysis Tab -->
-            <div class="tab-content" id="battery">
-                <h2>Battery Storage ROI Analysis</h2>
-                
-                <div class="input-group">
-                    <label for="batterySize">Battery Capacity (kWh)</label>
-                    <select id="batterySize">
-                        <option value="0">No battery</option>
-                        <option value="5">5 kWh (£2,500)</option>
-                        <option value="10" selected>10 kWh (£5,000)</option>
-                        <option value="13.5">13.5 kWh Tesla Powerwall (£8,000)</option>
-                        <option value="15">15 kWh (£7,500)</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-                    <label for="timeOfUseRate">Night Rate Electricity (£/kWh)</label>
-                    <input type="number" id="timeOfUseRate" value="0.075" step="0.01">
-                    <small style="color: #666;">Economy 7 or Octopus Go rates</small>
-                </div>
-                
-                <button class="calculate-btn" onclick="calculateBatteryROI()">Analyse Battery Investment →</button>
-                
-                <div id="batteryResults" style="display: none;">
-                    <h3>Battery Storage Analysis</h3>
-                    <div class="results-grid">
-                        <div class="result-card">
-                            <div class="result-title">Extra Savings</div>
-                            <div class="result-value" id="batterySavings">-</div>
-                            <small>per year</small>
-                        </div>
-                        <div class="result-card">
-                            <div class="result-title">Battery ROI</div>
-                            <div class="result-value" id="batteryROI">-</div>
-                            <small>return</small>
-                        </div>
-                        <div class="result-card highlight">
-                            <div class="result-title">Worth It?</div>
-                            <div class="result-value" id="batteryVerdict">-</div>
+                <!-- Battery Analysis Tab -->
+                <div class="tab-content" id="battery">
+                    <h2>Battery Storage ROI Analysis</h2>
+                    
+                    <div class="input-group">
+                        <label for="batterySize">Battery Capacity (kWh)</label>
+                        <select id="batterySize">
+                            <option value="0">No battery</option>
+                            <option value="5">5 kWh (£2,500)</option>
+                            <option value="10" selected>10 kWh (£5,000)</option>
+                            <option value="13.5">13.5 kWh Tesla Powerwall (£8,000)</option>
+                            <option value="15">15 kWh (£7,500)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="timeOfUseRate">Night Rate Electricity (£/kWh)</label>
+                        <input type="number" id="timeOfUseRate" value="0.075" step="0.01">
+                        <small style="color: #666;">Economy 7 or Octopus Go rates</small>
+                    </div>
+                    
+                    <button class="calculate-btn" id="calculateBatteryBtn">Analyse Battery Investment →</button>
+                    
+                    <div id="batteryResults" style="display: none;">
+                        <h3>Battery Storage Analysis</h3>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-title">Extra Savings</div>
+                                <div class="result-value" id="batterySavings">-</div>
+                                <small>per year</small>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-title">Battery ROI</div>
+                                <div class="result-value" id="batteryROI">-</div>
+                                <small>return</small>
+                            </div>
+                            <div class="result-card highlight">
+                                <div class="result-title">Worth It?</div>
+                                <div class="result-value" id="batteryVerdict">-</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- System Comparison Tab -->
-            <div class="tab-content" id="comparison">
-                <h2>Compare Different System Sizes</h2>
-                <p>Based on your roof and usage, here's how different systems compare:</p>
-                
-                <div class="comparison-container" id="comparisonResults">
-                    <p style="text-align: center; color: #666; padding: 40px;">
-                        Please complete the Advanced Calculator first to see system comparisons based on your specific location and usage patterns.
-                    </p>
+                <!-- System Comparison Tab -->
+                <div class="tab-content" id="comparison">
+                    <h2>Compare Different System Sizes</h2>
+                    <p>Based on your roof and usage, here's how different systems compare:</p>
+                    
+                    <div class="comparison-container" id="comparisonResults">
+                        <p style="text-align: center; color: #666; padding: 40px;">
+                            Please complete the Advanced Calculator first to see system comparisons based on your specific location and usage patterns.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Monthly Breakdown Tab -->
-            <div class="tab-content" id="monthly">
-                <h2>Month-by-Month Analysis</h2>
-                
-                <div class="monthly-breakdown">
-                    <table class="breakdown-table">
-                        <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>Generation (kWh)</th>
-                                <th>Self-Use</th>
-                                <th>Export</th>
-                                <th>Savings</th>
-                            </tr>
-                        </thead>
-                        <tbody id="monthlyData">
-                            <tr>
-                                <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
-                                    Please complete the Advanced Calculator first to see your monthly breakdown.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Monthly Breakdown Tab -->
+                <div class="tab-content" id="monthly">
+                    <h2>Month-by-Month Analysis</h2>
+                    
+                    <div class="monthly-breakdown">
+                        <table class="breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Generation (kWh)</th>
+                                    <th>Self-Use</th>
+                                    <th>Export</th>
+                                    <th>Savings</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthlyData">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+                                        Please complete the Advanced Calculator first to see your monthly breakdown.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Download Section -->
-            <div class="download-section">
-                <h3>📄 Download Your Investment Analysis</h3>
-                <p>Get a detailed breakdown of your solar investment with all calculations and recommendations</p>
-                <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left;">
-                    <p style="margin: 0; font-size: 0.9em;"><strong>Your report includes:</strong></p>
-                    <ul style="margin: 10px 0 0 20px; font-size: 0.9em;">
-                        <li>Complete financial breakdown with 25-year projections</li>
-                        <li>Monthly cash flow analysis</li>
-                        <li>System sizing recommendations</li>
-                        <li>Battery storage investment analysis</li>
-                        <li>Professional installer consultation guide</li>
-                    </ul>
+                <!-- Download Section -->
+                <div class="download-section">
+                    <h3>📄 Download Your Investment Analysis</h3>
+                    <p>Get a detailed breakdown of your solar investment with all calculations and recommendations</p>
+                    <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left;">
+                        <p style="margin: 0; font-size: 0.9em;"><strong>Your report includes:</strong></p>
+                        <ul style="margin: 10px 0 0 20px; font-size: 0.9em;">
+                            <li>Complete financial breakdown with 25-year projections</li>
+                            <li>Monthly cash flow analysis</li>
+                            <li>System sizing recommendations</li>
+                            <li>Battery storage investment analysis</li>
+                            <li>Professional installer consultation guide</li>
+                        </ul>
+                    </div>
+                    <button class="download-btn" id="downloadBtn">Download Investment Analysis →</button>
+                    <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Professional-grade analysis you can share with installers and financial advisors</p>
                 </div>
-                <button class="download-btn" onclick="generateReport()">Download Investment Analysis →</button>
-                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Professional-grade analysis you can share with installers and financial advisors</p>
             </div>
         </div>
     </div>
 
 <script>
-// Basic protection
-document.addEventListener('contextmenu', e => e.preventDefault());
+// SECURITY CHECK RUNS IMMEDIATELY
+(function checkAccess() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    
+    let hasAccess = false;
+    
+    // Check for valid Stripe session
+    if (sessionId && sessionId.startsWith('cs_')) {
+        hasAccess = true;
+        localStorage.setItem('solarProAccess', 'true');
+        localStorage.setItem('proSessionId', sessionId);
+        localStorage.setItem('proAccessDate', new Date().toISOString());
+    } else {
+        // Check stored access
+        const storedAccess = localStorage.getItem('solarProAccess');
+        const storedSession = localStorage.getItem('proSessionId');
+        if (storedAccess === 'true' && storedSession) {
+            hasAccess = true;
+        }
+    }
+    
+    // Show/hide content based on access
+    if (hasAccess) {
+        document.getElementById('accessDenied').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        document.getElementById('successMessage').style.display = 'block';
+        initializeApp(); // Initialize the app only if access is granted
+    }
+})();
 
-// Global variables - MUST be defined at the top level
+// Global variables
 let globalPostcode = 'SW1A 1AA';
 let globalSystemSize = 6;
 let globalSelfConsumption = 0.35;
@@ -470,9 +518,24 @@ let globalExportRate = 0.055;
 let globalAnnualGeneration = 0;
 let globalSunshineHours = 950;
 
-// CRITICAL: All functions MUST be defined at the global scope for onclick to work
+// Initialize app (only runs if access is granted)
+function initializeApp() {
+    // Basic protection
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    
+    // Set up tab listeners
+    document.getElementById('tabAdvanced').addEventListener('click', () => switchTab('advanced'));
+    document.getElementById('tabBattery').addEventListener('click', () => switchTab('battery'));
+    document.getElementById('tabComparison').addEventListener('click', () => switchTab('comparison'));
+    document.getElementById('tabMonthly').addEventListener('click', () => switchTab('monthly'));
+    
+    // Set up button listeners
+    document.getElementById('calculateProBtn').addEventListener('click', calculateProROI);
+    document.getElementById('calculateBatteryBtn').addEventListener('click', calculateBatteryROI);
+    document.getElementById('downloadBtn').addEventListener('click', generateReport);
+}
 
-// Tab switching function - GLOBAL SCOPE
+// Tab switching
 function switchTab(tabName) {
     // Remove active from all
     document.querySelectorAll('.tab').forEach(tab => {
@@ -482,23 +545,12 @@ function switchTab(tabName) {
         content.classList.remove('active');
     });
     
-    // Find and activate the right tab
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-        if (tab.textContent.toLowerCase().includes(tabName) || 
-            (tabName === 'advanced' && tab.textContent.includes('Advanced')) ||
-            (tabName === 'battery' && tab.textContent.includes('Battery')) ||
-            (tabName === 'comparison' && tab.textContent.includes('System')) ||
-            (tabName === 'monthly' && tab.textContent.includes('Monthly'))) {
-            tab.classList.add('active');
-        }
-    });
-    
-    // Show content
+    // Add active to selected
+    document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
     document.getElementById(tabName).classList.add('active');
 }
 
-// Get sunshine hours - GLOBAL SCOPE
+// Get sunshine hours
 function getSunshineHours(postcode) {
     const postcodeData = {
         'SW': 1050, 'SE': 1025, 'W': 1000, 'WC': 1000, 'EC': 1000, 'E': 975,
@@ -517,7 +569,7 @@ function getSunshineHours(postcode) {
     return postcodeData[prefix] || 950;
 }
 
-// Calculate Pro ROI - GLOBAL SCOPE
+// Calculate Pro ROI
 function calculateProROI() {
     const postcode = document.getElementById('postcode').value || 'SW1A 1AA';
     const systemSize = parseFloat(document.getElementById('systemSizePro').value);
@@ -563,7 +615,7 @@ function calculateProROI() {
     generateMonthlyBreakdown();
 }
 
-// Calculate Battery ROI - GLOBAL SCOPE
+// Calculate Battery ROI
 function calculateBatteryROI() {
     const batterySize = parseFloat(document.getElementById('batterySize').value);
     const nightRate = parseFloat(document.getElementById('timeOfUseRate').value);
@@ -600,7 +652,7 @@ function calculateBatteryROI() {
     document.getElementById('batteryResults').style.display = 'block';
 }
 
-// Generate System Comparison - GLOBAL SCOPE
+// Generate System Comparison
 function generateSystemComparison() {
     const container = document.getElementById('comparisonResults');
     container.innerHTML = '';
@@ -641,7 +693,7 @@ function generateSystemComparison() {
     });
 }
 
-// Generate Monthly Breakdown - GLOBAL SCOPE
+// Generate Monthly Breakdown
 function generateMonthlyBreakdown() {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 
                   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -686,7 +738,7 @@ function generateMonthlyBreakdown() {
     `;
 }
 
-// Generate Report - GLOBAL SCOPE
+// Generate Report
 function generateReport() {
     if (globalAnnualGeneration === 0) {
         alert('Please complete the Advanced Calculator first to generate a report.');
@@ -735,49 +787,6 @@ After that, you'll enjoy free electricity and export income for decades.
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
 }
-
-// Show Access Denied - GLOBAL SCOPE
-function showAccessDenied() {
-    document.body.innerHTML = `
-        <div style="max-width: 600px; margin: 100px auto; padding: 40px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-            <h1 style="color: #e74c3c;">🔒 Pro Access Required</h1>
-            <p style="font-size: 1.2em; margin: 20px 0;">This is the Pro version of our solar calculator.</p>
-            <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
-                Get Pro Access - £4.99 →
-            </a>
-            <p style="margin-top: 20px;">
-                <a href="/" style="color: #3498db;">← Back to Free Calculator</a>
-            </p>
-        </div>
-    `;
-}
-
-// Access check - runs AFTER all functions are defined
-window.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id');
-    
-    // Check for valid access
-    if (sessionId && sessionId.startsWith('cs_')) {
-        document.getElementById('successMessage').style.display = 'block';
-        localStorage.setItem('solarProAccess', 'true');
-        localStorage.setItem('proSessionId', sessionId);
-        localStorage.setItem('proAccessDate', new Date().toISOString());
-        return;
-    }
-    
-    const storedAccess = localStorage.getItem('solarProAccess');
-    const storedSession = localStorage.getItem('proSessionId');
-    
-    if (storedAccess === 'true' && storedSession) {
-        document.getElementById('successMessage').innerHTML = '✅ Welcome back to Solar Calculator Pro!';
-        document.getElementById('successMessage').style.display = 'block';
-        return;
-    }
-    
-    // No access - show denial
-    showAccessDenied();
-});
 </script>
 
 </body>
