@@ -152,6 +152,7 @@
             font-size: 1.3rem;
             font-weight: bold;
             text-decoration: none;
+            display: none; /* Hide the logo text */
         }
         
         .nav-links {
@@ -498,6 +499,20 @@
             .nav-links {
                 gap: 1rem;
                 font-size: 0.9rem;
+            }
+            
+            /* Fix the savings timeline chart on mobile */
+            #savingsChart > div {
+                padding: 10px !important;
+            }
+            
+            #savingsChart .text-center > div {
+                flex-direction: column !important;
+                gap: 15px;
+            }
+            
+            #savingsChart .text-center > div > div {
+                margin: 0 !important;
             }
         }
     </style>
@@ -943,10 +958,10 @@
                     </div>
                     
                     <div style="position: relative; height: 40px; background: #f0f0f0; border-radius: 20px; overflow: hidden;">
-                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: ${(breakEvenYear/25)*100}%; background: linear-gradient(to right, #ef5350, #ffa726); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: ${(breakEvenYear/25)*100}%; background: linear-gradient(to right, #ef5350, #ffa726); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em;">
                             Paying Off
                         </div>
-                        <div style="position: absolute; left: ${(breakEvenYear/25)*100}%; top: 0; height: 100%; width: ${100-(breakEvenYear/25)*100}%; background: linear-gradient(to right, #66bb6a, #4caf50); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        <div style="position: absolute; left: ${(breakEvenYear/25)*100}%; top: 0; height: 100%; width: ${100-(breakEvenYear/25)*100}%; background: linear-gradient(to right, #66bb6a, #4caf50); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em;">
                             Pure Profit!
                         </div>
                     </div>
