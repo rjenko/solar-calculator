@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar Panel ROI Calculator UK 2025 | Calculate Your Solar Savings</title>
-    <meta name="description" content="Free solar panel ROI calculator for UK homeowners. Calculate payback period, 25-year savings, and return on investment. Using current Ofgem rates (27.03p/kWh).">
+    <meta name="description" content="Free solar panel ROI calculator for UK homeowners. Calculate payback period, 25-year savings, and return on investment. Using current Ofgem rates (27.03p/kWh)."><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
@@ -804,7 +804,7 @@
                     What about export payments?
                 </h3>
                 <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                    <p itemprop="text">The Smart Export Guarantee (SEG) pays you for electricity exported to the grid. Rates vary: Octopus offers up to 15p/kWh, while others pay 4-8p. We use 7.5p as a conservative average. Higher export rates significantly improve your ROI - our Pro calculator optimises for different tariffs.</p>
+                    <p itemprop="text">The Smart Export Guarantee (SEG) pays you for electricity exported to the grid. Rates vary: Octopus offers up to 15p/kWh, while others pay 4-8p. We use 12p as a current market average. Higher export rates significantly improve your ROI - our Pro calculator optimises for different tariffs.</p>
                 </div>
             </div>
         </div>
@@ -871,7 +871,7 @@
             const annualExport = annualGeneration - annualSelfUse;
             
             const annualSelfUseSavings = annualSelfUse * electricityRate;
-            const exportIncome = annualExport * 0.075; // 7.5p/kWh SEG average
+            const exportIncome = annualExport * 0.12; // 12p/kWh SEG current market average
             const firstYearSavings = annualSelfUseSavings + exportIncome;
             const monthlySavings = firstYearSavings / 12;
             

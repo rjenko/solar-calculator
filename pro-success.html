@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar Calculator Pro - Advanced UK Solar ROI Analysis</title>
-    <meta name="description" content="Professional solar panel ROI calculator with postcode-specific data, battery analysis, and detailed reports.">
+    <meta name="description" content="Professional solar panel ROI calculator with postcode-specific data, battery analysis, and detailed reports."><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
@@ -392,8 +392,8 @@
                 
                 <div class="input-group">
                     <label for="exportTariff">Smart Export Guarantee Rate (p/kWh)</label>
-                    <input type="number" id="exportTariff" value="7.5" step="0.1" min="0" max="20">
-                    <small style="color: #666;">Octopus 15p | British Gas 6.4p | E.ON 5.5p | Average 7.5p</small>
+                    <input type="number" id="exportTariff" value="12" step="0.1" min="0" max="20">
+                    <small style="color: #666;">Octopus 15p | British Gas 6.4p | E.ON 5.5p | Current average 12p</small>
                 </div>
                 
                 <button type="submit" class="calculate-btn" onclick="calculateProROI()">Calculate Advanced ROI →</button>
@@ -922,7 +922,7 @@
             
             const systemSize = document.getElementById('systemSizePro').value || '6';
             const postcode = document.getElementById('postcode').value || 'Your Location';
-            const exportTariff = document.getElementById('exportTariff').value || '7.5';
+            const exportTariff = document.getElementById('exportTariff').value || '12';
             const currentTariff = document.getElementById('currentTariff').value || '27.03';
             const batterySize = document.getElementById('batterySize').value || '0';
             const roofArea = document.getElementById('roofArea').value || '40';
