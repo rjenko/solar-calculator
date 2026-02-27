@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://solarroicalculator.co.uk/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
