@@ -20,7 +20,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background: #f8f9fa;
@@ -31,40 +31,68 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
         }
         
         h1 {
             color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            text-align: center;
         }
         
-        .intro {
+        .subtitle {
+            text-align: center;
+            color: #666;
             font-size: 1.1em;
             margin-bottom: 30px;
-            color: #555;
         }
         
-        .benefits {
-            background: #e8f5e9;
-            padding: 20px;
+        .stats {
+            background: #e3f2fd;
+            padding: 15px 20px;
             border-radius: 8px;
             margin: 20px 0;
-            text-align: left;
+            text-align: center;
         }
         
-        .benefits h3 {
-            color: #27ae60;
-            margin-bottom: 10px;
+        .stats strong {
+            color: #1976d2;
+            font-size: 1.3em;
         }
         
-        .benefits ul {
-            margin: 0;
+        .opportunity-section {
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            background: #e8f5e9;
+        }
+        
+        .opportunity-section.future {
+            border-left-color: #ff9800;
+            background: #fff3e0;
+        }
+        
+        .opportunity-section h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.3em;
+        }
+        
+        .opportunity-section ul {
+            margin: 15px 0;
             padding-left: 20px;
         }
         
-        .benefits li {
-            margin: 8px 0;
+        .opportunity-section li {
+            margin: 10px 0;
+        }
+        
+        .cta-section {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
         }
         
         .cta-button {
@@ -76,7 +104,7 @@
             border-radius: 30px;
             font-size: 1.1em;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 15px 0;
             transition: background 0.3s;
         }
         
@@ -100,43 +128,77 @@
             color: #666;
             margin-top: 15px;
         }
+        
+        .icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="partner-container">
         <h1>🤝 Partner With Us</h1>
+        <p class="subtitle">Reach homeowners actively researching solar installations</p>
         
-        <p class="intro">
-            Get qualified solar leads from homeowners who've already calculated their ROI and are ready to install.
-        </p>
-        
-        <div class="benefits">
-            <h3>Why Partner With Solar ROI Calculator?</h3>
-            <ul>
-                <li>Pre-qualified leads who understand the investment</li>
-                <li>Local leads only - no wasted time</li>
-                <li>Pay per lead - no monthly fees</li>
-                <li>8,500+ monthly impressions and growing fast</li>
-            </ul>
+        <div class="stats">
+            <p style="margin: 5px 0;"><strong>9,200+</strong> monthly impressions</p>
+            <p style="margin: 5px 0;"><strong>147</strong> clicks per month</p>
+            <p style="margin: 5px 0;"><strong>Growing fast</strong> – traffic increasing month-on-month</p>
         </div>
         
-        <p style="margin: 25px 0 15px 0; font-size: 1.05em;">
-            <strong>Interested in partnering with us?</strong>
-        </p>
+        <!-- Advertising Opportunities -->
+        <div class="opportunity-section">
+            <h2><span class="icon">📢</span> Advertising Opportunities (Available Now)</h2>
+            <p>Promote your solar installation business to our engaged audience:</p>
+            <ul>
+                <li><strong>Calculator Results Placement</strong> – Featured installer spotlight on results page</li>
+                <li><strong>Blog Sponsorship</strong> – Sponsored mention in our growing solar guides (4 SEO-optimised articles)</li>
+                <li><strong>Banner Advertising</strong> – Prominent placement on high-traffic pages</li>
+                <li><strong>Newsletter Sponsorship</strong> – Exclusive positioning when we launch email updates</li>
+            </ul>
+            <p style="margin-bottom: 0; color: #555;"><em>All advertising is clearly labelled and GDPR compliant</em></p>
+        </div>
         
-        <p style="margin: 0 0 20px 0; color: #555;">
-            Send us a message about your installer business and service areas:
-        </p>
+        <!-- Future Lead Generation -->
+        <div class="opportunity-section future">
+            <h2><span class="icon">🚀</span> Installer Finder Feature (Coming Soon)</h2>
+            <p>We're building a feature to connect homeowners with local installers:</p>
+            <ul>
+                <li><strong>Pre-qualified leads</strong> – Homeowners who've calculated their ROI and are ready to install</li>
+                <li><strong>GDPR compliant</strong> – Users actively consent to share their details</li>
+                <li><strong>Local targeting</strong> – Leads matched to your service areas only</li>
+                <li><strong>Pay per lead</strong> – No monthly fees, only pay for genuine enquiries</li>
+            </ul>
+            <p style="margin-bottom: 0; color: #555;"><em>Target launch: Q2 2026 (subject to traffic growth)</em></p>
+        </div>
         
-        <a href="https://formsubmit.co/el/sehawe" target="_blank" class="cta-button">
-            Send Partnership Message →
-        </a>
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h3 style="margin-top: 0;">Interested in Partnership?</h3>
+            <p style="margin: 15px 0; color: #555;">
+                Fill in the contact form and specify which opportunity interests you:
+            </p>
+            
+            <a href="https://formsubmit.co/el/sehawe" target="_blank" class="cta-button">
+                Get In Touch →
+            </a>
+            
+            <p class="note">
+                Opens in a new tab • We'll respond within 72 hours
+            </p>
+            
+            <p style="margin-top: 20px; font-size: 0.9em; color: #666; line-height: 1.6;">
+                <strong>In your message, please tell us:</strong><br>
+                • Your company name and website<br>
+                • Service areas (counties/regions you cover)<br>
+                • <strong>Whether you're interested in advertising now, future leads, or both</strong><br>
+                • Any questions you have
+            </p>
+        </div>
         
-        <p class="note">
-            Opens in a new tab • We'll respond within 72 hours
-        </p>
-        
-        <a href="/" class="back-link">← Back to Calculator</a>
+        <div style="text-align: center;">
+            <a href="/" class="back-link">← Back to Calculator</a>
+        </div>
     </div>
 </body>
 </html>
