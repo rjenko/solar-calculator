@@ -395,8 +395,8 @@
         }
         
         .upgrade-btn {
-            background: white;
-            color: #f57c00;
+            background: #4caf50;
+            color: white;
             padding: 15px 40px;
             border: none;
             border-radius: 50px;
@@ -755,8 +755,21 @@
             <p style="margin: 20px 0; font-size: 0.9em;">
                 <strong>Example:</strong> Battery storage can save £500-800/year by charging at 7p overnight and using at 27.69p daytime. Pro shows YOUR actual savings.
             </p>
+            <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 10px; margin: 25px 0; border: 2px solid rgba(255,255,255,0.3);">
+                <p style="font-size: 1.2em; margin: 0 0 15px 0; line-height: 1.5; font-weight: 600;">
+                    For just £4.99, discover if your home could save thousands more than UK averages suggest
+                </p>
+                <p style="font-size: 1em; margin: 0; opacity: 0.95; line-height: 1.6;">
+                    Location-specific sunshine data + personalised battery analysis + system comparisons. 
+                    The difference between generic estimates and YOUR real potential could be <strong>£6,000+ over 25 years</strong>.
+                </p>
+            </div>
             <button class="upgrade-btn" onclick="upgradeToPro()">Get My Accurate Analysis →</button>
-            <div class="countdown" id="countdown">Special launch price expires in: 23:47:32</div>
+            <div style="background: #ffd700; color: #333; padding: 15px 30px; border-radius: 25px; display: inline-block; margin-top: 20px; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
+                <div style="font-size: 0.85em; opacity: 0.8; margin-bottom: 3px;">Regular Price: £9.99</div>
+                <div style="font-size: 1.3em;">⚡ Launch Price: £4.99</div>
+                <div style="font-size: 0.85em; opacity: 0.8; margin-top: 3px;">Save 50% — Price increasing soon</div>
+            </div>
         </div>
 
         <table class="roi-table">
@@ -1009,7 +1022,6 @@
             
             if (calculationCount === 1) {
                 document.getElementById('upgradeBanner').style.display = 'block';
-                startCountdown();
             }
             
             drawChart(systemCost, firstYearSavings, paybackYears);
@@ -1075,27 +1087,6 @@
             });
         }
         
-        function startCountdown() {
-            let hours = 23, minutes = 47, seconds = 32;
-            
-            setInterval(() => {
-                seconds--;
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        if (hours < 0) {
-                            hours = 23;
-                        }
-                    }
-                }
-                
-                document.getElementById('countdown').innerHTML = 
-                    `Special offer expires in: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
         
         document.getElementById('systemSize').addEventListener('change', function() {
             const costs = {
