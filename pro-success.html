@@ -638,32 +638,53 @@
                         </ul>
                     </div>
                     
+                    <div style="margin: 20px 0; color: #666; font-size: 0.95em;">
+                        🔒 Secure Checkout | Powered by Stripe
+                    </div>
+                    
                     <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #f57c00; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.2em; font-weight: bold; display: inline-block; margin: 20px;">
                         Get Pro Access - £4.99 →
                     </a>
                     
                     <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
                         <h4 style="color: #1976d2; margin-bottom: 15px;">💡 Already purchased Pro access?</h4>
-                        
-                        <p style="margin: 0 0 15px 0; font-size: 0.95em;"><strong>Try these steps to regain access:</strong></p>
-                        
-                        <ol style="text-align: left; margin: 0 0 20px 20px; font-size: 0.9em; line-height: 1.8;">
-                            <li><strong>Check your browser history</strong> for <code>solarroicalculator.co.uk/pro-success</code>
-                                <br><span style="color: #666; font-size: 0.95em;">→ Look for a URL ending with <code>?session_id=cs_...</code></span>
-                                <br><span style="color: #666; font-size: 0.95em;">→ Click that link to access Pro immediately</span>
+                        <p style="margin: 0 0 10px 0; font-size: 0.9em;"><strong>Try these steps to regain access:</strong></p>
+                        <ol style="text-align: left; margin: 0 0 15px 20px; font-size: 0.9em; line-height: 1.6;">
+                            <li>Check your browser history for <strong>solarroicalculator.co.uk</strong>
+                                <br><span style="font-size: 0.85em; color: #666;">→ Find your recent Pro purchase page</span>
+                                <br><span style="font-size: 0.85em; color: #666;">→ Click to access immediately</span>
                             </li>
-                            <li style="margin-top: 12px;"><strong>Check if you bookmarked</strong> the Pro access link after payment</li>
-                            <li style="margin-top: 12px;"><strong>Still can't access?</strong> Submit a support request below
-                                <br><span style="color: #666; font-size: 0.95em;">→ Include your Stripe receipt or transaction ID</span>
-                                <br><span style="color: #666; font-size: 0.95em;">→ Describe the issue you're facing</span>
-                            </li>
+                            <li style="margin-top: 10px;">If you bookmarked the Pro access link after payment, use that bookmark</li>
+                            <li style="margin-top: 10px;">Still can't access? Submit a support request below</li>
                         </ol>
+                        <p style="margin: 0 0 15px 0; font-size: 0.85em; color: #666; font-style: italic;">Note: If you've cleared your browser data or are using a different device, we'll restore your access within 24 hours via the form below.</p>
                         
-                        <a href="https://formsubmit.co/el/sehawe" target="_blank" style="display: inline-block; background: #2196f3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 5px;">
-                            Request Access Restoration →
-                        </a>
+                        <form action="https://formsubmit.co/el/sehawe" method="POST" style="text-align: left;">
+                            <input type="hidden" name="_subject" value="Pro Access Restoration Request">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Your Email*</label>
+                                <input type="email" name="email" required style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Stripe Transaction ID (if available)</label>
+                                <input type="text" name="transaction_id" placeholder="e.g., pi_1234567890" style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em;">Issue Description</label>
+                                <textarea name="issue" rows="3" placeholder="e.g., Cleared browser cache and can't access Pro calculator" style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 14px; resize: vertical;"></textarea>
+                            </div>
+                            
+                            <button type="submit" style="background: #2196f3; color: white; padding: 10px 20px; border: none; border-radius: 25px; font-size: 0.9em; cursor: pointer; width: 100%;">
+                                Request Access Restoration →
+                            </button>
+                        </form>
                         
-                        <p style="margin: 15px 0 0 0; font-size: 0.8em; color: #666;">Opens in a new tab • We respond within 72 hours</p>
+                        <p style="margin: 15px 0 0 0; font-size: 0.8em; color: #666;">We typically respond within 24 hours</p>
                     </div>
                     
                     <p style="margin-top: 20px;">
