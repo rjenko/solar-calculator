@@ -3,7 +3,7 @@
   <!-- Homepage - highest priority -->
   <url>
     <loc>https://solarroicalculator.co.uk/</loc>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Pro Success Page -->
   <url>
     <loc>https://solarroicalculator.co.uk/pro-success</loc>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -19,7 +19,7 @@
   <!-- Partners Page -->
   <url>
     <loc>https://solarroicalculator.co.uk/partners</loc>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- Insights Index -->
   <url>
     <loc>https://solarroicalculator.co.uk/insights/</loc>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -72,7 +72,15 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- NEW BLOG POST 6 -->
+  <!-- NEW BLOG POST 6 - Smart Export Guarantee -->
+  <url>
+    <loc>https://solarroicalculator.co.uk/insights/smart-export-guarantee-explained.html</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- NEW BLOG POST 7 -->
   <url>
     <loc>https://solarroicalculator.co.uk/insights/solar-battery-vs-solar-only-uk-2026.html</loc>
     <lastmod>2026-01-03</lastmod>
@@ -80,7 +88,7 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- NEW BLOG POST 7 -->
+  <!-- NEW BLOG POST 8 -->
   <url>
     <loc>https://solarroicalculator.co.uk/insights/monocrystalline-vs-polycrystalline-solar-panels-uk.html</loc>
     <lastmod>2025-12-15</lastmod>
