@@ -1827,7 +1827,7 @@
             <div class="upgrade-banner" id="upgradeBanner" style="display: none;">
                 <div class="upgrade-banner-text">
                     <strong>You're weighing up a <span class="anchor-cost">£6,000</span> decision. The analysis that tells you if it's right costs only £4.99.</strong>
-                    <p>Postcode sunshine data · battery analysis · 10-year projections · system comparison</p>
+                    <p>Postcode sunshine data · battery analysis · 5-year projections · system comparison</p>
                 </div>
                 <button class="upgrade-btn" onclick="upgradeToPro()">Find out for £4.99 →</button>
             </div>
@@ -1884,7 +1884,7 @@
                 <div class="pricing-feature"><div class="pricing-dot"></div>YOUR postcode solar irradiance data</div>
                 <div class="pricing-feature"><div class="pricing-dot"></div>Smart battery storage analysis</div>
                 <div class="pricing-feature"><div class="pricing-dot"></div>Export income optimiser</div>
-                <div class="pricing-feature"><div class="pricing-dot"></div>10-year month-by-month breakdown</div>
+                <div class="pricing-feature"><div class="pricing-dot"></div>5-year month-by-month breakdown</div>
                 <div class="pricing-feature"><div class="pricing-dot"></div>Compare 4 system sizes side-by-side</div>
                 <div class="pricing-feature"><div class="pricing-dot"></div>Downloadable PDF report</div>
                 <button class="pricing-cta" onclick="upgradeToPro()">Find out if I'm leaving money on the table →</button>
@@ -2291,7 +2291,7 @@
                 
                 <div style="position: relative; height: 40px; background: #f0f0f0; border-radius: 20px; overflow: hidden;">
                     <div style="position: absolute; left: 0; top: 0; height: 100%; width: ${(breakEvenYear/25)*100}%; background: linear-gradient(to right, #ef5350, #ffa726); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em;">
-                        Paying Off
+                        ${(breakEvenYear/25)*100 < 32 ? 'Paying' : 'Paying Off'}
                     </div>
                     <div style="position: absolute; left: ${(breakEvenYear/25)*100}%; top: 0; height: 100%; width: ${100-(breakEvenYear/25)*100}%; background: linear-gradient(to right, #66bb6a, #4caf50); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em;">
                         Pure Profit!
