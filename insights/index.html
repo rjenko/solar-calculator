@@ -6,453 +6,694 @@
     <title>Solar Panel Guides UK 2026 - Free Calculator + Real UK Data</title>
     <meta name="description" content="Complete solar guides: ROI (£20k-30k profit), costs (£5.5k avg), payback (6-9 years), batteries, grants, brands. 2026 UK data + free calculator.">
     <link rel="canonical" href="https://solarroicalculator.co.uk/insights/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8720C'/><polygon points='16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8' fill='white'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PWME39QWJD');
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream:        #F7F4EF;
+            --white:        #FFFFFF;
+            --dark:         #1a1a1a;
+            --orange:       #E8720C;
+            --orange-h:     #cf6200;
+            --orange-bg:    rgba(232,114,12,0.08);
+            --text:         #1a1a1a;
+            --mid:          #555555;
+            --muted:        #888888;
+            --border:       rgba(0,0,0,0.09);
+            --r:            12px;
+            --shadow:       0 2px 16px rgba(0,0,0,0.07);
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
             line-height: 1.6;
-            color: #2c3e50;
-            background: #f8f9fa;
         }
-        
+
+        /* ── Navigation ── */
         .nav-header {
-            background: #2c3e50;
-            padding: 1rem 0;
+            background: var(--cream);
+            border-bottom: 0.5px solid var(--border);
+            padding: 0 40px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
-        .nav-container {
-            max-width: 1200px;
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nav-logo-solar {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: italic;
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-logo-roi {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-logo-calc {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            opacity: 0.65;
+        }
+
+        .nav-logo-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--mid);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            background: var(--dark) !important;
+            color: var(--cream) !important;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: #333 !important; }
+
+        /* ── Page hero ── */
+        .page-hero {
+            padding: 56px 40px 44px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+        }
+
+        .page-hero h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .page-hero p {
+            font-size: 16px;
+            color: var(--mid);
+            max-width: 540px;
+        }
+
+        /* ── Top CTA bar ── */
+        .top-cta {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 40px;
+        }
+
+        .top-cta-inner {
+            background: var(--dark);
+            border-radius: var(--r);
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .top-cta-text h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .top-cta-text p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .top-cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .top-cta-btn {
+            display: inline-block;
+            background: var(--orange);
+            color: #fff;
+            text-decoration: none;
+            padding: 11px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .top-cta-btn:hover { background: var(--orange-h); }
+
+        .top-cta-free {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            white-space: nowrap;
+            text-align: right;
+            transition: color 0.2s;
+        }
+
+        .top-cta-free:hover { color: rgba(255,255,255,0.65); }
+
+        /* ── Grid ── */
+        .grid-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+
+        .grid-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        /* ── Article card ── */
+        .blog-card {
+            background: var(--white);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 3px solid transparent;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.11);
+            border-top-color: var(--orange);
+        }
+
+        .blog-card-body {
+            padding: 22px 22px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .blog-card-body h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .blog-excerpt {
+            font-size: 13.5px;
+            color: var(--mid);
+            line-height: 1.55;
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--orange);
+            text-decoration: none;
+            transition: gap 0.2s;
+        }
+
+        .read-more:hover { gap: 8px; }
+
+        /* ── Coming soon cards ── */
+        .blog-card.coming-soon {
+            opacity: 0.55;
+            border-top: 3px solid transparent !important;
+            border: 1.5px dashed rgba(232,114,12,0.4);
+        }
+
+        .blog-card.coming-soon:hover {
+            transform: none;
+            box-shadow: var(--shadow);
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--orange-bg);
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .read-more-disabled {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: not-allowed;
+        }
+
+        /* ── Bottom CTA ── */
+        .bottom-cta {
+            max-width: 900px;
+            margin: 0 auto 56px;
+            padding: 0 40px;
+        }
+
+        .bottom-cta-inner {
+            background: var(--white);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            padding: 40px 36px;
+            text-align: center;
+        }
+
+        .bottom-cta-inner h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .bottom-cta-inner p {
+            font-size: 15px;
+            color: var(--mid);
+            margin-bottom: 22px;
+            max-width: 440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--orange);
+            color: #fff;
+            text-decoration: none;
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover { background: var(--orange-h); }
+
+        .bottom-cta-sub {
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .bottom-cta-sub a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .bottom-cta-sub a:hover { text-decoration: underline; }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--cream);
+            border-top: 0.5px solid var(--border);
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: white;
+
+        .footer-text { font-size: 12px; color: #999; }
+
+        .footer-links { display: flex; gap: 22px; }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #888;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
-        
-        .nav-links a:hover {
-            color: #ff8c00;
+
+        .footer-links a:hover { color: var(--orange); }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .nav-header { padding: 0 20px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page-hero { padding: 36px 20px 28px; }
+            .page-hero h1 { font-size: 30px; }
+            .top-cta { padding: 0 20px; }
+            .top-cta-inner { flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px; }
+            .top-cta-buttons { align-items: stretch; width: 100%; }
+            .top-cta-btn { width: 100%; text-align: center; }
+            .top-cta-free { text-align: center; }
+            .grid-section { padding: 0 20px 48px; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .bottom-cta { padding: 0 20px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
         }
-        
-        .header {
-            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .blog-card-header {
-            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
-            color: white;
-            padding: 20px;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .blog-card-header h2 {
-            font-size: 1.5em;
-            margin: 0;
-            text-align: center;
-        }
-        
-        .blog-card-body {
-            padding: 25px;
-        }
-        
-        .blog-meta {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .blog-excerpt {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .read-more {
-            display: inline-block;
-            background: #ff8c00;
-            color: white;
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        
-        .read-more:hover {
-            background: #e67e00;
-        }
-        
-        .cta-box {
-            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 50px 0;
-        }
-        
-        .cta-box h2 {
-            margin-bottom: 15px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #4caf50;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-top: 15px;
-            transition: transform 0.2s;
-        }
-        
-        .cta-button:hover {
-            transform: scale(1.05);
-        }
-        
-        @media (max-width: 600px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
+
+        @media (max-width: 420px) {
+            .nav-logo-solar, .nav-logo-roi, .nav-logo-calc { font-size: 13px; }
+            .nav-logo-icon { width: 24px; height: 24px; }
+            .nav-logo { gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <nav class="nav-header">
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="/">Calculator</a>
-                <a href="/insights">Insights</a>
-                <a href="/#faq">FAQ</a>
-                <a href="/partners">Partners</a>
-                <a href="/legal">Legal</a>
-                <a href="/pro-success" style="background: #ff8c00; color: white; padding: 5px 15px; border-radius: 20px;">Go Pro</a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="header">
-        <div class="container">
-            <h1>📚 Solar Panel Insights</h1>
-            <p style="font-size: 1.2em;">Expert guides and analysis for UK homeowners</p>
+<!-- ── Navigation ── -->
+<nav class="nav-header">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+            <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8" fill="white"/>
+            </svg>
+        </div>
+        <span class="nav-logo-text"><em class="nav-logo-solar">Solar</em><span class="nav-logo-roi">&#8202;ROI</span><span class="nav-logo-calc">Calculator</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="/#calculator">Calculator</a>
+        <a href="/insights">Insights</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/partners">Partners</a>
+        <a href="/legal">Legal</a>
+        <a href="/pro-success" class="nav-cta">Try Pro — £4.99 →</a>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="page-hero">
+    <h1>Solar Panel Insights</h1>
+    <p>Expert guides and analysis for UK homeowners — backed by 2026 data.</p>
+</div>
+
+<!-- ── Top CTA ── -->
+<div class="top-cta">
+    <div class="top-cta-inner">
+        <div class="top-cta-text">
+            <h3>Get your postcode-specific solar analysis</h3>
+            <p>Location data, 10-year projections &amp; battery comparison — £4.99 one-off.</p>
+        </div>
+        <div class="top-cta-buttons">
+            <a href="/pro-success" class="top-cta-btn">Get Pro Analysis — £4.99 →</a>
+            <a href="/" class="top-cta-free">Try free calculator first</a>
         </div>
     </div>
+</div>
 
-    <div class="container">
-        <div class="cta-box">
-            <h2>🧮 Calculate Your Solar Savings First</h2>
-            <p>Before diving into the guides, see how much YOU could save with solar panels</p>
-            <a href="/" class="cta-button">Use Free Calculator →</a>
-        </div>
+<!-- ── Article grid ── -->
+<div class="grid-section">
+    <p class="grid-label">Latest Solar Guides</p>
 
-        <h2 style="margin: 40px 0 20px 0; font-size: 2em;">Latest Solar Guides</h2>
-        
-        <div class="blog-grid">
-            <!-- NEW Post 1 - Most Recent -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Are Solar Panels Worth It in the UK? 2026 Analysis</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 5 Mar 2026</span>
-                        <span>⏱️ 12 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        The definitive answer with 2026 data. ROI analysis, regional comparisons, and real-world payback periods using current Ofgem rates (27.69p/kWh). Find out if solar is right for YOUR home.
-                    </p>
-                    <a href="/insights/are-solar-panels-worth-it-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
+    <div class="blog-grid">
 
-            <!-- NEW Post 2 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Is Solar Battery Storage Worth It? UK 2026 Guide</h2>
+        <!-- Post 1 -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 5 Mar 2026</span>
+                    <span>⏱️ 12 min</span>
                 </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 28 Feb 2026</span>
-                        <span>⏱️ 10 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Complete battery ROI analysis. Time-shifting savings with Octopus Go (7p overnight), payback periods, and when batteries actually make financial sense for UK homeowners.
-                    </p>
-                    <a href="/insights/solar-battery-storage-worth-it-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- NEW Post 3 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>How Much Do Solar Panels Save? UK 2026 Breakdown</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 15 Feb 2026</span>
-                        <span>⏱️ 11 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Real savings data from UK homeowners. Regional breakdowns, system size comparisons, and detailed financial projections. See exactly what you'd save with current electricity rates.
-                    </p>
-                    <a href="/insights/how-much-solar-panels-save-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- NEW Post 4 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Solar Panel Grants & Subsidies UK 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 1 Feb 2026</span>
-                        <span>⏱️ 9 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Complete guide to UK solar grants in 2026. ECO4 scheme eligibility, 0% VAT rules, Smart Export Guarantee rates, and council-specific interest-free loans you can actually access.
-                    </p>
-                    <a href="/insights/solar-panel-grants-subsidies-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- OLD Post 1 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Solar Panels vs Heat Pumps: UK Comparison 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 18 Jan 2026</span>
-                        <span>⏱️ 10 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Should you install solar panels or a heat pump first? ROI comparison, grant availability, and which technology makes sense for your home. Includes combined system analysis.
-                    </p>
-                    <a href="/insights/solar-panels-vs-heat-pump-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- OLD Post 2 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Solar Panel Payback Period UK 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 15 Jan 2026</span>
-                        <span>⏱️ 8 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Discover how long it takes for solar panels to pay for themselves in 2026. Complete analysis using current Ofgem rates (27.69p/kWh) with regional breakdowns for England, Scotland, and Wales.
-                    </p>
-                    <a href="/insights/solar-panel-payback-period-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- NEW Post 5 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Solar + Battery vs Solar-Only: Which ROI Wins?</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 3 Jan 2026</span>
-                        <span>⏱️ 9 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Head-to-head financial comparison. Upfront combined system (345% ROI) vs staged approach (solar first, battery later). Real numbers for UK homes in 2026.
-                    </p>
-                    <a href="/insights/solar-battery-vs-solar-only-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- OLD Post 3 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Best Solar Panel Brands UK 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 29 Jan 2026</span>
-                        <span>⏱️ 12 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Independent comparison of top solar panel manufacturers. Efficiency ratings, warranty terms, real-world UK performance, and which brands installers actually recommend.
-                    </p>
-                    <a href="/insights/best-solar-panel-brands-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- OLD Post 4 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Solar Panel Costs UK 2026: Complete Pricing Guide</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 22 Jan 2026</span>
-                        <span>⏱️ 10 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Transparent pricing breakdown for 2026. From 3kW systems (£4,500) to 10kW installations (£13,000). Includes hidden costs, financing options, and what affects your final price.
-                    </p>
-                    <a href="/insights/solar-panel-costs-uk-2026.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- NEW Post 6 -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Monocrystalline vs Polycrystalline Solar Panels UK</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 15 Dec 2025</span>
-                        <span>⏱️ 8 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Technical comparison for UK climate. Efficiency differences, pricing, durability in cloudy conditions, and which panel type delivers better ROI for British homeowners.
-                    </p>
-                    <a href="/insights/monocrystalline-vs-polycrystalline-solar-panels-uk.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- NEW Post 11 - Smart Export Guarantee -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <h2>Smart Export Guarantee UK 2026: Complete Guide</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 10 Jan 2026</span>
-                        <span>⏱️ 10 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Earn £150-300/year from excess solar exports. Best SEG rates 2026 (Octopus 15p/kWh), how to register, maximize export income, and compare all UK suppliers.
-                    </p>
-                    <a href="/insights/smart-export-guarantee-explained.html" class="read-more">Read Full Guide →</a>
-                </div>
-            </div>
-
-            <!-- FUTURE PLACEHOLDER 1 -->
-            <div class="blog-card" style="opacity: 0.7; border: 2px dashed #ff8c00;">
-                <div class="blog-card-header" style="background: linear-gradient(135deg, #ccc 0%, #999 100%);">
-                    <h2>Solar Panel Warranties UK 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 Coming Soon</span>
-                        <span>⏱️ 8 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Understanding solar panel warranties: product vs performance guarantees, what's covered, claim process, and how to protect your 25-year investment. Coming soon!
-                    </p>
-                    <a href="#" class="read-more" style="background: #ccc; cursor: not-allowed;">Coming Soon</a>
-                </div>
-            </div>
-
-            <!-- FUTURE PLACEHOLDER 2 -->
-            <div class="blog-card" style="opacity: 0.7; border: 2px dashed #ff8c00;">
-                <div class="blog-card-header" style="background: linear-gradient(135deg, #ccc 0%, #999 100%);">
-                    <h2>How to Choose a Solar Installer UK 2026</h2>
-                </div>
-                <div class="blog-card-body">
-                    <div class="blog-meta">
-                        <span>📅 Coming Soon</span>
-                        <span>⏱️ 9 min read</span>
-                    </div>
-                    <p class="blog-excerpt">
-                        Red flags to avoid, MCS certification importance, quote comparison checklist, and what questions to ask installers. Protect yourself from cowboy installers. Coming soon!
-                    </p>
-                    <a href="#" class="read-more" style="background: #ccc; cursor: not-allowed;">Coming Soon</a>
-                </div>
+                <h2>Are Solar Panels Worth It in the UK? 2026 Analysis</h2>
+                <p class="blog-excerpt">The definitive answer with 2026 data. ROI analysis, regional comparisons, and real-world payback periods using current Ofgem rates (27.69p/kWh). Find out if solar is right for YOUR home.</p>
+                <a href="/insights/are-solar-panels-worth-it-uk-2026.html" class="read-more">Read Full Guide →</a>
             </div>
         </div>
 
-        <div class="cta-box">
-            <h2>⚡ Ready to Calculate Your Solar Savings?</h2>
-            <p>Get personalised ROI calculations based on YOUR electricity usage, location, and roof specifications.</p>
-            <a href="/" class="cta-button">Calculate My ROI →</a>
-            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
-                Or get location-specific analysis with <a href="/pro-success" style="color: white; text-decoration: underline;">Pro Calculator (£4.99)</a>
-            </p>
+        <!-- Post 2 -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 28 Feb 2026</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+                <h2>Is Solar Battery Storage Worth It? UK 2026 Guide</h2>
+                <p class="blog-excerpt">Complete battery ROI analysis. Time-shifting savings with Octopus Go (7p overnight), payback periods, and when batteries actually make financial sense for UK homeowners.</p>
+                <a href="/insights/solar-battery-storage-worth-it-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
         </div>
+
+        <!-- Post 3 -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 15 Feb 2026</span>
+                    <span>⏱️ 11 min</span>
+                </div>
+                <h2>How Much Do Solar Panels Save? UK 2026 Breakdown</h2>
+                <p class="blog-excerpt">Real savings data from UK homeowners. Regional breakdowns, system size comparisons, and detailed financial projections. See exactly what you'd save with current electricity rates.</p>
+                <a href="/insights/how-much-solar-panels-save-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 4 -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 1 Feb 2026</span>
+                    <span>⏱️ 9 min</span>
+                </div>
+                <h2>Solar Panel Grants &amp; Subsidies UK 2026</h2>
+                <p class="blog-excerpt">Complete guide to UK solar grants in 2026. ECO4 scheme eligibility, 0% VAT rules, Smart Export Guarantee rates, and council-specific interest-free loans you can actually access.</p>
+                <a href="/insights/solar-panel-grants-subsidies-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 5 (Solar vs Heat Pump) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 18 Jan 2026</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+                <h2>Solar Panels vs Heat Pumps: UK Comparison 2026</h2>
+                <p class="blog-excerpt">Should you install solar panels or a heat pump first? ROI comparison, grant availability, and which technology makes sense for your home. Includes combined system analysis.</p>
+                <a href="/insights/solar-panels-vs-heat-pump-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 6 (Payback Period) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 15 Jan 2026</span>
+                    <span>⏱️ 8 min</span>
+                </div>
+                <h2>Solar Panel Payback Period UK 2026</h2>
+                <p class="blog-excerpt">Discover how long it takes for solar panels to pay for themselves in 2026. Complete analysis using current Ofgem rates (27.69p/kWh) with regional breakdowns for England, Scotland, and Wales.</p>
+                <a href="/insights/solar-panel-payback-period-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 7 (Battery vs Solar Only) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 3 Jan 2026</span>
+                    <span>⏱️ 9 min</span>
+                </div>
+                <h2>Solar + Battery vs Solar-Only: Which ROI Wins?</h2>
+                <p class="blog-excerpt">Head-to-head financial comparison. Upfront combined system (345% ROI) vs staged approach (solar first, battery later). Real numbers for UK homes in 2026.</p>
+                <a href="/insights/solar-battery-vs-solar-only-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 8 (Best Brands) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 29 Jan 2026</span>
+                    <span>⏱️ 12 min</span>
+                </div>
+                <h2>Best Solar Panel Brands UK 2026</h2>
+                <p class="blog-excerpt">Independent comparison of top solar panel manufacturers. Efficiency ratings, warranty terms, real-world UK performance, and which brands installers actually recommend.</p>
+                <a href="/insights/best-solar-panel-brands-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 9 (Costs) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 22 Jan 2026</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+                <h2>Solar Panel Costs UK 2026: Complete Pricing Guide</h2>
+                <p class="blog-excerpt">Transparent pricing breakdown for 2026. From 3kW systems (£4,500) to 10kW installations (£13,000). Includes hidden costs, financing options, and what affects your final price.</p>
+                <a href="/insights/solar-panel-costs-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 10 (Mono vs Poly) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 15 Dec 2025</span>
+                    <span>⏱️ 8 min</span>
+                </div>
+                <h2>Monocrystalline vs Polycrystalline Solar Panels UK</h2>
+                <p class="blog-excerpt">Technical comparison for UK climate. Efficiency differences, pricing, durability in cloudy conditions, and which panel type delivers better ROI for British homeowners.</p>
+                <a href="/insights/monocrystalline-vs-polycrystalline-solar-panels-uk.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 11 (SEG) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 10 Jan 2026</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+                <h2>Smart Export Guarantee UK 2026: Complete Guide</h2>
+                <p class="blog-excerpt">Earn £150-300/year from excess solar exports. Best SEG rates 2026 (Octopus 15p/kWh), how to register, maximize export income, and compare all UK suppliers.</p>
+                <a href="/insights/smart-export-guarantee-explained.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 12 (Warranties) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 31 Mar 2026</span>
+                    <span>⏱️ 9 min</span>
+                </div>
+                <h2>Solar Panel Warranties UK 2026: What's Covered &amp; What Isn't</h2>
+                <p class="blog-excerpt">Product warranty vs performance guarantee, inverter cover, what voids your warranty, how to claim, and the red flags that signal a manufacturer you can't rely on.</p>
+                <a href="/insights/solar-panel-warranties-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
+        <!-- Post 13 (Choose an Installer) -->
+        <div class="blog-card">
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span>📅 31 Mar 2026</span>
+                    <span>⏱️ 10 min</span>
+                </div>
+                <h2>How to Choose a Solar Installer UK 2026: MCS Checklist &amp; Red Flags</h2>
+                <p class="blog-excerpt">Why MCS certification is non-negotiable, how to verify it, what a proper quote must include, questions to ask before signing, and the pressure tactics that signal a cowboy installer.</p>
+                <a href="/insights/how-to-choose-solar-installer-uk-2026.html" class="read-more">Read Full Guide →</a>
+            </div>
+        </div>
+
     </div>
+</div>
 
-    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1.5rem 0; margin-top: 3rem;">
-        <div class="container">
-            <p>&copy; 2026 Solar ROI Calculator UK. <a href="/privacy" style="color: #ff8c00;">Privacy Policy</a> | <a href="/legal" style="color: #ff8c00;">Terms & Disclaimer</a></p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8;">Expert Solar Guides for UK Homeowners</p>
-        </div>
-    </footer>
+<!-- ── Bottom CTA ── -->
+<div class="bottom-cta">
+    <div class="bottom-cta-inner">
+        <h2>Want a Proper Solar Analysis?</h2>
+        <p>Pro gives you postcode-specific data, 10-year financial projections, battery ROI comparison, and a downloadable PDF report — everything the free calculator doesn't.</p>
+        <a href="/pro-success" class="btn-primary">Get Pro Analysis — £4.99 →</a>
+        <p class="bottom-cta-sub">Not ready yet? <a href="/">Try the free calculator first →</a></p>
+    </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+    <div class="footer-text">&copy; 2026 Solar ROI Calculator UK &middot; solarroicalculator.co.uk</div>
+    <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/legal">Terms &amp; Disclaimer</a>
+        <a href="/">Free Calculator</a>
+    </div>
+</footer>
+
 </body>
 </html>

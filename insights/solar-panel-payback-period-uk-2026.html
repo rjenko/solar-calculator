@@ -6,8 +6,20 @@
     <title>Solar Panel Payback UK 2026: 6-9 Years (Then 20 Years Free Power)</title>
     <meta name="description" content="Solar payback: 6-7 years (South England), 8-9 years (Scotland). After payback = 20 years free electricity worth £18k-27k. 2026 Ofgem rates + calculator.">
     <link rel="canonical" href="https://solarroicalculator.co.uk/insights/solar-panel-payback-period-uk-2026.html">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8720C'/><polygon points='16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8' fill='white'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PWME39QWJD');
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -19,7 +31,7 @@
       "publisher": {"@type": "Organization", "name": "Solar ROI Calculator UK"}
     }
     </script>
-    
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -30,7 +42,7 @@
           "name": "How long do solar panels take to pay for themselves in the UK?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In 2026, solar panels in the UK typically pay for themselves in 6-9 years, depending on location, system size, and electricity usage. With current Ofgem rates at 27.69p/kWh, most households see excellent returns. After payback, panels generate free electricity for 15-20 additional years."
+            "text": "In 2026, solar panels in the UK typically pay for themselves in 6-9 years, depending on location, system size, and electricity usage. With current Ofgem rates at 24.50p/kWh, most households see excellent returns. After payback, panels generate free electricity for 15-20 additional years."
           }
         },
         {
@@ -38,7 +50,7 @@
           "name": "What affects solar panel payback period UK?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Key factors affecting payback include electricity rate (27.69p/kWh in 2026), system size and cost, self-consumption percentage (30-40% typical), roof orientation and shading, and location (South England sees 6-7 year payback, Scotland 8-9 years). Battery storage can reduce payback by increasing self-consumption to 70-80%."
+            "text": "Key factors affecting payback include electricity rate (24.50p/kWh in 2026), system size and cost, self-consumption percentage (30-40% typical), roof orientation and shading, and location (South England sees 6-7 year payback, Scotland 8-9 years). Battery storage can reduce payback by increasing self-consumption to 70-80%."
           }
         },
         {
@@ -52,7 +64,7 @@
       ]
     }
     </script>
-    
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -79,89 +91,543 @@
       ]
     }
     </script>
-    
+
     <style>
+        /* ── Design tokens ─────────────────────────────── */
+        :root {
+            --cream: #F7F4EF;
+            --white: #FFFFFF;
+            --dark: #1a1a1a;
+            --dark-card: #222222;
+            --orange: #E8720C;
+            --orange-h: #cf6200;
+            --orange-bg: rgba(232,114,12,0.08);
+            --green: #2E7D32;
+            --green-bg: #E8F5E9;
+            --text: #1a1a1a;
+            --mid: #555555;
+            --muted: #888888;
+            --border: rgba(0,0,0,0.09);
+            --r: 12px;
+            --r-sm: 8px;
+            --shadow: 0 2px 16px rgba(0,0,0,0.07);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #2c3e50; background: #f8f9fa; }
-        .nav-header { background: #2c3e50; padding: 1rem 0; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: white; text-decoration: none; transition: color 0.3s; }
-        .nav-links a:hover { color: #ff8c00; }
-        .header { background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%); color: white; padding: 40px 20px; text-align: center; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        article { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin: 20px 0; }
-        h1 { font-size: 2.2em; margin-bottom: 20px; line-height: 1.2; }
-        h2 { color: #2c3e50; margin: 30px 0 15px 0; font-size: 1.8em; }
-        h3 { color: #2c3e50; margin: 25px 0 10px 0; font-size: 1.4em; }
-        p { margin-bottom: 15px; }
-        .meta { color: #666; font-size: 0.9em; margin-bottom: 20px; }
-        .cta-box { background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin: 30px 0; }
-        .cta-button { display: inline-block; background: white; color: #4caf50; padding: 15px 35px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 15px; }
-        .highlight-box { background: #e3f2fd; padding: 20px; border-left: 4px solid #2196f3; border-radius: 5px; margin: 20px 0; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background: #f8f9fa; font-weight: 600; }
-        .pro-cta { background: #fff3cd; padding: 25px; border-radius: 10px; margin: 30px 0; text-align: center; border: 2px solid #ffc107; }
-        @media (max-width: 600px) { h1 { font-size: 1.8em; } article { padding: 20px; } .nav-links { gap: 1rem; font-size: 0.9rem; } }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── Nav ───────────────────────────────────────── */
+        .nav-header {
+            background: var(--cream);
+            border-bottom: 0.5px solid var(--border);
+            padding: 0 40px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nav-logo-solar {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: italic;
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-logo-roi {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-logo-calc {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            opacity: 0.65;
+        }
+
+        .nav-logo-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--mid);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            background: var(--dark) !important;
+            color: var(--cream) !important;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: #333 !important; }
+
+        /* ── Article layout ────────────────────────────── */
+        .article-outer {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 40px 40px 60px;
+        }
+
+        /* ── Breadcrumb ────────────────────────────────── */
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover { color: var(--orange); }
+
+        .breadcrumb-sep { color: var(--border); }
+
+        /* ── Article header ────────────────────────────── */
+        .article-meta {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 24px;
+        }
+
+        /* ── Quick Answer ──────────────────────────────── */
+        .quick-answer {
+            background: var(--white);
+            border-left: 3px solid var(--green);
+            border-radius: var(--r-sm);
+            padding: 16px 20px;
+            margin-bottom: 28px;
+        }
+
+        .quick-answer-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--green);
+            margin-bottom: 6px;
+        }
+
+        .quick-answer p {
+            font-size: 15px;
+            color: var(--mid);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ── Table of Contents ─────────────────────────── */
+        .toc {
+            background: var(--white);
+            border-radius: var(--r);
+            padding: 20px 24px;
+            margin-bottom: 36px;
+            box-shadow: var(--shadow);
+        }
+
+        .toc-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            margin: 0;
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .toc li {
+            font-size: 14px;
+            color: var(--mid);
+            line-height: 1.5;
+        }
+
+        .toc a {
+            color: var(--orange);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover { color: var(--orange-h); }
+
+        /* ── Body prose ────────────────────────────────── */
+        h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--dark);
+            margin: 36px 0 14px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 24px 0 10px;
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--mid);
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        ul, ol {
+            margin: 0 0 16px 22px;
+        }
+
+        li {
+            font-size: 15px;
+            color: var(--mid);
+            line-height: 1.75;
+            margin-bottom: 6px;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        strong { color: var(--dark); }
+
+        /* ── Tables ────────────────────────────────────── */
+        .table-wrap {
+            border-radius: var(--r);
+            overflow-x: auto;
+            box-shadow: var(--shadow);
+            margin: 24px 0 28px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead tr {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        thead th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        tbody tr:nth-child(odd) { background: var(--white); }
+        tbody tr:nth-child(even) { background: var(--cream); }
+
+        tbody td {
+            padding: 11px 14px;
+            color: var(--mid);
+            border: none;
+            white-space: nowrap;
+        }
+
+        /* ── Highlight box ─────────────────────────────── */
+        .highlight-box {
+            background: var(--white);
+            border-left: 3px solid var(--orange);
+            border-radius: var(--r-sm);
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p, .highlight-box strong {
+            font-size: 14px;
+            color: var(--mid);
+            margin: 0;
+        }
+
+        /* ── In-article Pro CTA ────────────────────────── */
+        .pro-cta {
+            background: var(--dark);
+            border-radius: var(--r);
+            padding: 24px 28px;
+            margin: 28px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pro-cta h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--white);
+            margin: 0;
+        }
+
+        .pro-cta p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.72);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .pro-cta-btn {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 11px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            align-self: flex-start;
+            transition: background 0.2s;
+            margin-top: 4px;
+        }
+
+        .pro-cta-btn:hover { background: var(--orange-h); }
+
+        /* ── Bottom CTA ────────────────────────────────── */
+        .cta-box {
+            background: var(--dark);
+            border-radius: var(--r);
+            padding: 32px 32px;
+            text-align: center;
+            margin: 36px 0 0;
+        }
+
+        .cta-box h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--white);
+            margin: 0 0 12px;
+        }
+
+        .cta-box p {
+            color: rgba(255,255,255,0.72);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .cta-button:hover { background: var(--orange-h); }
+
+        .cta-box .cta-sub {
+            margin-top: 14px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 0;
+        }
+
+        .cta-box .cta-sub a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: underline;
+        }
+
+        /* ── Footer ────────────────────────────────────── */
+        footer {
+            background: var(--cream);
+            border-top: 0.5px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text { font-size: 12px; color: #999; }
+
+        .footer-links { display: flex; gap: 22px; }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--orange); }
+
+        /* ── Responsive ────────────────────────────────── */
+        @media (max-width: 640px) {
+            .nav-header { padding: 0 20px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .article-outer { padding: 24px 24px 48px; }
+            h1 { font-size: 1.9rem; }
+            footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
+            .cta-box { padding: 24px 20px; }
+            .pro-cta { padding: 20px; }
+            .pro-cta-btn { align-self: stretch; text-align: center; }
+        }
+
+        @media (max-width: 420px) {
+            .nav-logo-solar, .nav-logo-roi, .nav-logo-calc { font-size: 13px; }
+            .nav-logo-icon { width: 24px; height: 24px; }
+            .nav-logo { gap: 6px; }
+        }
     </style>
 </head>
 <body>
-    <nav class="nav-header">
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="/">Calculator</a>
-                <a href="/insights">Insights</a>
-                <a href="/#faq">FAQ</a>
-                <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="background: #ff8c00; color: white; padding: 5px 15px; border-radius: 20px;">Go Pro</a>
-            </div>
+
+<!-- ── Navigation ──────────────────────────────────────────── -->
+<nav class="nav-header">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+            <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8" fill="white"/>
+            </svg>
         </div>
+        <span class="nav-logo-text"><em class="nav-logo-solar">Solar</em><span class="nav-logo-roi">&#8202;ROI</span><span class="nav-logo-calc">Calculator</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="/#calculator">Calculator</a>
+        <a href="/insights">Insights</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/partners">Partners</a>
+        <a href="/legal">Legal</a>
+        <a href="/pro-success" class="nav-cta">Try Pro — £4.99 →</a>
+    </div>
+</nav>
+
+<!-- ── Article ──────────────────────────────────────────────── -->
+<div class="article-outer">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="/insights/">Insights</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Solar Panel Payback Period UK 2026</span>
     </nav>
 
-    <div class="breadcrumbs" style="max-width: 800px; margin: 20px auto; padding: 0 20px; font-size: 0.9em;">
-        <a href="/" style="color: #666; text-decoration: none;">Home</a>
-        <span style="color: #ccc; margin: 0 8px;">›</span>
-        <a href="/insights/" style="color: #666; text-decoration: none;">Insights</a>
-        <span style="color: #ccc; margin: 0 8px;">›</span>
-        <span style="color: #2c3e50;">Solar Panel Payback Period UK 2026</span>
-    </div>
+    <article>
+        <div class="article-meta">Published: 15 January 2026 &middot; Reading time: 8 minutes</div>
 
-    <div class="header">
-        <div class="container">
-            <h1>Solar Panel Payback Period UK 2026</h1>
-            <p style="font-size: 1.1em;">How long until solar panels pay for themselves?</p>
+        <h1>Solar Panel Payback Period UK 2026</h1>
+
+        <!-- Quick Answer -->
+        <div class="quick-answer">
+            <div class="quick-answer-label">Quick Answer</div>
+            <p>In 2026, solar panels in the UK typically pay for themselves in 6–9 years, depending on your location, system size, and electricity usage. With current Ofgem rates at 24.50p/kWh, most households see excellent returns, with systems continuing to generate free electricity for 15–20 years after the payback period.</p>
         </div>
-    </div>
 
-    <div class="container">
-        <article>
-            <div class="meta">Published: 15 January 2026 | Reading time: 8 minutes</div>
-            
-            <div class="highlight-box">
-                <strong>Quick Answer:</strong> In 2026, solar panels in the UK typically pay for themselves in 6-9 years, depending on your location, system size, and electricity usage. With current Ofgem rates at 27.69p/kWh, most households see excellent returns, with systems continuing to generate free electricity for 15-20 years after the payback period.
-            </div>
+        <!-- Table of Contents -->
+        <nav class="toc" aria-label="Table of contents">
+            <div class="toc-title">Table of Contents</div>
+            <ol>
+                <li><a href="#what-is-payback">What Is Solar Panel Payback Period?</a></li>
+                <li><a href="#uk-regions">2026 UK Payback Periods by Region</a></li>
+                <li><a href="#what-affects">What Affects Your Payback Period?</a></li>
+                <li><a href="#real-example">Real Example: Birmingham System</a></li>
+                <li><a href="#reduce-payback">How to Reduce Your Payback Period</a></li>
+                <li><a href="#after-payback">What Happens After Payback?</a></li>
+                <li><a href="#worth-it">Are Solar Panels Still Worth It?</a></li>
+            </ol>
+        </nav>
 
-            <nav style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #ff8c00;">
-                <h3 style="margin-top: 0; color: #2c3e50; font-size: 1.1em;">Table of Contents</h3>
-                <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
-                    <li><a href="#what-is-payback" style="color: #2196f3; text-decoration: none;">What Is Solar Panel Payback Period?</a></li>
-                    <li><a href="#uk-regions" style="color: #2196f3; text-decoration: none;">2026 UK Payback Periods by Region</a></li>
-                    <li><a href="#what-affects" style="color: #2196f3; text-decoration: none;">What Affects Your Payback Period?</a></li>
-                    <li><a href="#real-example" style="color: #2196f3; text-decoration: none;">Real Example: Birmingham System</a></li>
-                    <li><a href="#reduce-payback" style="color: #2196f3; text-decoration: none;">How to Reduce Your Payback Period</a></li>
-                    <li><a href="#after-payback" style="color: #2196f3; text-decoration: none;">What Happens After Payback?</a></li>
-                    <li><a href="#worth-it" style="color: #2196f3; text-decoration: none;">Are Solar Panels Still Worth It?</a></li>
-                </ol>
-            </nav>
+        <h2 id="what-is-payback">What Is Solar Panel Payback Period?</h2>
+        <p>The payback period is the time it takes for your solar panel savings to equal your initial investment. For example, if you spend £6,000 on solar panels and save £750 per year on electricity bills, your payback period is 8 years (£6,000 ÷ £750 = 8 years).</p>
 
-            <h2 id="what-is-payback">What Is Solar Panel Payback Period?</h2>
-            <p>The payback period is the time it takes for your solar panel savings to equal your initial investment. For example, if you spend £6,000 on solar panels and save £750 per year on electricity bills, your payback period is 8 years (£6,000 ÷ £750 = 8 years).</p>
-            
-            <p>After this point, you're essentially getting free electricity for the remaining 15-25 years of your panels' lifespan. This is why solar panels remain one of the best home investments in the UK, despite higher upfront costs than a few years ago.</p>
+        <p>After this point, you're essentially getting free electricity for the remaining 15–25 years of your panels' lifespan. This is why solar panels remain one of the best home investments in the UK, despite higher upfront costs than a few years ago.</p>
 
-            <h2 id="uk-regions">2026 UK Payback Periods by Region</h2>
-            <p>Solar panel payback periods vary across the UK due to different sunshine hours. Here's what you can expect in 2026:</p>
+        <h2 id="uk-regions">2026 UK Payback Periods by Region</h2>
+        <p>Solar panel payback periods vary across the UK due to different sunshine hours. Here's what you can expect in 2026:</p>
 
+        <div class="table-wrap">
             <table>
                 <thead>
                     <tr>
@@ -174,132 +640,132 @@
                 <tbody>
                     <tr>
                         <td>South England</td>
-                        <td>6-7 years</td>
-                        <td>950-1,000 kWh/kWp</td>
-                        <td>£900-£1,100</td>
+                        <td>6–7 years</td>
+                        <td>950–1,000 kWh/kWp</td>
+                        <td>£900–£1,100</td>
                     </tr>
                     <tr>
                         <td>Midlands</td>
-                        <td>7-8 years</td>
-                        <td>850-900 kWh/kWp</td>
-                        <td>£800-£950</td>
+                        <td>7–8 years</td>
+                        <td>850–900 kWh/kWp</td>
+                        <td>£800–£950</td>
                     </tr>
                     <tr>
                         <td>North England</td>
-                        <td>8-9 years</td>
-                        <td>750-850 kWh/kWp</td>
-                        <td>£700-£850</td>
+                        <td>8–9 years</td>
+                        <td>750–850 kWh/kWp</td>
+                        <td>£700–£850</td>
                     </tr>
                     <tr>
                         <td>Scotland</td>
-                        <td>8-9 years</td>
-                        <td>700-800 kWh/kWp</td>
-                        <td>£650-£800</td>
+                        <td>8–9 years</td>
+                        <td>700–800 kWh/kWp</td>
+                        <td>£650–£800</td>
                     </tr>
                     <tr>
                         <td>Wales</td>
-                        <td>7-8 years</td>
-                        <td>800-900 kWh/kWp</td>
-                        <td>£750-£900</td>
+                        <td>7–8 years</td>
+                        <td>800–900 kWh/kWp</td>
+                        <td>£750–£900</td>
                     </tr>
                 </tbody>
             </table>
-
-            <div class="cta-box">
-                <h3>Calculate Your Exact Payback Period</h3>
-                <p>Every home is different. See your specific payback period based on your location, roof, and electricity usage.</p>
-                <a href="/" class="cta-button">Use Free Calculator →</a>
-            </div>
-
-            <h2 id="what-affects">What Affects Your Payback Period?</h2>
-            
-            <h3>1. Electricity Rate (Most Important in 2026)</h3>
-            <p>With the Ofgem price cap at 27.69p/kWh in Q1 2026, payback periods are currently excellent. Every penny of electricity rate increase shortens your payback period by approximately 3-4 months. If you're on a smart tariff like Octopus Agile (averaging ~19p/kWh), your payback will be slightly longer, but battery storage can bridge this gap.</p>
-
-            <h3>2. System Size and Cost</h3>
-            <p>Larger systems have economies of scale. A 4kW system might cost £5,500 (£1,375/kW), while a 6kW system costs £7,500 (£1,250/kW). However, if the larger system generates more electricity than you can use, you'll export it at lower rates (typically 12p/kWh vs 27.69p/kWh for self-consumption), extending the payback period.</p>
-
-            <h3>3. Self-Consumption Percentage</h3>
-            <p>The more solar electricity you use directly (rather than exporting to the grid), the faster your payback. Most UK homes achieve 30-40% self-consumption without batteries. With battery storage, this can increase to 70-80%, significantly reducing payback periods.</p>
-
-            <h3>4. Roof Orientation and Shading</h3>
-            <p>South-facing roofs perform best, but don't dismiss east/west orientations. An east/west split can provide better morning and evening generation, matching typical household consumption patterns. Shading from trees or buildings can add 1-2 years to payback periods.</p>
-
-            <div class="pro-cta">
-                <h3>📊 Get Location-Specific Analysis</h3>
-                <p>Our Pro calculator uses YOUR exact postcode sunshine data, not UK averages. See your actual payback period with battery analysis and export optimisation.</p>
-                <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="display: inline-block; background: #ff8c00; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 10px;">Upgrade to Pro - £4.99 →</a>
-            </div>
-
-            <h2 id="real-example">Real Example: 4kW System in Birmingham</h2>
-            <p>Let's work through a realistic example for a typical UK household:</p>
-            
-            <ul style="margin: 15px 0 15px 25px;">
-                <li><strong>System cost:</strong> £5,500 (4kW system)</li>
-                <li><strong>Location:</strong> Birmingham (850 kWh/kWp annual generation)</li>
-                <li><strong>Annual generation:</strong> 3,400 kWh (4kW × 850)</li>
-                <li><strong>Self-consumption:</strong> 35% (1,190 kWh)</li>
-                <li><strong>Export:</strong> 65% (2,210 kWh)</li>
-                <li><strong>Electricity rate:</strong> 27.69p/kWh</li>
-                <li><strong>Export rate:</strong> 12p/kWh (SEG average)</li>
-            </ul>
-
-            <p><strong>Annual savings calculation:</strong></p>
-            <ul style="margin: 15px 0 15px 25px;">
-                <li>Self-consumption savings: 1,190 kWh × £0.2769 = £329</li>
-                <li>Export income: 2,210 kWh × £0.12 = £265</li>
-                <li><strong>Total year 1 savings: £594</strong></li>
-            </ul>
-
-            <p>With 3.5% electricity price inflation and 0.5% annual panel degradation, this system pays back in approximately <strong>7.8 years</strong>. Over 25 years, it generates a net profit of approximately £18,500.</p>
-
-            <h2 id="reduce-payback">How to Reduce Your Payback Period</h2>
-            
-            <h3>Increase Self-Consumption</h3>
-            <p>Run major appliances (washing machines, dishwashers) during sunny days. Time-shift your usage to coincide with generation. Even without batteries, simple behaviour changes can increase self-consumption from 30% to 40%, reducing payback by 6-12 months.</p>
-
-            <h3>Consider Battery Storage</h3>
-            <p>A 5kWh battery costs approximately £3,500-£4,500 in 2026. While this increases upfront costs, it can increase self-consumption to 70-80%. More importantly, batteries enable "time-shifting" - charging at cheap overnight rates (e.g., 7p on Octopus Go) and using that power during expensive peak times (27.69p), creating additional savings of £500-800 annually.</p>
-
-            <h3>Maximise Export Income</h3>
-            <p>Not all Smart Export Guarantee (SEG) tariffs are equal. Octopus Outgoing pays up to 15p/kWh, while some suppliers offer as little as 4p/kWh. Switching to a better export tariff can reduce payback by 6-18 months without any additional equipment.</p>
-
-            <h2 id="after-payback">What Happens After Payback?</h2>
-            <p>This is where solar panels truly shine. Once you've recovered your initial investment, you continue receiving free electricity for another 15-20 years. A system with a 7-year payback that lasts 25 years generates 18 years of pure profit.</p>
-
-            <p>With electricity prices expected to continue rising (even with occasional dips), the value of this free electricity increases each year. What saves you £600 annually today might save you £900-£1,200 annually in 10 years' time.</p>
-
-            <div class="highlight-box">
-                <strong>Important Note:</strong> You'll need to replace your inverter around years 10 and 20 (approximately £1,500 each time). Our calculations include these costs, so your actual payback period accounts for all major expenses.
-            </div>
-
-            <h2 id="worth-it">Are Solar Panels Still Worth It in 2026?</h2>
-            <p>Absolutely. Despite installation costs remaining relatively high, solar panels are one of the few home improvements that actually pay for themselves and continue generating returns for decades. Even in less sunny parts of the UK like Scotland, 8-9 year payback periods deliver excellent returns.</p>
-
-            <p>The key is realistic expectations. Solar panels won't make you rich, but they will:</p>
-            <ul style="margin: 15px 0 15px 25px;">
-                <li>Reduce your electricity bills by 40-60%</li>
-                <li>Provide predictable energy costs (free electricity) for 25+ years</li>
-                <li>Increase your property value (studies show 1-4% uplift)</li>
-                <li>Reduce your carbon footprint by 1-2 tonnes CO₂ annually</li>
-                <li>Protect against future electricity price increases</li>
-            </ul>
-
-            <div class="cta-box">
-                <h2>Ready to See Your Payback Period?</h2>
-                <p>Use our free calculator to see exactly how long solar panels will take to pay for themselves on YOUR home, with YOUR electricity usage.</p>
-                <a href="/" class="cta-button">Calculate My Solar ROI →</a>
-                <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.9;">
-                    Want postcode-specific accuracy? <a href="https://buy.stripe.com/28E28r7U0eic7qk2Zge3e00" style="color: white; text-decoration: underline;">Upgrade to Pro (£4.99)</a> for location-specific sunshine data and battery analysis.
-                </p>
-            </div>
-        </article>
-    </div>
-
-    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1.5rem 0; margin-top: 3rem;">
-        <div class="container">
-            <p>&copy; 2026 Solar ROI Calculator UK. <a href="/privacy" style="color: #ff8c00;">Privacy Policy</a> | <a href="/legal" style="color: #ff8c00;">Terms & Disclaimer</a></p>
         </div>
-    </footer>
+
+        <h2 id="what-affects">What Affects Your Payback Period?</h2>
+
+        <h3>1. Electricity Rate (Most Important in 2026)</h3>
+        <p>With the Ofgem price cap at 24.50p/kWh in Q2 2026, payback periods are currently excellent. Every penny of electricity rate increase shortens your payback period by approximately 3–4 months. If you're on a smart tariff like Octopus Agile (averaging ~19p/kWh), your payback will be slightly longer, but battery storage can bridge this gap.</p>
+
+        <h3>2. System Size and Cost</h3>
+        <p>Larger systems have economies of scale. A 4kW system might cost £5,500 (£1,375/kW), while a 6kW system costs £7,500 (£1,250/kW). However, if the larger system generates more electricity than you can use, you'll export it at lower rates (typically 12p/kWh vs 24.50p/kWh for self-consumption), extending the payback period.</p>
+
+        <h3>3. Self-Consumption Percentage</h3>
+        <p>The more solar electricity you use directly (rather than exporting to the grid), the faster your payback. Most UK homes achieve 30–40% self-consumption without batteries. With battery storage, this can increase to 70–80%, significantly reducing payback periods.</p>
+
+        <h3>4. Roof Orientation and Shading</h3>
+        <p>South-facing roofs perform best, but don't dismiss east/west orientations. An east/west split can provide better morning and evening generation, matching typical household consumption patterns. Shading from trees or buildings can add 1–2 years to payback periods.</p>
+
+        <div class="pro-cta">
+            <h3>These are UK averages. Your postcode tells a different story.</h3>
+            <p>Pro uses your exact postcode's sunshine data — not UK averages — to calculate your actual payback period, with battery analysis, roof orientation adjustments, and a full 25-year projection.</p>
+            <a href="/pro-success" class="pro-cta-btn">See My Exact Numbers — £4.99 →</a>
+        </div>
+
+        <h2 id="real-example">Real Example: 4kW System in Birmingham</h2>
+        <p>Let's work through a realistic example for a typical UK household:</p>
+
+        <ul>
+            <li><strong>System cost:</strong> £5,500 (4kW system)</li>
+            <li><strong>Location:</strong> Birmingham (850 kWh/kWp annual generation)</li>
+            <li><strong>Annual generation:</strong> 3,400 kWh (4kW × 850)</li>
+            <li><strong>Self-consumption:</strong> 35% (1,190 kWh)</li>
+            <li><strong>Export:</strong> 65% (2,210 kWh)</li>
+            <li><strong>Electricity rate:</strong> 24.50p/kWh</li>
+            <li><strong>Export rate:</strong> 12p/kWh (SEG average)</li>
+        </ul>
+
+        <p><strong>Annual savings calculation:</strong></p>
+        <ul>
+            <li>Self-consumption savings: 1,190 kWh × £0.2450 = £292</li>
+            <li>Export income: 2,210 kWh × £0.12 = £265</li>
+            <li><strong>Total year 1 savings: £557</strong></li>
+        </ul>
+
+        <p>With 3.5% electricity price inflation and 0.5% annual panel degradation, this system pays back in approximately <strong>8.3 years</strong>. Over 25 years, it generates a net profit of approximately £17,500.</p>
+
+        <h2 id="reduce-payback">How to Reduce Your Payback Period</h2>
+
+        <h3>Increase Self-Consumption</h3>
+        <p>Run major appliances (washing machines, dishwashers) during sunny days. Time-shift your usage to coincide with generation. Even without batteries, simple behaviour changes can increase self-consumption from 30% to 40%, reducing payback by 6–12 months.</p>
+
+        <h3>Consider Battery Storage</h3>
+        <p>A 5kWh battery costs approximately £3,500–£4,500 in 2026. While this increases upfront costs, it can increase self-consumption to 70–80%. More importantly, batteries enable "time-shifting" — charging at cheap overnight rates (e.g., 7p on Octopus Go) and using that power during expensive peak times (24.50p), creating additional savings of £500–800 annually.</p>
+
+        <h3>Maximise Export Income</h3>
+        <p>Not all Smart Export Guarantee (SEG) tariffs are equal. Octopus Outgoing pays 12p/kWh (reduced from 15p in March 2026), while basic tariffs offer as little as 4p/kWh. Switching to a better export tariff can reduce payback by 6–18 months without any additional equipment.</p>
+
+        <h2 id="after-payback">What Happens After Payback?</h2>
+        <p>This is where solar panels truly shine. Once you've recovered your initial investment, you continue receiving free electricity for another 15–20 years. A system with a 7-year payback that lasts 25 years generates 18 years of pure profit.</p>
+
+        <p>With electricity prices expected to continue rising (even with occasional dips), the value of this free electricity increases each year. What saves you £600 annually today might save you £900–£1,200 annually in 10 years' time.</p>
+
+        <div class="highlight-box">
+            <p><strong>Important Note:</strong> You'll need to replace your inverter around years 10 and 20 (approximately £1,500 each time). Our calculations include these costs, so your actual payback period accounts for all major expenses.</p>
+        </div>
+
+        <h2 id="worth-it">Are Solar Panels Still Worth It in 2026?</h2>
+        <p>Absolutely. Despite installation costs remaining relatively high, solar panels are one of the few home improvements that actually pay for themselves and continue generating returns for decades. Even in less sunny parts of the UK like Scotland, 8–9 year payback periods deliver excellent returns.</p>
+
+        <p>The key is realistic expectations. Solar panels won't make you rich, but they will:</p>
+        <ul>
+            <li>Reduce your electricity bills by 40–60%</li>
+            <li>Provide predictable energy costs (free electricity) for 25+ years</li>
+            <li>Increase your property value (studies show 1–4% uplift)</li>
+            <li>Reduce your carbon footprint by 1–2 tonnes CO₂ annually</li>
+            <li>Protect against future electricity price increases</li>
+        </ul>
+
+        <!-- Bottom CTA -->
+        <div class="cta-box">
+            <h2>Know exactly when you'll break even</h2>
+            <p>Pro uses your postcode's sunshine hours, your usage pattern, and a full 25-year projection — so you get a precise payback date, not a regional average.</p>
+            <a href="/pro-success" class="cta-button">Get My Accurate Analysis — £4.99 →</a>
+            <p class="cta-sub">Prefer to start free? <a href="/">Use the free calculator →</a></p>
+        </div>
+
+    </article>
+</div>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer>
+    <span class="footer-text">© 2026 Solar ROI Calculator UK · solarroicalculator.co.uk</span>
+    <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/legal">Terms &amp; Disclaimer</a>
+        <a href="/">Free Calculator</a>
+    </div>
+</footer>
+
 </body>
 </html>
