@@ -6,8 +6,11 @@
     <title>Solar Installer Advertising UK - High-Intent Homeowner Traffic</title>
     <meta name="description" content="Advertise to UK homeowners researching solar panels. Page 1 Google rankings, calculator users, high engagement. Advertising packages for solar installers.">
     <link rel="canonical" href="https://solarroicalculator.co.uk/partners">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8720C'/><polygon points='16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8' fill='white'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
     <script>
@@ -16,240 +19,563 @@
       gtag('js', new Date());
       gtag('config', 'G-PWME39QWJD');
     </script>
-    
+
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream:        #F7F4EF;
+            --white:        #FFFFFF;
+            --dark:         #1a1a1a;
+            --orange:       #E8720C;
+            --orange-h:     #cf6200;
+            --orange-bg:    rgba(232,114,12,0.08);
+            --green:        #2E7D32;
+            --green-bg:     #E8F5E9;
+            --text:         #1a1a1a;
+            --mid:          #555555;
+            --muted:        #888888;
+            --border:       rgba(0,0,0,0.09);
+            --r:            12px;
+            --shadow:       0 2px 16px rgba(0,0,0,0.07);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
             line-height: 1.6;
-            color: #333;
-            max-width: 900px;
+        }
+
+        /* ── Navigation ── */
+        .nav-header {
+            background: var(--cream);
+            border-bottom: 0.5px solid var(--border);
+            padding: 0 40px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nav-logo-solar {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: italic;
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-logo-roi {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-logo-calc {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            opacity: 0.65;
+        }
+
+        .nav-logo-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--mid);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            background: var(--dark) !important;
+            color: var(--cream) !important;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: #333 !important; }
+
+        /* ── Page layout ── */
+        .page-inner {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background: #f8f9fa;
+            padding: 48px 40px 64px;
         }
-        
-        .partner-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        /* ── Page hero ── */
+        .page-hero {
+            margin-bottom: 36px;
         }
-        
-        h1 {
-            color: #2c3e50;
+
+        .page-hero h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            color: var(--dark);
             margin-bottom: 10px;
-            text-align: center;
         }
-        
-        h2 {
-            color: #2c3e50;
-            margin: 30px 0 15px 0;
-            font-size: 1.6em;
+
+        .page-hero .subtitle {
+            font-size: 16px;
+            color: var(--mid);
         }
-        
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 30px;
+
+        /* ── White content cards ── */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            padding: 32px 36px;
+            margin-bottom: 20px;
         }
-        
-        .stats {
-            background: #e3f2fd;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
+
+        .content-card h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
         }
-        
-        .stats strong {
-            color: #1976d2;
-            font-size: 1.3em;
+
+        .content-card h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
         }
-        
-        .opportunity-section {
-            margin: 30px 0;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid #27ae60;
-            background: #e8f5e9;
-        }
-        
-        .opportunity-section.future {
-            border-left-color: #ff9800;
-            background: #fff3e0;
-        }
-        
-        .opportunity-section h3 {
-            margin-top: 0;
-            color: #2c3e50;
-            font-size: 1.3em;
-        }
-        
-        .opportunity-section ul {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-        
-        .opportunity-section li {
-            margin: 10px 0;
-        }
-        
-        .seo-section {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-        }
-        
-        .seo-section p {
+
+        .content-card p {
+            font-size: 15px;
+            color: var(--mid);
             margin-bottom: 12px;
         }
-        
-        .cta-section {
-            background: #f5f5f5;
-            padding: 30px;
-            border-radius: 8px;
+
+        .content-card p:last-child { margin-bottom: 0; }
+
+        .content-card ul {
+            padding-left: 0;
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        .content-card ul li {
+            font-size: 15px;
+            color: var(--mid);
+            padding: 5px 0 5px 20px;
+            position: relative;
+        }
+
+        .content-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-size: 13px;
+        }
+
+        .content-card strong {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* ── Stats highlight card ── */
+        .stats-card {
+            background: var(--dark);
+            border-radius: var(--r);
+            padding: 28px 36px;
+            margin-bottom: 20px;
+        }
+
+        .stats-card h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .stats-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px 0;
+        }
+
+        .stats-card ul li {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            padding: 5px 0 5px 20px;
+            position: relative;
+        }
+
+        .stats-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+        }
+
+        .stats-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* ── Opportunity cards ── */
+        .opportunity-card {
+            border-radius: var(--r);
+            padding: 28px 36px;
+            margin-bottom: 20px;
+        }
+
+        .opportunity-card.green-tint {
+            background: var(--green-bg);
+            border-left: 3px solid var(--green);
+        }
+
+        .opportunity-card.orange-tint {
+            background: var(--orange-bg);
+            border-left: 3px solid var(--orange);
+        }
+
+        .opportunity-card h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .opportunity-card p {
+            font-size: 15px;
+            color: var(--mid);
+            margin-bottom: 12px;
+        }
+
+        .opportunity-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        .opportunity-card ul li {
+            font-size: 15px;
+            color: var(--mid);
+            padding: 5px 0 5px 20px;
+            position: relative;
+        }
+
+        .opportunity-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-size: 13px;
+        }
+
+        .opportunity-card strong {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .opportunity-card .note {
+            font-size: 13px;
+            color: var(--muted);
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* ── CTA card ── */
+        .cta-card {
+            background: var(--white);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            padding: 36px;
             text-align: center;
-            margin: 30px 0;
+            margin-bottom: 20px;
         }
-        
-        .cta-button {
+
+        .cta-card h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .cta-card p {
+            font-size: 15px;
+            color: var(--mid);
+            margin-bottom: 20px;
+        }
+
+        .cta-btn {
             display: inline-block;
-            background: #27ae60;
-            color: white;
-            padding: 15px 40px;
+            background: var(--orange);
+            color: #fff;
             text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin: 15px 0;
-            transition: background 0.3s;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: background 0.2s;
         }
-        
-        .cta-button:hover {
-            background: #219a52;
+
+        .cta-btn:hover { background: var(--orange-h); }
+
+        .cta-note {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--muted);
         }
-        
-        .back-link {
-            display: inline-block;
+
+        .cta-details {
             margin-top: 20px;
-            color: #3498db;
+            font-size: 14px;
+            color: var(--mid);
+            line-height: 1.7;
+            text-align: left;
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 16px 20px;
+        }
+
+        .cta-details strong {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* ── Back link ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--orange);
             text-decoration: none;
+            margin-top: 8px;
         }
-        
-        .back-link:hover {
-            text-decoration: underline;
+
+        .back-link:hover { text-decoration: underline; }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--cream);
+            border-top: 0.5px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 15px;
+
+        .footer-text { font-size: 12px; color: #999; }
+
+        .footer-links { display: flex; gap: 22px; }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
         }
-        
-        .icon {
-            font-size: 1.2em;
-            margin-right: 5px;
+
+        .footer-links a:hover { color: var(--orange); }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .nav-header { padding: 0 20px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page-inner { padding: 32px 20px 48px; }
+            .page-hero h1 { font-size: 30px; }
+            .content-card { padding: 24px 20px; }
+            .stats-card { padding: 22px 20px; }
+            .opportunity-card { padding: 22px 20px; }
+            .cta-card { padding: 24px 20px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
+        }
+
+        @media (max-width: 420px) {
+            .nav-logo-solar, .nav-logo-roi, .nav-logo-calc { font-size: 13px; }
+            .nav-logo-icon { width: 24px; height: 24px; }
+            .nav-logo { gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <div class="partner-container">
-        <h1>🤝 Partner With Solar ROI Calculator UK</h1>
+
+<!-- ── Navigation ── -->
+<nav class="nav-header">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+            <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8" fill="white"/>
+            </svg>
+        </div>
+        <span class="nav-logo-text"><em class="nav-logo-solar">Solar</em><span class="nav-logo-roi">&#8202;ROI</span><span class="nav-logo-calc">Calculator</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="/#calculator">Calculator</a>
+        <a href="/insights">Insights</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/partners">Partners</a>
+        <a href="/legal">Legal</a>
+        <a href="/pro-success" class="nav-cta">Try Pro — £4.99 →</a>
+    </div>
+</nav>
+
+<!-- ── Page content ── -->
+<div class="page-inner">
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <h1>Partner With Solar ROI Calculator UK</h1>
         <p class="subtitle">Reach homeowners actively researching solar installations</p>
-        
-        <div class="stats">
-            <h3 style="margin: 0 0 15px 0; color: #1976d2;">Targeted Solar Traffic</h3>
-            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-                <li style="margin: 8px 0;">• Page 1 Google rankings for solar ROI searches</li>
-                <li style="margin: 8px 0;">• Steady month-over-month growth in visibility</li>
-                <li style="margin: 8px 0;">• Audience actively researching solar panel installations</li>
-                <li style="margin: 8px 0;">• All visitors use our calculator tool (high engagement signal)</li>
-            </ul>
-            <p style="margin: 15px 0 0 0; font-style: italic; color: #555;">
-                These aren't casual browsers—they're homeowners entering real data to calculate payback periods and savings.
-            </p>
-        </div>
-        
-        <!-- SEO Section for Installer Searches -->
-        <div class="seo-section">
-            <h2>Looking for Solar Panel Leads UK?</h2>
-            <p>Solar ROI Calculator UK connects you with homeowners at the perfect moment—when they're actively researching solar panel costs, savings, and ROI. Our visitors aren't casual browsers; they're using our calculator to determine if solar panels are financially viable for their home.</p>
-            
-            <p><strong>Why our audience is valuable:</strong> Every visitor uses our ROI calculator, entering their postcode, electricity usage, and roof details. They're researching real investment decisions with real numbers—not just browsing solar articles. This is high-intent traffic at the consideration stage.</p>
-            
-            <h2>Advertise to Solar Buyers</h2>
-            <p>Promote your solar installation business directly to homeowners calculating their solar ROI. Our audience is actively comparing costs, payback periods, and system sizes—the perfect time to present your services.</p>
-            
-            <p>Our solar installer advertising packages put your brand in front of engaged prospects across England, Scotland, Wales, and Northern Ireland. Choose from homepage placement, blog sponsorship, or featured installer spots on our growing platform.</p>
-        </div>
-        
-        <!-- Advertising Opportunities -->
-        <div class="opportunity-section">
-            <h3><span class="icon">📢</span> Advertising Opportunities (Available Now)</h3>
-            <p>Promote your solar installation business to our engaged audience:</p>
-            <ul>
-                <li><strong>Calculator Results Placement</strong> – Featured installer spotlight on results page</li>
-                <li><strong>Blog Sponsorship</strong> – Sponsored mention in our growing solar guides (11 SEO-optimised articles)</li>
-                <li><strong>Banner Advertising</strong> – Prominent placement on high-traffic pages</li>
-                <li><strong>Newsletter Sponsorship</strong> – Exclusive positioning when we launch email updates</li>
-            </ul>
-            <p style="margin-bottom: 0; color: #555;"><em>All advertising is clearly labelled and GDPR compliant</em></p>
-        </div>
-        
-        <!-- Future Lead Generation -->
-        <div class="opportunity-section future">
-            <h3><span class="icon">🚀</span> Solar Lead Generation Programme (Coming Q2 2026)</h3>
-            <p>We're building a feature to connect homeowners with local installers:</p>
-            <ul>
-                <li><strong>Pre-qualified solar panel leads</strong> – Homeowners who've calculated their ROI and are ready to install</li>
-                <li><strong>GDPR compliant</strong> – Users actively consent to share their details with installers</li>
-                <li><strong>Local targeting</strong> – Solar installation leads matched to your service areas only</li>
-                <li><strong>Pay per lead</strong> – No monthly fees, only pay for genuine enquiries</li>
-            </ul>
-            <p style="margin-bottom: 0; color: #555;"><em>Target launch: Q2 2026 (subject to traffic growth)</em></p>
-        </div>
-        
-        <!-- Solar Installer Marketing Benefits -->
-        <div class="seo-section">
-            <h2>Solar Installer B2B Marketing That Works</h2>
-            <p>Unlike generic advertising platforms, Solar ROI Calculator UK delivers:</p>
-            <ul>
-                <li><strong>High purchase intent:</strong> Our visitors are calculating costs and savings—they're weeks (not months) from buying</li>
-                <li><strong>Regional targeting:</strong> Specify which counties you serve, reach only relevant homeowners</li>
-                <li><strong>Transparent metrics:</strong> Monthly traffic reports showing impressions and clicks on your placement</li>
-                <li><strong>MCS audience:</strong> Our content educates homeowners on MCS certification importance—they'll ask for certified installers</li>
-            </ul>
-        </div>
-        
-        <!-- CTA Section -->
-        <div class="cta-section">
-            <h3 style="margin-top: 0;">Interested in Partnership?</h3>
-            <p style="margin: 15px 0; color: #555;">
-                Fill in the contact form and specify which opportunity interests you:
-            </p>
-            
-            <a href="https://formsubmit.co/el/sehawe" target="_blank" class="cta-button">
-                Get In Touch →
-            </a>
-            
-            <p class="note">
-                Opens in a new tab • We'll respond within 72 hours
-            </p>
-            
-            <p style="margin-top: 20px; font-size: 0.9em; color: #666; line-height: 1.6;">
-                <strong>In your message, please tell us:</strong><br>
-                • Your company name and website<br>
-                • Service areas (counties/regions you cover)<br>
-                • <strong>Whether you're interested in advertising now, future leads, or both</strong><br>
-                • Any questions you have
-            </p>
-        </div>
-        
-        <div style="text-align: center;">
-            <a href="/" class="back-link">← Back to Calculator</a>
+    </div>
+
+    <!-- Stats / audience card -->
+    <div class="stats-card">
+        <h3>Targeted Solar Traffic</h3>
+        <ul>
+            <li>Page 1 Google rankings for solar ROI searches</li>
+            <li>Steady month-over-month growth in visibility</li>
+            <li>Audience actively researching solar panel installations</li>
+            <li>All visitors use our calculator tool (high engagement signal)</li>
+        </ul>
+        <p>These aren't casual browsers—they're homeowners entering real data to calculate payback periods and savings.</p>
+    </div>
+
+    <!-- SEO content: leads section -->
+    <div class="content-card">
+        <h2>Looking for Solar Panel Leads UK?</h2>
+        <p>Solar ROI Calculator UK connects you with homeowners at the perfect moment—when they're actively researching solar panel costs, savings, and ROI. Our visitors aren't casual browsers; they're using our calculator to determine if solar panels are financially viable for their home.</p>
+        <p><strong>Why our audience is valuable:</strong> Every visitor uses our ROI calculator, entering their postcode, electricity usage, and roof details. They're researching real investment decisions with real numbers—not just browsing solar articles. This is high-intent traffic at the consideration stage.</p>
+
+        <h2>Advertise to Solar Buyers</h2>
+        <p>Promote your solar installation business directly to homeowners calculating their solar ROI. Our audience is actively comparing costs, payback periods, and system sizes—the perfect time to present your services.</p>
+        <p>Our solar installer advertising packages put your brand in front of engaged prospects across England, Scotland, Wales, and Northern Ireland. Choose from homepage placement, blog sponsorship, or featured installer spots on our growing platform.</p>
+    </div>
+
+    <!-- Advertising opportunities -->
+    <div class="opportunity-card green-tint">
+        <h3>Advertising Opportunities — Available Now</h3>
+        <p>Promote your solar installation business to our engaged audience:</p>
+        <ul>
+            <li><strong>Calculator Results Placement</strong> – Featured installer spotlight on results page</li>
+            <li><strong>Blog Sponsorship</strong> – Sponsored mention in our growing solar guides (11 SEO-optimised articles)</li>
+            <li><strong>Banner Advertising</strong> – Prominent placement on high-traffic pages</li>
+            <li><strong>Newsletter Sponsorship</strong> – Exclusive positioning when we launch email updates</li>
+        </ul>
+        <p class="note">All advertising is clearly labelled and GDPR compliant</p>
+    </div>
+
+    <!-- Future lead gen -->
+    <div class="opportunity-card orange-tint">
+        <h3>Solar Lead Generation Programme — Coming Q2 2026</h3>
+        <p>We're building a feature to connect homeowners with local installers:</p>
+        <ul>
+            <li><strong>Pre-qualified solar panel leads</strong> – Homeowners who've calculated their ROI and are ready to install</li>
+            <li><strong>GDPR compliant</strong> – Users actively consent to share their details with installers</li>
+            <li><strong>Local targeting</strong> – Solar installation leads matched to your service areas only</li>
+            <li><strong>Pay per lead</strong> – No monthly fees, only pay for genuine enquiries</li>
+        </ul>
+        <p class="note">Target launch: Q2 2026 (subject to traffic growth)</p>
+    </div>
+
+    <!-- Why advertise here -->
+    <div class="content-card">
+        <h2>Why Our Audience Converts</h2>
+        <p>Most advertising platforms put your brand in front of people who might be vaguely interested in solar. Our audience is different — every visitor is actively running numbers on a real purchasing decision.</p>
+        <ul>
+            <li><strong>High purchase intent:</strong> Visitors are calculating payback periods and costs — they're weeks, not months, from booking a quote</li>
+            <li><strong>Regional specificity:</strong> You choose which counties you cover; we surface your brand to homeowners in those areas only</li>
+            <li><strong>Transparent reporting:</strong> Monthly summaries showing impressions and clicks on your placement — no black box</li>
+            <li><strong>An educated audience:</strong> Our guides cover MCS certification, installer vetting, and what questions to ask — visitors arrive at quotes already informed</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+        <h3>Interested in Partnership?</h3>
+        <p>Fill in the contact form and specify which opportunity interests you:</p>
+        <a href="https://formsubmit.co/el/sehawe" target="_blank" class="cta-btn">Get In Touch →</a>
+        <p class="cta-note">Opens in a new tab &bull; We'll respond within 72 hours</p>
+        <div class="cta-details">
+            <strong>In your message, please tell us:</strong><br>
+            • Your company name and website<br>
+            • Service areas (counties/regions you cover)<br>
+            • <strong>Whether you're interested in advertising now, future leads, or both</strong><br>
+            • Any questions you have
         </div>
     </div>
+
+    <a href="/" class="back-link">← Back to Calculator</a>
+
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+    <div class="footer-text">&copy; 2026 Solar ROI Calculator UK &middot; solarroicalculator.co.uk</div>
+    <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/legal">Terms &amp; Disclaimer</a>
+        <a href="/">Free Calculator</a>
+    </div>
+</footer>
+
 </body>
 </html>

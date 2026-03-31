@@ -6,7 +6,11 @@
     <title>Legal Disclaimer - Solar ROI Calculator UK</title>
     <link rel="canonical" href="https://solarroicalculator.co.uk/legal">
     <meta name="robots" content="noindex, nofollow">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8720C'/><polygon points='16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8' fill='white'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWME39QWJD"></script>
     <script>
@@ -15,66 +19,292 @@
       gtag('js', new Date());
       gtag('config', 'G-PWME39QWJD');
     </script>
-    
+
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream:        #F7F4EF;
+            --white:        #FFFFFF;
+            --dark:         #1a1a1a;
+            --orange:       #E8720C;
+            --orange-h:     #cf6200;
+            --text:         #1a1a1a;
+            --mid:          #555555;
+            --muted:        #888888;
+            --border:       rgba(0,0,0,0.09);
+            --r:            12px;
+            --shadow:       0 2px 16px rgba(0,0,0,0.07);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f8f9fa;
         }
-        
-        .legal-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        /* ── Navigation ── */
+        .nav-header {
+            background: var(--cream);
+            border-bottom: 0.5px solid var(--border);
+            padding: 0 40px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-        
-        h2 {
-            color: #34495e;
-            margin-top: 30px;
-        }
-        
-        .back-button {
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
             text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin-bottom: 20px;
         }
-        
-        .back-button:hover {
-            background: #2980b9;
+
+        .nav-logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nav-logo-solar {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: italic;
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-logo-roi {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-logo-calc {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-style: normal;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            opacity: 0.65;
+        }
+
+        .nav-logo-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--mid);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            background: var(--dark) !important;
+            color: var(--cream) !important;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: #333 !important; }
+
+        /* ── Page layout ── */
+        .page-outer {
+            padding: 48px 40px 64px;
+        }
+
+        .legal-card {
+            max-width: 740px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            padding: 44px 48px;
+        }
+
+        /* ── Typography ── */
+        .legal-card h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .legal-card .last-updated {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        .legal-card h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-top: 28px;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .legal-card p {
+            font-size: 15px;
+            color: var(--mid);
+            margin-bottom: 12px;
+            line-height: 1.65;
+        }
+
+        .legal-card ul {
+            padding-left: 20px;
+            margin: 10px 0 12px;
+        }
+
+        .legal-card ul li {
+            font-size: 15px;
+            color: var(--mid);
+            margin-bottom: 6px;
+            line-height: 1.55;
+        }
+
+        .legal-card a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .legal-card a:hover { text-decoration: underline; }
+
+        /* ── Back link ── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--dark);
+            color: var(--cream);
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover { background: #333; }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--cream);
+            border-top: 0.5px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text { font-size: 12px; color: #999; }
+
+        .footer-links { display: flex; gap: 22px; }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--orange); }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .nav-header { padding: 0 20px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page-outer { padding: 28px 16px 48px; }
+            .legal-card { padding: 28px 22px; }
+            .legal-card h1 { font-size: 28px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
+        }
+
+        @media (max-width: 420px) {
+            .nav-logo-solar, .nav-logo-roi, .nav-logo-calc { font-size: 13px; }
+            .nav-logo-icon { width: 24px; height: 24px; }
+            .nav-logo { gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <div class="legal-container">
-        <a href="/" class="back-button">← Back to Calculator</a>
-        
+
+<!-- ── Navigation ── -->
+<nav class="nav-header">
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+            <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="16,2 18.2,12.8 26,6 19.2,13.8 30,16 19.2,18.2 26,26 18.2,19.2 16,30 13.8,19.2 6,26 12.8,18.2 2,16 12.8,13.8 6,6 13.8,12.8" fill="white"/>
+            </svg>
+        </div>
+        <span class="nav-logo-text"><em class="nav-logo-solar">Solar</em><span class="nav-logo-roi">&#8202;ROI</span><span class="nav-logo-calc">Calculator</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="/#calculator">Calculator</a>
+        <a href="/insights">Insights</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/partners">Partners</a>
+        <a href="/legal">Legal</a>
+        <a href="/pro-success" class="nav-cta">Try Pro — £4.99 →</a>
+    </div>
+</nav>
+
+<!-- ── Content ── -->
+<div class="page-outer">
+    <div class="legal-card">
+
+        <a href="/" class="back-btn">← Back to Calculator</a>
+
         <h1>Legal Disclaimer</h1>
-        
-        <p><strong>Last Updated: 11 March 2026</strong></p>
-        
+        <p class="last-updated"><strong>Last Updated: 11 March 2026</strong></p>
+
         <h2>Digital Content &amp; Refund Policy</h2>
         <p>Pro access is a digital product delivered immediately upon payment. By completing your purchase, you explicitly consent to immediate access to the digital content and acknowledge that you waive your 14-day cancellation right under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013.</p>
         <p><strong>No refunds are offered once Pro access has been granted.</strong> If you experience a technical issue preventing access, please <a href="https://formsubmit.co/el/sehawe" target="_blank">contact us via our enquiry form</a> and we will investigate.</p>
 
         <h2>Calculator Disclaimer</h2>
         <p>The Solar Panel ROI Calculator ("Calculator") is provided for informational and educational purposes only. The results are estimates based on the information you provide and general assumptions about solar panel performance in the UK.</p>
-        
         <p>The Calculator results:</p>
         <ul>
             <li>Are NOT guaranteed or warranted to be accurate</li>
@@ -97,6 +327,19 @@
 
         <h2>Contact</h2>
         <p>For questions about these terms, please <a href="https://formsubmit.co/el/sehawe" target="_blank">contact us via our enquiry form</a>.</p>
+
     </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+    <div class="footer-text">&copy; 2026 Solar ROI Calculator UK &middot; solarroicalculator.co.uk</div>
+    <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/legal">Terms &amp; Disclaimer</a>
+        <a href="/">Free Calculator</a>
+    </div>
+</footer>
+
 </body>
 </html>
